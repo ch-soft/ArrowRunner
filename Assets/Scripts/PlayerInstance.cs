@@ -17,6 +17,8 @@ public class PlayerInstance : MonoBehaviour
 
     private bool m_canRun;
 
+    private bool m_isSlowmoEnable;
+
     private void Awake()
     {
         m_selfRigidbody = GetComponent<Rigidbody>();
@@ -25,6 +27,9 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
+        TimeControl.NormalizeTime();
+
+
         StartRunAnimation();
         AllowToRun(true);
     }
@@ -34,6 +39,25 @@ public class PlayerInstance : MonoBehaviour
         if (m_canRun)
         {
             MoveCharacterForward();
+        }
+    }
+
+    private void LateUpdate()
+    {
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            ChangeSlowmoLocalState(true);
+            if (m_isSlowmoEnable)
+            {
+                EnableSlowmo(true);
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            ChangeSlowmoLocalState(false);
+            EnableSlowmo(false);
         }
     }
 
@@ -50,5 +74,27 @@ public class PlayerInstance : MonoBehaviour
     private void StartRunAnimation()
     {
         m_selfAnimator.Play(m_animationRunName);
+    }
+
+    private void EnableSlowmo(bool state)
+    {
+        switch (state)
+        {
+            case true:
+                {
+                    TimeControl.SlowTime();
+                    break;
+                }
+            case false:
+                {
+                    TimeControl.NormalizeTime();
+                    break;
+                }
+        }
+    }
+
+    private void ChangeSlowmoLocalState(bool state)
+    {
+        m_isSlowmoEnable = state;
     }
 }
