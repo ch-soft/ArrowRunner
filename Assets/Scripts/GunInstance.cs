@@ -20,6 +20,7 @@ public class GunInstance : MonoBehaviour
     private bool m_laserActivityState;
 
     private Vector3 m_testMousePosition;
+    private Vector3 m_currentgMousePosition;
     private Vector3 m_startingMousePosition;
 
     private float m_deltaX;
@@ -39,10 +40,10 @@ public class GunInstance : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            m_testMousePosition = Input.mousePosition;
+            m_testMousePosition.z = 1.0f;
 
-            m_deltaX = m_startingMousePosition.x - transform.position.x;
-            m_deltaY = m_startingMousePosition.y - transform.position.y;
+            m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(m_testMousePosition);
         }
 
         if (m_laserActivityState)
@@ -74,9 +75,12 @@ public class GunInstance : MonoBehaviour
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
 
-        m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(m_testMousePosition);
+        m_currentgMousePosition =
+            (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * 40f;
         //m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
-        m_laserEndPosition = m_startingMousePosition;
+        m_currentgMousePosition.z = 0f;
+
+        m_laserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
     }
 
 
