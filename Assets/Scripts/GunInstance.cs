@@ -7,6 +7,8 @@ using NaughtyAttributes;
 public class GunInstance : MonoBehaviour
 {
     [BoxGroup("Gun Parameters"), SerializeField] private float m_laserDistance;
+
+    [BoxGroup("References"), SerializeField] private Camera m_mainCamera;
     [BoxGroup("References"), SerializeField] private Transform m_rightHand;
 
 
@@ -17,7 +19,7 @@ public class GunInstance : MonoBehaviour
 
     private bool m_laserActivityState;
 
-    private Vector3 m_currentMousePosition;
+    private Vector3 m_testMousePosition;
     private Vector3 m_startingMousePosition;
 
     private float m_deltaX;
@@ -37,7 +39,7 @@ public class GunInstance : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            m_startingMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             m_deltaX = m_startingMousePosition.x - transform.position.x;
             m_deltaY = m_startingMousePosition.y - transform.position.y;
@@ -69,18 +71,12 @@ public class GunInstance : MonoBehaviour
 
     private void ControlLaserEndPosition()
     {
-        m_startingMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        m_testMousePosition = Input.mousePosition;
+        m_testMousePosition.z = 1.0f;
 
-        m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
-
-        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, transform.position.z + 20f);
-        Debug.Log(m_laserEndPosition);
-
-
-
-        //m_laserEndPosition = transform.position + mousePosition;
+        m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(m_testMousePosition);
+        //m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
+        m_laserEndPosition = m_startingMousePosition;
     }
 
 

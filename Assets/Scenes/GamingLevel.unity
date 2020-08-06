@@ -634,6 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_laserDistance: 10
+  m_mainCamera: {fileID: 963194227}
   m_rightHand: {fileID: 6003052536660011137}
 --- !u!120 &1807025504
 LineRenderer:
