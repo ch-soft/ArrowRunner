@@ -355,7 +355,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -380,13 +380,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.14363652, y: -0.13806017, z: 0.020240474, w: 0.97974396}
-  m_LocalPosition: {x: 1.413, y: 2.536, z: -2.701}
+  m_LocalRotation: {x: 0.18063615, y: -0.1873991, z: 0.035082646, w: 0.96489453}
+  m_LocalPosition: {x: 1.15, y: 2.536, z: -1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 16.681002, y: -16.042, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.207, y: -21.982, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 8296172668750175729}
-  _offset: {x: 0.46, y: 0.92, z: 0.13}
+  _offset: {x: 0.46, y: 0.8, z: 0.52}
   _durability: 0.1
 --- !u!1 &1433278496
 GameObject:
@@ -652,7 +652,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: bbefdfcbd2b7562478e9c89608d68e7f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -675,22 +675,31 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: -10, z: 0}
-  - {x: 0, y: -10, z: 3.91}
+  - {x: 0, y: -10, z: 7.23}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.04
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.44871923
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

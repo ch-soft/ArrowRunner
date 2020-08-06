@@ -13,6 +13,8 @@ public class GunInstance : MonoBehaviour
 
     private LineRenderer m_lineRenderer;
 
+    private Vector3 m_laserEndPosition;
+
     private bool m_laserActivityState;
 
     private void Awake()
@@ -29,8 +31,8 @@ public class GunInstance : MonoBehaviour
     {
         if (m_laserActivityState)
         {
-            m_lineRenderer.SetPosition(0, transform.position);
-            m_lineRenderer.SetPosition(1, transform.position + (Vector3.forward * m_laserDistance));
+            ControlLaserEndPosition();
+            ShootLaserFromGun();
         }
     }
 
@@ -43,5 +45,16 @@ public class GunInstance : MonoBehaviour
     {
         m_laserActivityState = state;
         m_lineRenderer.enabled = state;
+    }
+
+    private void ShootLaserFromGun()
+    {
+        m_lineRenderer.SetPosition(0, transform.position);
+        m_lineRenderer.SetPosition(1, m_laserEndPosition);
+    }
+
+    private void ControlLaserEndPosition()
+    {
+        m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance);
     }
 }
