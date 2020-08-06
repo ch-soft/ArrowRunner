@@ -17,6 +17,12 @@ public class GunInstance : MonoBehaviour
 
     private bool m_laserActivityState;
 
+    private Vector3 m_currentMousePosition;
+    private Vector3 m_startingMousePosition;
+
+    private float m_deltaX;
+    private float m_deltaY;
+
     private void Awake()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
@@ -29,6 +35,14 @@ public class GunInstance : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            m_startingMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            m_deltaX = m_startingMousePosition.x - transform.position.x;
+            m_deltaY = m_startingMousePosition.y - transform.position.y;
+        }
+
         if (m_laserActivityState)
         {
             ControlLaserEndPosition();
@@ -55,6 +69,22 @@ public class GunInstance : MonoBehaviour
 
     private void ControlLaserEndPosition()
     {
-        m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance);
+        m_startingMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
+
+        //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, transform.position.z + 20f);
+        Debug.Log(m_laserEndPosition);
+
+
+
+        //m_laserEndPosition = transform.position + mousePosition;
     }
+
+
+
+
+    //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
 }
