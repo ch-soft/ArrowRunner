@@ -9,6 +9,9 @@ using NaughtyAttributes;
 public class PlayerInstance : MonoBehaviour
 {
     [BoxGroup("Preferences"), SerializeField] private float m_movementSpeed;
+    [Space]
+    [BoxGroup("References"), SerializeField] private GunInstance m_gun;
+
 
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
@@ -27,7 +30,7 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
-        TimeControl.NormalizeTime();
+        EnableSlowmo(false);
 
 
         StartRunAnimation();
@@ -44,13 +47,13 @@ public class PlayerInstance : MonoBehaviour
 
     private void LateUpdate()
     {
-
         if (Input.GetMouseButtonDown(0))
         {
             ChangeSlowmoLocalState(true);
             if (m_isSlowmoEnable)
             {
                 EnableSlowmo(true);
+                m_gun.EnableLaserSight(true);
             }
         }
 
@@ -58,6 +61,7 @@ public class PlayerInstance : MonoBehaviour
         {
             ChangeSlowmoLocalState(false);
             EnableSlowmo(false);
+            m_gun.EnableLaserSight(false);
         }
     }
 

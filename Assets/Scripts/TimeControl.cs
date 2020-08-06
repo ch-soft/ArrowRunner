@@ -5,7 +5,7 @@ using UnityEngine;
 public static class TimeControl
 {
     private static float _normalTime = 1f;
-    private static float _slowmoTime = 0.1f;
+    private static float _slowmoTime = 0.25f;
 
 
     public static void SlowTime()
