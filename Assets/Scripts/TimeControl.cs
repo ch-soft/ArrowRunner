@@ -10,15 +10,15 @@ public static class TimeControl
 
     public static void SlowTime()
     {
-        ChangeTimeScale(_slowmoTime);
+        ChangeTimeScale(_slowmoTime, 0.02f);
     }
 
     public static void NormalizeTime()
     {
-        ChangeTimeScale(_normalTime);
+        ChangeTimeScale(_normalTime, 1f);
     }
 
-    private static void ChangeTimeScale(float timeScale)
+    private static void ChangeTimeScale(float timeScale, float fixedDeltaTimeMultiplier)
     {
         Time.timeScale = timeScale;
     }

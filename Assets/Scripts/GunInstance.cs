@@ -16,8 +16,10 @@ public class GunInstance : MonoBehaviour
     private LineRenderer m_lineRenderer;
 
     private Vector3 m_laserEndPosition;
+    private Vector3 m_secondarylaserEndPosition;
 
     private bool m_laserActivityState;
+
 
     private Vector3 m_testMousePosition;
     private Vector3 m_currentgMousePosition;
@@ -48,7 +50,20 @@ public class GunInstance : MonoBehaviour
 
         if (m_laserActivityState)
         {
-            ControlLaserEndPosition();
+            RaycastHit hit;
+
+
+            if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
+            {
+                m_laserEndPosition = hit.point;
+            }
+            else
+            {
+                //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
+
+                ControlLaserEndPosition();
+            }
+
             ShootLaserFromGun();
         }
     }
@@ -81,10 +96,8 @@ public class GunInstance : MonoBehaviour
         m_currentgMousePosition.z = 0f;
 
         m_laserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
+        m_secondarylaserEndPosition = m_laserEndPosition;
     }
-
-
-
 
     //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
 }
