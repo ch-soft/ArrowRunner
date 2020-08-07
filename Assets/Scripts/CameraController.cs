@@ -25,17 +25,10 @@ public class CameraController : MonoBehaviour
 
     private void FollowForPlayer()
     {
-        if (_target)
-        {
-            Vector3 nativePosition = transform.position;
-
-            Vector3 targetDirection = (_target.transform.position - nativePosition);
-
-            m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
-
-            m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.deltaTime);
-
-            transform.position = Vector3.Lerp(transform.position, m_targetPos + _offset, _durability);
-        }
+        Vector3 nativePosition = transform.position;
+        Vector3 targetDirection = (_target.transform.position - nativePosition);
+        m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
+        m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.fixedDeltaTime);
+        transform.position = Vector3.Lerp(transform.position, m_targetPos + _offset, _durability);
     }
 }
