@@ -56,37 +56,19 @@ public class GunInstance : MonoBehaviour
 
             m_testMousePosition = Input.mousePosition;
             m_testMousePosition.z = 1.0f;
-
             m_currentgMousePosition =
                 (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
-            //m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
             m_currentgMousePosition.z = 0f;
-
             m_secondarylaserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
-
 
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit)) //НУЖНО ПЛЯСАТЬ ОТСЮДА
             {
                 Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
-                print("Debug Ray: " + m_secondarylaserEndPosition);
                 m_laserEndPosition = hit.point;
-                //m_testMousePosition = Input.mousePosition;
-                //m_testMousePosition.z = 1.0f;
-
-                //m_currentgMousePosition =
-                //    (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
-                ////m_laserEndPosition = new Vector3(m_startingMousePosition.x - m_deltaX, m_startingMousePosition.y - m_deltaY, transform.position.z + 20f);
-                //m_currentgMousePosition.z = 0f;
-
-                //m_laserEndPosition = hit.point/* + m_currentgMousePosition*/;
-
             }
             else
             {
                 m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
-                //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
-
-                //ControlLaserEndPosition();
             }
 
             ShootLaserFromGun();
@@ -108,18 +90,6 @@ public class GunInstance : MonoBehaviour
     {
         m_lineRenderer.SetPosition(0, transform.position);
         m_lineRenderer.SetPosition(1, m_laserEndPosition);
-    }
-
-    private void ControlLaserEndPosition()
-    {
-        m_testMousePosition = Input.mousePosition;
-        m_testMousePosition.z = 1.0f;
-
-        m_currentgMousePosition =
-            (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
-        m_currentgMousePosition.z = 0f;
-
-        m_laserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
     }
 
     //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
