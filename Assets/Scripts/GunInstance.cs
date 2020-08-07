@@ -28,7 +28,7 @@ public class GunInstance : MonoBehaviour
     private float m_deltaX;
     private float m_deltaY;
 
-    private float m_sensitivity = 35f;
+    private float m_sensitivity = 40f;
 
     private void Awake()
     {
@@ -63,10 +63,12 @@ public class GunInstance : MonoBehaviour
             m_currentgMousePosition.z = 0f;
 
             m_secondarylaserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
-            Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
+
 
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit)) //НУЖНО ПЛЯСАТЬ ОТСЮДА
             {
+                Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
+                print("Debug Ray: " + m_secondarylaserEndPosition);
                 m_laserEndPosition = hit.point;
                 //m_testMousePosition = Input.mousePosition;
                 //m_testMousePosition.z = 1.0f;
@@ -81,9 +83,10 @@ public class GunInstance : MonoBehaviour
             }
             else
             {
+                m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
                 //m_laserEndPosition = transform.position + (Vector3.forward * m_laserDistance); //just shoot forward
 
-                ControlLaserEndPosition();
+                //ControlLaserEndPosition();
             }
 
             ShootLaserFromGun();
@@ -109,7 +112,6 @@ public class GunInstance : MonoBehaviour
 
     private void ControlLaserEndPosition()
     {
-        print("isWorking");
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
 
