@@ -59,7 +59,7 @@ public class GunInstance : MonoBehaviour
             m_currentgMousePosition =
                 (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
-            m_secondarylaserEndPosition = transform.position + new Vector3(0, 0, 20f) + m_currentgMousePosition;
+            m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, 20f) + m_currentgMousePosition;
 
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit)) //НУЖНО ПЛЯСАТЬ ОТСЮДА
             {
@@ -72,6 +72,11 @@ public class GunInstance : MonoBehaviour
             }
 
             ShootLaserFromGun();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            m_startingMousePosition = Vector3.zero;
         }
     }
 
