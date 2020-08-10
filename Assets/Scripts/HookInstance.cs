@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
+
 public enum HookState
 {
     None = 0,
@@ -12,40 +13,57 @@ public enum HookState
     FliesToBase
 }
 
+[RequireComponent(typeof(LineRenderer))]
 public class HookInstance : MonoBehaviour
 {
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 35f;
+    private float m_hookMovementSpeed = 50f;
 
     private Vector3 m_hookLocalStartPosition;
+
+    private LineRenderer m_lineRenderer;
 
     private Transform m_parent;
 
     private const int m_grabbingObjectLayer = 8;
+
+    private bool m_isHookInAir;
 
     private void Awake()
     {
         m_hookState = HookState.Based;
         m_hookLocalStartPosition = transform.localPosition;
         m_parent = gameObject.transform.parent;
+
+        m_lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
     {
-        switch (m_hookState)
+        if (m_isHookInAir)
         {
-            case HookState.FliesToTarget:
-                {
-                    ShootGrabHookToTarget();
-                    break;
-                }
-            case HookState.FliesToBase:
-                {
-                    ReturnHookToBase();
-                    break;
-                }
+            switch (m_hookState)
+            {
+                case HookState.FliesToTarget:
+                    {
+                        ShootGrabHookToTarget();
+                        break;
+                    }
+                case HookState.FliesToBase:
+                    {
+                        ReturnHookToBase();
+                        break;
+                    }
+            }
+
+            m_lineRenderer.SetPosition(0, m_parent.position);
+            m_lineRenderer.SetPosition(1, transform.position);
+        }
+        else
+        {
+
         }
     }
 
@@ -57,6 +75,12 @@ public class HookInstance : MonoBehaviour
     private void ReturnHookToBase()
     {
         transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 3f);
+        if (Vector3.Distance(transform.localPosition, m_hookLocalStartPosition) < 0.1f)
+        {
+            transform.localPosition = m_hookLocalStartPosition;
+            m_hookState = HookState.Based;
+            ChangeLocalHookState(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,5 +106,11 @@ public class HookInstance : MonoBehaviour
     {
         transform.parent = m_parent;
         m_hookState = HookState.FliesToBase;
+    }
+
+    public void ChangeLocalHookState(bool state)
+    {
+        m_isHookInAir = state;
+        m_lineRenderer.enabled = state;
     }
 }

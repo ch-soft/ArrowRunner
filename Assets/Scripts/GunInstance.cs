@@ -124,6 +124,7 @@ public class GunInstance : MonoBehaviour
             m_hook.m_targetPosition = hit.point;
             m_hook.m_hookState = HookState.FliesToTarget;
             m_hook.transform.parent = null;
+            m_hook.ChangeLocalHookState(true);
             //}
         }
         else
