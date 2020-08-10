@@ -118,13 +118,13 @@ public class GunInstance : MonoBehaviour
 
         if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
         {
-            if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
-            {
-                //enemy was found, we can shoot hook
-                m_hook.m_targetPosition = hit.point;
-                m_hook.m_hookState = HookState.FliesToBase;
-                m_hook.transform.parent = null;
-            }
+            //if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
+            //{
+            //enemy was found, we can shoot hook
+            m_hook.m_targetPosition = hit.point;
+            m_hook.m_hookState = HookState.FliesToTarget;
+            m_hook.transform.parent = null;
+            //}
         }
         else
         {

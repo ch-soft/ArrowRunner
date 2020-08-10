@@ -17,7 +17,7 @@ public class HookInstance : MonoBehaviour
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 20f;
+    private float m_hookMovementSpeed = 35f;
 
     private Vector3 m_hookLocalStartPosition;
 
@@ -36,12 +36,12 @@ public class HookInstance : MonoBehaviour
     {
         switch (m_hookState)
         {
-            case HookState.FliesToBase:
+            case HookState.FliesToTarget:
                 {
                     ShootGrabHookToTarget();
                     break;
                 }
-            case HookState.FliesToTarget:
+            case HookState.FliesToBase:
                 {
                     ReturnHookToBase();
                     break;
@@ -56,9 +56,8 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.position, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 3f);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 2f);
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -66,10 +65,11 @@ public class HookInstance : MonoBehaviour
         {
             case m_grabbingObjectLayer:
                 {
+                    transform.parent = m_parent;
 
+                    m_hookState = HookState.FliesToBase;
                     break;
                 }
         }
     }
-
 }
