@@ -17,7 +17,7 @@ public class PlayerInstance : MonoBehaviour
     private Animator m_selfAnimator;
 
     private string m_animationRunName = "Run";
-    private float m_normalizeTimeDelay = 1f;
+    private float m_normalizeTimeDelay = 0f;
 
     private bool m_canRun;
 

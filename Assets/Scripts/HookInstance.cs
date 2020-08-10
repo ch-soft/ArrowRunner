@@ -19,7 +19,7 @@ public class HookInstance : MonoBehaviour
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 50f;
+    private float m_hookMovementSpeed = 25f;
 
     private Vector3 m_hookLocalStartPosition;
 
@@ -96,6 +96,13 @@ public class HookInstance : MonoBehaviour
             case m_grabbingObjectLayer:
                 {
                     //need add more logic here
+
+                    if (other.gameObject.GetComponent<GrabbingBaseObject>())
+                    {
+                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position);
+                        other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                    }
+
                     FixateHitAndReturnHome();
                     break;
                 }
