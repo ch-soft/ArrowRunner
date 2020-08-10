@@ -56,20 +56,31 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 2f);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 3f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         switch (other.gameObject.layer)
         {
+            case 0:
+                {
+                    FixateHitAndReturnHome();
+                    break;
+                }
+
             case m_grabbingObjectLayer:
                 {
-                    transform.parent = m_parent;
-
-                    m_hookState = HookState.FliesToBase;
+                    //need add more logic here
+                    FixateHitAndReturnHome();
                     break;
                 }
         }
+    }
+
+    private void FixateHitAndReturnHome()
+    {
+        transform.parent = m_parent;
+        m_hookState = HookState.FliesToBase;
     }
 }
