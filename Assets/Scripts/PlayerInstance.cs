@@ -17,10 +17,14 @@ public class PlayerInstance : MonoBehaviour
     private Animator m_selfAnimator;
 
     private string m_animationRunName = "Run";
+    private float m_normalizeTimeDelay = 1f;
 
     private bool m_canRun;
 
     private bool m_isSlowmoEnable;
+
+    private Coroutine m_normalizeTime;
+
 
     private void Awake()
     {
@@ -30,7 +34,7 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
-        EnableSlowmo(false);
+        //EnableSlowmo(false);
 
 
         StartRunAnimation();
@@ -49,19 +53,19 @@ public class PlayerInstance : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ChangeSlowmoLocalState(true);
-            if (m_isSlowmoEnable)
+            if (!m_isSlowmoEnable)
             {
                 EnableSlowmo(true);
-                m_gun.EnableLaserSight(true);
+                StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
+                StartCoroutine(ChangeSlowmoLocalState(true, 0f));
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            ChangeSlowmoLocalState(false);
+            StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
             EnableSlowmo(false);
-            m_gun.EnableLaserSight(false);
+            StartCoroutine(m_gun.EnableLaserSight(false, 0f));
         }
     }
 
@@ -86,19 +90,27 @@ public class PlayerInstance : MonoBehaviour
         {
             case true:
                 {
-                    TimeControl.SlowTime();
+                    if (!m_isSlowmoEnable)
+                    {
+                        TimeControl.SlowTime();
+                        if (m_normalizeTime != null)
+                        {
+                            StopCoroutine(m_normalizeTime);
+                        }
+                    }
                     break;
                 }
             case false:
                 {
-                    TimeControl.NormalizeTime();
+                    m_normalizeTime = StartCoroutine(TimeControl.NormalizeTime(m_normalizeTimeDelay));
                     break;
                 }
         }
     }
 
-    private void ChangeSlowmoLocalState(bool state)
+    private IEnumerator ChangeSlowmoLocalState(bool state, float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
         m_isSlowmoEnable = state;
     }
 }

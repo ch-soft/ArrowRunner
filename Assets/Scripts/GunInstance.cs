@@ -85,9 +85,10 @@ public class GunInstance : MonoBehaviour
         transform.SetParent(m_rightHand);
     }
 
-    public void EnableLaserSight(bool state)
+    public IEnumerator EnableLaserSight(bool state, float delay)
     {
         m_laserActivityState = state;
+        yield return new WaitForSecondsRealtime(delay);
         m_lineRenderer.enabled = state;
     }
 

@@ -13,8 +13,10 @@ public static class TimeControl
         ChangeTimeScale(_slowmoTime, 0.02f * Time.timeScale);
     }
 
-    public static void NormalizeTime()
+    public static IEnumerator NormalizeTime(float unfreezeTime)
     {
+        yield return new WaitForSecondsRealtime(unfreezeTime);
+
         ChangeTimeScale(_normalTime, 0.02f);
     }
 
