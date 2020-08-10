@@ -39,7 +39,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
             if (m_isgrabbing)
             {
-                transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 2f * Time.deltaTime);
+                transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 3f * Time.deltaTime);
             }
         }
     }
@@ -47,7 +47,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     public IEnumerator PullObjectToPlayer()
     {
         m_isgrabbing = true;
-        m_rigidbody.AddForce(m_pullingDirection + new Vector3(2f * transform.position.x * -m_pullingForce, 1.5f * -m_pullingForce, 3f * -m_pullingForce));
+        m_rigidbody.AddForce(m_pullingDirection + new Vector3(2f * transform.position.x * -m_pullingForce, 5f * -m_pullingForce, 5f * -m_pullingForce));
         yield return new WaitForSeconds(2f);
         m_isgrabbing = false;
     }
