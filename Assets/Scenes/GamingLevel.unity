@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 88759652}
   - component: {fileID: 88759651}
   - component: {fileID: 88759650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 264006107}
   - component: {fileID: 264006106}
   - component: {fileID: 264006105}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 284914304}
   - component: {fileID: 284914303}
   - component: {fileID: 284914302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 360783715}
   - component: {fileID: 360783714}
   - component: {fileID: 360783713}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   - component: {fileID: 436761278}
   - component: {fileID: 436761277}
   - component: {fileID: 436761280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,6 +767,98 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!1 &501321563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501321564}
+  - component: {fileID: 501321567}
+  - component: {fileID: 501321566}
+  - component: {fileID: 501321565}
+  m_Layer: 9
+  m_Name: GrabbingHook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &501321564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501321563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: 0.64}
+  m_LocalScale: {x: 1, y: 1, z: 0.268}
+  m_Children: []
+  m_Father: {fileID: 1807025499}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &501321565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501321563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &501321566
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501321563}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 8e6667095eedff042a87eee891898eed, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &501321567
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501321563}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &533389307
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1086,7 @@ GameObject:
   - component: {fileID: 764817718}
   - component: {fileID: 764817717}
   - component: {fileID: 764817716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1369,7 @@ GameObject:
   - component: {fileID: 1160569704}
   - component: {fileID: 1160569703}
   - component: {fileID: 1160569702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1478,7 @@ GameObject:
   - component: {fileID: 1244126475}
   - component: {fileID: 1244126474}
   - component: {fileID: 1244126473}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1841,7 @@ GameObject:
   - component: {fileID: 1722938962}
   - component: {fileID: 1722938961}
   - component: {fileID: 1722938960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1858,7 +1950,7 @@ GameObject:
   - component: {fileID: 1758279511}
   - component: {fileID: 1758279510}
   - component: {fileID: 1758279509}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2084,7 +2176,7 @@ GameObject:
   - component: {fileID: 1806924128}
   - component: {fileID: 1806924127}
   - component: {fileID: 1806924126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2212,7 +2304,8 @@ Transform:
     w: 1}
   m_LocalPosition: {x: 0.07899997, y: 1.0109999, z: 0.52599996}
   m_LocalScale: {x: 0.09495204, y: 0.09495207, z: 0.23738003}
-  m_Children: []
+  m_Children:
+  - {fileID: 501321564}
   m_Father: {fileID: 5006512735781810146}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2290,6 +2383,7 @@ MonoBehaviour:
   m_laserDistance: 10
   m_mainCamera: {fileID: 963194227}
   m_rightHand: {fileID: 6003052536660011137}
+  m_hookObjectTransform: {fileID: 501321564}
 --- !u!120 &1807025504
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2408,7 +2502,7 @@ GameObject:
   - component: {fileID: 1884580621}
   - component: {fileID: 1884580620}
   - component: {fileID: 1884580619}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2517,7 +2611,7 @@ GameObject:
   - component: {fileID: 1907250837}
   - component: {fileID: 1907250836}
   - component: {fileID: 1907250835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemyCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
