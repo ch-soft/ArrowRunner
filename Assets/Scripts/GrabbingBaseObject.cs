@@ -46,8 +46,10 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
     public IEnumerator PullObjectToPlayer()
     {
+        m_rigidbody.useGravity = true;
+
         m_isgrabbing = true;
-        m_rigidbody.AddForce(m_pullingDirection + new Vector3(2f * transform.position.x * -m_pullingForce, 5f * -m_pullingForce, 5f * -m_pullingForce));
+        m_rigidbody.AddForce(m_pullingDirection + new Vector3(2f * transform.position.x * -m_pullingForce, 2f * -m_pullingForce, 7.5f * -m_pullingForce));
         yield return new WaitForSeconds(2f);
         m_isgrabbing = false;
     }
