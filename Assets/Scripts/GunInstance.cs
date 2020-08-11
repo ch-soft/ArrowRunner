@@ -12,6 +12,7 @@ public class GunInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private Camera m_mainCamera;
     [BoxGroup("References"), SerializeField] private Transform m_rightHand;
     [BoxGroup("References"), SerializeField] private HookInstance m_hook;
+    [BoxGroup("References"), SerializeField] private GameObject m_pointSphere;
 
 
     private LineRenderer m_lineRenderer;
@@ -22,11 +23,7 @@ public class GunInstance : MonoBehaviour
     private Vector3 m_currentgMousePosition;
     private Vector3 m_startingMousePosition;
 
-    private float m_deltaX;
-    private float m_deltaY;
     private float m_sensitivity = 40f;
-
-    private int m_grabbingObjectLayer;
 
     private bool m_laserActivityState;
 
@@ -34,7 +31,6 @@ public class GunInstance : MonoBehaviour
     private void Awake()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
-        m_grabbingObjectLayer = LayerMask.NameToLayer("GrabbingObject");
     }
 
     private void Start()
@@ -71,11 +67,14 @@ public class GunInstance : MonoBehaviour
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
             {
                 Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
+                m_pointSphere.transform.position = hit.point;
                 m_laserEndPosition = hit.point;
+                EnablePointSphere(true);
             }
             else
             {
                 m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
+                EnablePointSphere(false);
             }
 
             ShootLaserFromGun();
@@ -96,6 +95,7 @@ public class GunInstance : MonoBehaviour
         m_laserActivityState = state;
         yield return new WaitForSecondsRealtime(delay);
         m_lineRenderer.enabled = state;
+        EnablePointSphere(state);
     }
 
     private void ShootLaserFromGun()
@@ -135,5 +135,11 @@ public class GunInstance : MonoBehaviour
         m_startingMousePosition = Vector3.zero;
     }
 
-
+    private void EnablePointSphere(bool state)
+    {
+        if (m_pointSphere.activeSelf == !state)
+        {
+            m_pointSphere.SetActive(state);
+        }
+    }
 }

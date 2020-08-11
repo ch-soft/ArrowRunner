@@ -29,7 +29,6 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     private bool m_isgrabbing;
 
 
-
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -52,6 +51,10 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                             transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.deltaTime);
 
                             transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 3f);
+                            if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
+                            {
+                                m_isgrabbing = false;
+                            }
                         }
                     }
                     break;
