@@ -51,7 +51,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                         {
                             transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.deltaTime);
 
-                            transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 4f);
+                            transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 3f);
                         }
                     }
                     break;
