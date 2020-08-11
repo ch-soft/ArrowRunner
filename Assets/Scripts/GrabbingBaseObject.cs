@@ -12,17 +12,17 @@ public enum GrabbingObjectType
     PullUpFastening
 }
 
-[RequireComponent(typeof(Rigidbody))]
 public abstract class GrabbingBaseObject : MonoBehaviour
 {
     [BoxGroup("Settings"), SerializeField] private float m_pullingForce;
     [BoxGroup("Settings"), SerializeField] private Vector3 m_forceDirection;
     [BoxGroup("Settings")] public GrabbingObjectType m_grabbingObjectType;
+    [Space]
+    [BoxGroup("References"), SerializeField] private Rigidbody m_rigidbody;
 
     [HideInInspector] public Vector3 m_pullingDirection;
     [HideInInspector] public Transform m_pullingObject;
 
-    private Rigidbody m_rigidbody;
 
     private float m_grabbingTime = 1f;
 
@@ -40,23 +40,23 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         {
             case GrabbingObjectType.EnemyCharacter:
                 {
-                    if (m_rigidbody.velocity.magnitude > 0.1f)
+                    //if (m_rigidbody.velocity.magnitude > 0.1f)
+                    //{
+                    //    //Vector3 newDirection = Vector3.RotateTowards(transform.forward, m_pullingDirection, m_pullingForce * Time.deltaTime, 20.0f);
+
+                    //    //transform.rotation = Quaternion.LookRotation(newDirection);
+
+                    if (m_isgrabbing)
                     {
-                        //Vector3 newDirection = Vector3.RotateTowards(transform.forward, m_pullingDirection, m_pullingForce * Time.deltaTime, 20.0f);
+                        transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.deltaTime);
 
-                        //transform.rotation = Quaternion.LookRotation(newDirection);
-
-                        if (m_isgrabbing)
+                        transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 3f);
+                        if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
                         {
-                            transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.deltaTime);
-
-                            transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 3f);
-                            if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
-                            {
-                                m_isgrabbing = false;
-                            }
+                            m_isgrabbing = false;
                         }
                     }
+                    //}
                     break;
                 }
         }

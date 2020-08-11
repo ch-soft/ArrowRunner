@@ -11,7 +11,13 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("Preferences"), SerializeField] private string m_punchAnimName;
 
 
-
+    private void Awake()
+    {
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
 
     public void OnHookGrab()
     {
@@ -21,6 +27,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             case GrabbingObjectType.EnvironmentObject:
                 {
                     StartCoroutine(PullObjectToPlayer());
+                    EnableAnimator(false);
                     ActivateRagdoll();
                     break;
                 }
@@ -31,7 +38,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
+            m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
+
             m_bonesRigidbodies[i].useGravity = true;
         }
+    }
+
+    private void EnableAnimator(bool state)
+    {
+        m_animator.enabled = state;
     }
 }
