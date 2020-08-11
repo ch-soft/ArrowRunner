@@ -3480,48 +3480,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4251095439011835710, guid: f78f5970621564c46a07571a7539ca75,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835710, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
       propertyPath: m_LocalScale.y
       value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835710, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 851046671483959525, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 08e3bb46474c1134e8278893dcc2a507, type: 2}
-    - target: {fileID: 4251095439011835714, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835715, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_pullingForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835715, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_forceDirection.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835715, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_forceDirection.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4251095439011835715, guid: f78f5970621564c46a07571a7539ca75,
-        type: 3}
-      propertyPath: m_forceDirection.z
-      value: 7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f78f5970621564c46a07571a7539ca75, type: 3}
