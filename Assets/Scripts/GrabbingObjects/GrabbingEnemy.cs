@@ -7,6 +7,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 {
     [BoxGroup("References"), SerializeField] private Animator m_animator;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
+    [BoxGroup("References"), SerializeField] private BoxCollider m_boxCollider;
     [Space]
     [BoxGroup("Preferences"), SerializeField] private string m_punchAnimName;
 
@@ -47,5 +48,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private void EnableAnimator(bool state)
     {
         m_animator.enabled = state;
+
+        m_boxCollider.enabled = state;
     }
 }
