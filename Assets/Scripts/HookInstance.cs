@@ -19,7 +19,7 @@ public class HookInstance : MonoBehaviour
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 25f;
+    private float m_hookMovementSpeed = 20f;
 
     private Vector3 m_hookLocalStartPosition;
 
@@ -74,7 +74,7 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 3f);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 4f);
         if (Vector3.Distance(transform.localPosition, m_hookLocalStartPosition) < 0.1f)
         {
             transform.localPosition = m_hookLocalStartPosition;
@@ -99,7 +99,7 @@ public class HookInstance : MonoBehaviour
 
                     if (other.gameObject.GetComponent<GrabbingBaseObject>())
                     {
-                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position);
+                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 

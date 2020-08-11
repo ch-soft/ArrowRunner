@@ -76,7 +76,7 @@ public class PlayerInstance : MonoBehaviour
 
     private void MoveCharacterForward()
     {
-        m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);
+       transform.position =  Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime);; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
     }
 
     private void StartRunAnimation()
