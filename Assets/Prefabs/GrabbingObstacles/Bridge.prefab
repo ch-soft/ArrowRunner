@@ -158,10 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d215d7adc9f9ce84d95a5cd6eefe7177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pullingForce: 5
+  m_pullingForce: 3
   m_forceDirection: {x: 0, y: 0, z: 0}
   m_grabbingObjectType: 4
-  m_rigidbody: {fileID: 0}
+  m_rigidbody: {fileID: 95639545562809266}
   m_pullingDirection: {x: 0, y: 0, z: 0}
   m_pullingObject: {fileID: 0}
+  m_selfRenderer: {fileID: 95639545562809265}
+  m_standColor: {r: 0.5764706, g: 0.39215687, b: 0.7921569, a: 1}
   m_isFalling: 0

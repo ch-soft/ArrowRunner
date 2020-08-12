@@ -108,6 +108,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                     {
                         FixateDeath("Bridge");
                     }
+                    StartCoroutine(bridge.DisableBridge());
 
                     break;
                 }
