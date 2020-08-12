@@ -31,6 +31,9 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     {
         m_isFalling = true;
         PullBridge();
+
+        StartCoroutine(DisableBridge());
+
     }
 
     public IEnumerator DisableBridge()

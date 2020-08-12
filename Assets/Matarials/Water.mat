@@ -10,7 +10,7 @@ Material:
   m_Name: Water
   m_Shader: {fileID: 4800000, guid: 4a91c9577c91733478297518e0cb57ed, type: 3}
   m_ShaderKeywords: _SECONDARYFOAMALWAYSVISIBLE_ON
-  m_LightmapFlags: 4
+  m_LightmapFlags: 3
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _FoamTexture:
         m_Texture: {fileID: 2800000, guid: a24ddeee41b659a42b3e031e47a80ae2, type: 3}
-        m_Scale: {x: 0.8, y: 0.8}
+        m_Scale: {x: 0.7, y: 1.45}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
@@ -72,17 +72,17 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelExp: 2.857143
+    - _FresnelExp: 1.1210318
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GradientPosition1: 1.6
     - _GradientPosition2: 2
     - _LightColorIntensity: 0.54
-    - _MainFoamIntensity: 4.58
+    - _MainFoamIntensity: 0
     - _MainFoamOpacity: 0
-    - _MainFoamScale: 36.44
-    - _MainFoamSpeed: 3.99
+    - _MainFoamScale: 0
+    - _MainFoamSpeed: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -96,7 +96,7 @@ Material:
     - _SecondaryFoamAlwaysVisible: 0
     - _SecondaryFoamIntensity: 2.330097
     - _SecondaryFoamOpacity: 0.54
-    - _SecondaryFoamScale: 40
+    - _SecondaryFoamScale: 50
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0.62
@@ -107,7 +107,7 @@ Material:
     - _VertexOffset: 0
     - _WaveDistortionIntensity: 0.592233
     - _WavesAmplitude: 4.980582
-    - _WavesDirection: 116
+    - _WavesDirection: 0
     - _WavesIntensity: 2
     - _WavesSpeed: 1
     - _ZWrite: 1

@@ -12,6 +12,8 @@ public class PlayerInstance : MonoBehaviour
     [Space]
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
 
+    [HideInInspector] public bool m_isAlive;
+
 
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
@@ -35,7 +37,7 @@ public class PlayerInstance : MonoBehaviour
     private void Start()
     {
         //EnableSlowmo(false);
-
+        ChangeLifeState(true);
 
         StartRunAnimation();
         AllowToRun(true);
@@ -48,24 +50,35 @@ public class PlayerInstance : MonoBehaviour
             MoveCharacterForward();
         }
     }
-
     private void LateUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (m_isAlive)
         {
-            if (!m_isSlowmoEnable)
+            if (Input.GetMouseButtonDown(0))
             {
-                EnableSlowmo(true);
-                StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
-                StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+                if (!m_isSlowmoEnable)
+                {
+                    EnableSlowmo(true);
+                    StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
+                    StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+                }
             }
-        }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
-            EnableSlowmo(false);
-            StartCoroutine(m_gun.EnableLaserSight(false, 0f));
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
+                EnableSlowmo(false);
+                StartCoroutine(m_gun.EnableLaserSight(false, 0f));
+            }
+
+
+            if (m_selfRigidbody.velocity.y < -2f)
+            {
+                print(m_selfRigidbody.velocity.y);
+
+                ChangeLifeState(false);
+                AllowToRun(false);
+            }
         }
     }
 
@@ -74,9 +87,14 @@ public class PlayerInstance : MonoBehaviour
         m_canRun = state;
     }
 
+    private void ChangeLifeState(bool state)
+    {
+        m_isAlive = state;
+    }
+
     private void MoveCharacterForward()
     {
-       transform.position =  Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime);; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime); ; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
     }
 
     private void StartRunAnimation()
