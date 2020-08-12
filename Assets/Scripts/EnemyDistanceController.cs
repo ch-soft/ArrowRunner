@@ -18,9 +18,12 @@ public class EnemyDistanceController : MonoBehaviour
 
     private void Update()
     {
-        if (m_playerIsInSight)
+        if (m_parentEnemy.m_isAlive)
         {
-            ChangeColorDueDistance();
+            if (m_playerIsInSight)
+            {
+                ChangeColorDueDistance();
+            }
         }
     }
 

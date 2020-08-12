@@ -11,6 +11,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [Space]
     [BoxGroup("Preferences"), SerializeField] private string m_punchAnimName;
 
+    [HideInInspector] public bool m_isAlive;
 
     private void Awake()
     {
@@ -50,5 +51,46 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         m_animator.enabled = state;
 
         m_boxCollider.enabled = state;
+    }
+
+    private void FixateDeath(string reason)
+    {
+        switch (reason)
+        {
+            case "Bridge":
+                {
+                    m_isAlive = false;
+                    m_animator.Play("DeathFromBridge");
+                    m_boxCollider.enabled = false;
+
+                    m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+                    break;
+                }
+            case "Hook":
+                {
+
+                    break;
+                }
+
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Bridge":
+                {
+                    GrabbingBridge bridge = collision.gameObject.GetComponent<GrabbingBridge>();
+                    if (bridge.m_isFalling)
+                    {
+                        FixateDeath("Bridge");
+                    }
+
+                    break;
+                }
+        }
     }
 }
