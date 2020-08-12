@@ -88,6 +88,7 @@ public class HookInstance : MonoBehaviour
         switch (other.gameObject.layer)
         {
             case 0:
+            case 11:
                 {
                     FixateHitAndReturnHome();
                     break;
