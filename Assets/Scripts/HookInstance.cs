@@ -61,10 +61,6 @@ public class HookInstance : MonoBehaviour
             m_lineRenderer.SetPosition(0, m_parent.position);
             m_lineRenderer.SetPosition(1, transform.position);
         }
-        else
-        {
-
-        }
     }
 
     private void ShootGrabHookToTarget()

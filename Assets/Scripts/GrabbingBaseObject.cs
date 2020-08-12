@@ -37,7 +37,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         switch (m_grabbingObjectType)
         {
@@ -45,7 +45,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                 {
                     if (m_isgrabbing)
                     {
-                        transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.deltaTime);
+                        transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
 
                         transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 4f);
                         if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
@@ -59,7 +59,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                 {
                     if (m_isgrabbing)
                     {
-                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(m_targetRotation), Time.deltaTime * m_fallingBridgeForce);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(m_targetRotation), Time.fixedDeltaTime * m_fallingBridgeForce);
                         m_fallingBridgeForce += 1f;
                     }
                     break;

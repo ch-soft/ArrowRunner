@@ -595,9 +595,11 @@ MonoBehaviour:
   - {fileID: 4150267791476370198}
   - {fileID: 513642633169838992}
   - {fileID: 8352694159943366811}
-  m_selfRigidbody: {fileID: 6326781299990984193}
   m_boxCollider: {fileID: 1182771595}
+  m_selfRenderer: {fileID: 2602113188034388905}
   m_punchAnimName: FlyingKneePunch
+  m_deathColor: {r: 0, g: 0, b: 0, a: 1}
+  m_isAlive: 0
 --- !u!54 &6326781299990984193
 Rigidbody:
   m_ObjectHideFlags: 0
