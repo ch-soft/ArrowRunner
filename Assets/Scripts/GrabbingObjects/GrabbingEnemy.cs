@@ -76,14 +76,23 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         ChangeAliveState(false);
 
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].gameObject.layer = 1;
+        }
+
+        m_boxCollider.enabled = false;
+        m_rigidbody.isKinematic = true;
+
         switch (reason)
         {
             case "Bridge":
                 {
-                    m_animator.Play("DeathFromBridge");
-                    m_boxCollider.enabled = false;
 
-                    m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                    m_animator.Play("DeathFromBridge");
+
+
+
 
                     break;
                 }

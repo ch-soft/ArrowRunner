@@ -11,6 +11,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("Preferences"), SerializeField] private float m_movementSpeed;
     [Space]
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
+    [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
 
     [HideInInspector] public bool m_isAlive;
 
@@ -36,6 +37,9 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
+        EnableRagdoll(false);
+
+
         //EnableSlowmo(false);
         ChangeLifeState(true);
 
@@ -72,12 +76,14 @@ public class PlayerInstance : MonoBehaviour
             }
 
 
-            if (m_selfRigidbody.velocity.y < -2f)
+            if (m_selfRigidbody.velocity.y < -2.5f)
             {
                 print(m_selfRigidbody.velocity.y);
 
                 ChangeLifeState(false);
                 AllowToRun(false);
+
+                EnableRagdoll(true);
             }
         }
     }
@@ -130,5 +136,36 @@ public class PlayerInstance : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         m_isSlowmoEnable = state;
+    }
+
+    private void EnableRagdoll(bool state)
+    {
+        switch (state)
+        {
+            case true:
+                {
+                    m_selfAnimator.enabled = false;
+
+
+                    for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+                    {
+                        m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
+
+                        m_bonesRigidbodies[i].useGravity = true;
+                    }
+                    break;
+                }
+            case false:
+                {
+
+                    for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+                    {
+                        m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeRotation;
+                        m_bonesRigidbodies[i].useGravity = true;
+
+                    }
+                    break;
+                }
+        }
     }
 }
