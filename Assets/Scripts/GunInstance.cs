@@ -66,9 +66,9 @@ public class GunInstance : MonoBehaviour
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
             {
                 Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
-                m_pointSphere.transform.position = new Vector3(0f, hit.point.y, hit.point.z);
-                m_laserEndPosition = new Vector3(0f, hit.point.y, hit.point.z); //this is for vertical controll
-                //m_laserEndPosition = hit.point; // this is for full controll
+                //m_pointSphere.transform.position = new Vector3(0f, hit.point.y, hit.point.z);
+                m_laserEndPosition = hit.point; // this is for full controll
+                m_laserEndPosition.x = 0f;
                 EnablePointSphere(true);
             }
             else
