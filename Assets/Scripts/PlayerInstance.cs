@@ -76,7 +76,7 @@ public class PlayerInstance : MonoBehaviour
             }
 
 
-            if (m_selfRigidbody.velocity.y < -2.5f)
+            if (m_selfRigidbody.velocity.y < -2.6f)
             {
                 print(m_selfRigidbody.velocity.y);
 
