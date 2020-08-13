@@ -16,6 +16,9 @@ public enum HookState
 [RequireComponent(typeof(LineRenderer))]
 public class HookInstance : MonoBehaviour
 {
+    [SerializeField] private Transform m_characterTransform;
+    [SerializeField] public Rigidbody m_characterRigidbody;
+
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
@@ -89,14 +92,13 @@ public class HookInstance : MonoBehaviour
                     FixateHitAndReturnHome();
                     break;
                 }
-
             case m_grabbingObjectLayer:
                 {
                     //need add more logic here
 
                     if (other.gameObject.GetComponent<GrabbingBaseObject>())
                     {
-                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
+                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform, m_characterTransform, m_characterRigidbody);
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 

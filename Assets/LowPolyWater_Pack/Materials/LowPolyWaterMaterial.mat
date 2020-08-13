@@ -65,7 +65,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 88c8f45bafd42ab49ab67ccd1b8056ce, type: 3}
-        m_Scale: {x: 15, y: 15}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -186,7 +186,7 @@ Material:
     - _BumpDirection: {r: 10, g: 10, b: 10, a: 10}
     - _BumpMap_ST: {r: 1, g: 1, b: 0, a: 0}
     - _BumpTiling: {r: 0.01, g: 0.01, b: 0.01, a: 0.01}
-    - _Color: {r: 0.4198113, g: 0.9068833, b: 1, a: 1}
+    - _Color: {r: 0.6179246, g: 0.9246792, b: 1, a: 1}
     - _DepthColor: {r: 0.027511697, g: 0.14179105, b: 0.13226777, a: 0.4627451}
     - _DepthColorFade: {r: 0.8880597, g: 0.27834705, b: 0.44463244, a: 0.22352941}
     - _Displacement: {r: 6.6371665, g: 20.353983, b: -1, a: -0.681416}

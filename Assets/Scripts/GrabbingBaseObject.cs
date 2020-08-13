@@ -9,7 +9,8 @@ public enum GrabbingObjectType
     GrabObject,
     EnemyCharacter,
     EnvironmentObject,
-    Bridge
+    Bridge,
+    GrapplingBase
 }
 
 public abstract class GrabbingBaseObject : MonoBehaviour
@@ -23,14 +24,17 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     [HideInInspector] public Vector3 m_pullingDirection;
     [HideInInspector] public Transform m_pullingObject;
 
-
     private float m_grabbingTime = 1f;
+    private bool m_isGrabbing;
 
+    //Bridge
     private Vector3 m_targetRotation = new Vector3(-90f, 0f, 0f);
-
-    private bool m_isgrabbing;
-
     private float m_fallingBridgeForce;
+
+    //Grappling base
+
+    private Transform m_characterTransform;
+    private Rigidbody m_characterRigidbody;
 
     private void Awake()
     {
@@ -39,53 +43,80 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        switch (m_grabbingObjectType)
+        if (m_isGrabbing)
         {
-            case GrabbingObjectType.EnemyCharacter:
-                {
-                    if (m_isgrabbing)
+            switch (m_grabbingObjectType)
+            {
+                case GrabbingObjectType.EnemyCharacter:
                     {
+
                         transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
 
                         transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 4f);
                         if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
                         {
-                            m_isgrabbing = false;
+                            m_isGrabbing = false;
                         }
+                        break;
                     }
-                    break;
-                }
-            case GrabbingObjectType.Bridge:
-                {
-                    if (m_isgrabbing)
+                case GrabbingObjectType.Bridge:
                     {
                         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(m_targetRotation), Time.fixedDeltaTime * m_fallingBridgeForce);
                         m_fallingBridgeForce += 1f;
+                        break;
                     }
-                    break;
-                }
+
+                case GrabbingObjectType.GrapplingBase:
+                    {
+                        Vector3 grapplePoint = m_characterTransform.position;
+                        Vector3 grappleDirection = (grapplePoint - transform.position);
+
+                        float distance = Vector3.Distance(grapplePoint, transform.position);
+
+                        //if (distance < grappleDirection.magnitude)// With this you can determine if you are overshooting your target. You are basically checking, if you are further away from your target then during the last frame
+                        //{
+                            float velocity = m_characterRigidbody.velocity.magnitude;//How fast you are currently
+
+                            Vector3 newDirection = Vector3.ProjectOnPlane(m_characterRigidbody.velocity, grappleDirection);//So this is a bit more complicated
+                                                                                                                           //basically I am using the grappleDirection Vector as a normal vector of a plane.
+                                                                                                                           //I am really bad at explaining it. Partly due to my bad english but it is best if you just look up what Vector3.ProjectOnPlane does.
+
+                            m_characterRigidbody.velocity = newDirection.normalized * velocity;//Now I just have to redirect the velocity
+
+                        //}
+                        break;
+                    }
+            }
         }
     }
 
     public IEnumerator PullObjectToPlayer()
     {
         m_rigidbody.useGravity = true;
-        m_isgrabbing = true;
+        m_isGrabbing = true;
         m_rigidbody.AddForce(m_pullingDirection + new Vector3(m_forceDirection.x * transform.position.x * -m_pullingForce, m_forceDirection.y * -m_pullingForce, m_forceDirection.z * -m_pullingForce));
         yield return new WaitForSeconds(m_grabbingTime);
-        m_isgrabbing = false;
+        m_isGrabbing = false;
     }
 
     public void PullBridge()
     {
-        m_isgrabbing = true;
+        m_isGrabbing = true;
         m_fallingBridgeForce = m_pullingForce;
     }
 
-    public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook)
+    public void PrepareGrapplingMove()
+    {
+        m_isGrabbing = true;
+    }
+
+    public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook, Transform characterTransform, Rigidbody characterRigidbody)
     {
         m_pullingDirection = playerDirection;
         m_pullingObject = hook;
+
+        m_characterTransform = characterTransform;
+        m_characterRigidbody = characterRigidbody;
     }
 }
 
