@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 m_targetPos;
 
+
+
     void Start()
     {
         m_targetPos = transform.position;
@@ -29,6 +31,9 @@ public class CameraController : MonoBehaviour
         Vector3 targetDirection = (_target.transform.position - nativePosition);
         m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
         m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.fixedDeltaTime);
-        transform.position = Vector3.Lerp(transform.position, m_targetPos + _offset, _durability);
+
+
+        Vector3 newPosition = new Vector3(m_targetPos.x + _offset.x, 2.889322f, m_targetPos.z + _offset.z);
+        transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
     }
 }

@@ -328,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.45
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
@@ -799,7 +799,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376758051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.301, z: 73.97}
+  m_LocalPosition: {x: 0, y: -9.301, z: 72.59999}
   m_LocalScale: {x: 3, y: 15, z: 26.728}
   m_Children: []
   m_Father: {fileID: 533389308}
@@ -963,7 +963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447339267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.301, z: 43.8}
+  m_LocalPosition: {x: 0, y: -9.301, z: 43.659996}
   m_LocalScale: {x: 3, y: 15, z: 26.728}
   m_Children: []
   m_Father: {fileID: 533389308}
@@ -1619,7 +1619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750181387}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.301, z: 14.09}
+  m_LocalPosition: {x: 0, y: -9.301, z: 13.96}
   m_LocalScale: {x: 3, y: 15, z: 26.728}
   m_Children: []
   m_Father: {fileID: 533389308}
@@ -1699,7 +1699,7 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
@@ -2306,12 +2306,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 60.93
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
@@ -2371,7 +2371,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 56.656
+      value: 87.934006
+      objectReference: {fileID: 0}
+    - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.4029994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a916696125dd19f4dbb2d442c3c0efa2, type: 3}
@@ -2765,12 +2770,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 30.759998
+      value: 31.069998
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
@@ -2830,7 +2835,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 56.656
+      value: 57.764
+      objectReference: {fileID: 0}
+    - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.4029994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a916696125dd19f4dbb2d442c3c0efa2, type: 3}
@@ -3059,7 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11cc5003d52628a45b9dc3d0823e2241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_laserDistance: 10
+  m_laserDistance: 20
   m_mainCamera: {fileID: 963194227}
   m_rightHand: {fileID: 6003052536660011137}
   m_hook: {fileID: 501321568}
@@ -3897,12 +3907,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.74
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.05
+      value: 1.3599983
       objectReference: {fileID: 0}
     - target: {fileID: 95639545562809271, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
@@ -3962,7 +3972,12 @@ PrefabInstance:
     - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 26.946
+      value: 28.054003
+      objectReference: {fileID: 0}
+    - target: {fileID: 95639545562809267, guid: a916696125dd19f4dbb2d442c3c0efa2,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.4029994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a916696125dd19f4dbb2d442c3c0efa2, type: 3}
@@ -4333,7 +4348,7 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.24
+      value: -0.59
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
@@ -6748,7 +6763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ee5ff6e11507942b0a98ae090766a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_movementSpeed: 5
+  m_movementSpeed: 7.5
   m_gun: {fileID: 1807025503}
   m_isAlive: 0
 --- !u!54 &8296172668750175731

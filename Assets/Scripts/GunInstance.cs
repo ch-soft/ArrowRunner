@@ -6,7 +6,6 @@ using NaughtyAttributes;
 [RequireComponent(typeof(LineRenderer))]
 public class GunInstance : MonoBehaviour
 {
-
     [BoxGroup("Gun Parameters"), SerializeField] private float m_laserDistance;
 
     [BoxGroup("References"), SerializeField] private Camera m_mainCamera;
@@ -40,7 +39,6 @@ public class GunInstance : MonoBehaviour
     private void StartingSetup()
     {
         transform.SetParent(m_rightHand);
-
     }
 
     private void Update()
@@ -62,18 +60,22 @@ public class GunInstance : MonoBehaviour
             m_currentgMousePosition =
                 (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
-            m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, 20f) + m_currentgMousePosition;
+            m_currentgMousePosition.x = 0f;
+            m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
 
             if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
             {
                 Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
-                m_pointSphere.transform.position = hit.point;
-                m_laserEndPosition = hit.point;
+                m_pointSphere.transform.position = new Vector3(0f, hit.point.y, hit.point.z);
+                m_laserEndPosition = new Vector3(0f, hit.point.y, hit.point.z); //this is for vertical controll
+                //m_laserEndPosition = hit.point; // this is for full controll
                 EnablePointSphere(true);
             }
             else
             {
                 m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
+
+                m_laserEndPosition = new Vector3(0f, m_laserEndPosition.y, m_laserEndPosition.z);
                 EnablePointSphere(false);
             }
 
@@ -114,14 +116,15 @@ public class GunInstance : MonoBehaviour
         m_currentgMousePosition =
             (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
         m_currentgMousePosition.z = 0f;
-        m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, 20f) + m_currentgMousePosition;
+        m_currentgMousePosition.x = 0f;
+        m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
 
         if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
         {
             //if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
             //{
             //enemy was found, we can shoot hook
-            m_hook.m_targetPosition = hit.point;
+            m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
             m_hook.m_hookState = HookState.FliesToTarget;
             m_hook.transform.parent = null;
             m_hook.ChangeLocalHookState(true);
