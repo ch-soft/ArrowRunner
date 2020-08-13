@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: 4800000, guid: 56d51706552e4a944b8b25b0e5b36dd9, type: 3}
-  m_ShaderKeywords: _SECONDARYFOAMALWAYSVISIBLE_ON
+  m_Shader: {fileID: 4800000, guid: 4a91c9577c91733478297518e0cb57ed, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 3
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -76,7 +76,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelExp: 0.2876984
+    - _FresnelExp: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -84,19 +84,19 @@ Material:
     - _Gradient2: 2
     - _GradientPosition1: 0
     - _GradientPosition2: 0
-    - _LightColorIntensity: 0.54
+    - _LightColorIntensity: 0.14
     - _MainFoamIntensity: 0
-    - _MainFoamOpacity: 0.02
+    - _MainFoamOpacity: 0.08
     - _MainFoamScale: 0
     - _MainFoamSpeed: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.59
+    - _Opacity: 0.75
     - _OpacityDepth: 0
     - _Parallax: 0.02
     - _RealTimeReflection: 0
-    - _ReflectionsIntensity: 1
+    - _ReflectionsIntensity: 0
     - _RefractionIntensity: 1
     - _Roughness: 0.58
     - _SecondaryFoamAlwaysVisible: 0
@@ -107,12 +107,12 @@ Material:
     - _SpecularHighlights: 1
     - _SpecularIntensity: 0.62
     - _SrcBlend: 1
-    - _TurbulenceDistortionIntesity: 0.8155341
+    - _TurbulenceDistortionIntesity: 0.5
     - _TurbulenceScale: 10
     - _UVSec: 0
     - _VertexOffset: 0
-    - _WaveDistortionIntensity: 0.592233
-    - _WavesAmplitude: 4.980582
+    - _WaveDistortionIntensity: 0
+    - _WavesAmplitude: 0
     - _WavesDirection: 0
     - _WavesIntensity: 2
     - _WavesSpeed: 1
@@ -126,5 +126,5 @@ Material:
     - _DepthGradient2: {r: 0, g: 0, b: 0, a: 0}
     - _DepthGradient3: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 0, g: 0, b: 0, a: 0}
+    - _FoamColor: {r: 0.3254717, g: 1, b: 0.8176503, a: 0}
     - _FresnelColor: {r: 0.23629406, g: 0.75725186, b: 0.8490566, a: 1}
