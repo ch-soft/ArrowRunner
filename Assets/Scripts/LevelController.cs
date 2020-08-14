@@ -7,11 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    [BoxGroup("Buttons"), SerializeField] private Button m_restartButton;
+    [BoxGroup("Buttons"), SerializeField] private Button m_levelMenuButton;
+    [BoxGroup("Buttons"), SerializeField] private Button m_continueButton;
+
+    [BoxGroup("References"), SerializeField] private Animator m_levelAnimator;
 
     private void Awake()
     {
-        m_restartButton.onClick.AddListener(RestartLevel);
+        m_levelMenuButton.onClick.AddListener(OpenEndgamePanel);
+        m_continueButton.onClick.AddListener(RestartLevel);
+
+    }
+
+    private void Start()
+    {
+        StartCoroutine(TimeControl.NormalizeTime(0f));
     }
 
     private void RestartLevel()
@@ -19,4 +29,8 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void OpenEndgamePanel()
+    {
+        m_levelAnimator.Play("ShowEndgamePanel");
+    }
 }

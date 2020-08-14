@@ -12,8 +12,8 @@ public class PlayerInstance : MonoBehaviour
     [Space]
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
-    [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
     [BoxGroup("References"), SerializeField] private CameraController m_cameraController;
+    [BoxGroup("References"), SerializeField] private LevelController m_levelController;
 
     [HideInInspector] public bool m_isAlive;
 
@@ -22,7 +22,7 @@ public class PlayerInstance : MonoBehaviour
     private Animator m_selfAnimator;
 
     private string m_animationRunName = "Run";
-    private string m_animationRLevitationName = "Levitation";
+    private string m_animationRLevitationName = "Flying";
     private float m_normalizeTimeDelay = 0f;
 
     private bool m_canRun;
@@ -88,6 +88,8 @@ public class PlayerInstance : MonoBehaviour
                     AllowToRun(false);
 
                     EnableRagdoll(true);
+
+                    m_levelController.OpenEndgamePanel();
                 }
             }
         }
@@ -115,30 +117,49 @@ public class PlayerInstance : MonoBehaviour
         {
             case true:
                 {
-
+                    AllowToFreeJump();
                     break;
                 }
 
             case false:
                 {
-
+                    StartCoroutine(ForbitToFreeJump());
                     break;
                 }
         }
 
-        m_selfAnimator.Play(m_animationRLevitationName);
-        AllowToRun(state);
+
+    }
+
+    private void AllowToFreeJump()
+    {
+        AllowToRun(false);
         EnableToCollectVelocityInfo(false);
-
-        m_selfRigidbody.useGravity = state;
-
+        m_selfRigidbody.useGravity = false;
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
-            m_bonesRigidbodies[i].useGravity = state;
+            m_bonesRigidbodies[i].useGravity = false;
         }
-
         m_cameraController.EnableFreeCamera(true);
+
         m_selfAnimator.enabled = false;
+
+    }
+
+    private IEnumerator ForbitToFreeJump()
+    {
+        AllowToRun(true);
+        m_selfRigidbody.useGravity = true;
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].useGravity = true;
+        }
+        yield return new WaitForSeconds(1f);
+        m_selfAnimator.enabled = true;
+
+        yield return new WaitForSeconds(1f);
+        m_cameraController.EnableFreeCamera(false);
+        EnableToCollectVelocityInfo(true);
 
     }
 

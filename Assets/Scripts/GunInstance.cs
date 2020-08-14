@@ -23,7 +23,7 @@ public class GunInstance : MonoBehaviour
 
     private float m_sensitivity = 40f;
 
-    private float m_laserDistance = 20f;
+    private float m_laserDistance = 25f;
 
     private bool m_laserActivityState;
 

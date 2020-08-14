@@ -7,7 +7,6 @@ public static class TimeControl
     private static float _normalTime = 1f;
     private static float _slowmoTime = 0.3f;
 
-
     public static void SlowTime()
     {
         ChangeTimeScale(_slowmoTime, 0.02f * Time.timeScale);

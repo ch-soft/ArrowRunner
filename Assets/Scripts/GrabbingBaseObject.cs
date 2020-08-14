@@ -78,7 +78,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                         {
                             m_isGrabbing = false;
 
-                            m_playerInstance.AllowFreeJump(true);
+                            m_playerInstance.AllowFreeJump(false);
 
                         }
 
@@ -107,7 +107,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     {
         m_isGrabbing = true;
 
-        m_playerInstance.AllowFreeJump(false);
+        m_playerInstance.AllowFreeJump(true);
     }
 
     public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook)
