@@ -33,12 +33,14 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
     //Grappling base
 
-    private Transform m_characterTransform;
-    private Rigidbody m_characterRigidbody;
+    private PlayerInstance m_playerInstance;
+    private Transform m_playerInstanceTransform;
 
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
+        m_playerInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInstance>();
+        m_playerInstanceTransform = m_playerInstance.transform;
     }
 
     private void FixedUpdate()
@@ -68,22 +70,18 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
                 case GrabbingObjectType.GrapplingBase:
                     {
-                        Vector3 grapplePoint = m_characterTransform.position;
-                        Vector3 grappleDirection = (grapplePoint - transform.position);
+                        if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 3f)
+                        {
+                            m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 10f);
+                        }
+                        else
+                        {
+                            m_isGrabbing = false;
 
-                        float distance = Vector3.Distance(grapplePoint, transform.position);
+                            m_playerInstance.AllowFreeJump(true);
 
-                        //if (distance < grappleDirection.magnitude)// With this you can determine if you are overshooting your target. You are basically checking, if you are further away from your target then during the last frame
-                        //{
-                            float velocity = m_characterRigidbody.velocity.magnitude;//How fast you are currently
+                        }
 
-                            Vector3 newDirection = Vector3.ProjectOnPlane(m_characterRigidbody.velocity, grappleDirection);//So this is a bit more complicated
-                                                                                                                           //basically I am using the grappleDirection Vector as a normal vector of a plane.
-                                                                                                                           //I am really bad at explaining it. Partly due to my bad english but it is best if you just look up what Vector3.ProjectOnPlane does.
-
-                            m_characterRigidbody.velocity = newDirection.normalized * velocity;//Now I just have to redirect the velocity
-
-                        //}
                         break;
                     }
             }
@@ -105,18 +103,17 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_fallingBridgeForce = m_pullingForce;
     }
 
-    public void PrepareGrapplingMove()
+    public void MakeGrapplingMove()
     {
         m_isGrabbing = true;
+
+        m_playerInstance.AllowFreeJump(false);
     }
 
-    public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook, Transform characterTransform, Rigidbody characterRigidbody)
+    public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook)
     {
         m_pullingDirection = playerDirection;
         m_pullingObject = hook;
-
-        m_characterTransform = characterTransform;
-        m_characterRigidbody = characterRigidbody;
     }
 }
 

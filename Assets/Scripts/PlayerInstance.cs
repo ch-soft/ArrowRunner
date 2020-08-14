@@ -12,6 +12,8 @@ public class PlayerInstance : MonoBehaviour
     [Space]
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
+    [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
+    [BoxGroup("References"), SerializeField] private CameraController m_cameraController;
 
     [HideInInspector] public bool m_isAlive;
 
@@ -20,10 +22,11 @@ public class PlayerInstance : MonoBehaviour
     private Animator m_selfAnimator;
 
     private string m_animationRunName = "Run";
+    private string m_animationRLevitationName = "Levitation";
     private float m_normalizeTimeDelay = 0f;
 
     private bool m_canRun;
-
+    private bool m_enableCollectVelocityInfo;
     private bool m_isSlowmoEnable;
 
     private Coroutine m_normalizeTime;
@@ -38,7 +41,7 @@ public class PlayerInstance : MonoBehaviour
     private void Start()
     {
         EnableRagdoll(false);
-
+        EnableToCollectVelocityInfo(true);
 
         //EnableSlowmo(false);
         ChangeLifeState(true);
@@ -75,15 +78,17 @@ public class PlayerInstance : MonoBehaviour
                 StartCoroutine(m_gun.EnableLaserSight(false, 0f));
             }
 
-
-            if (m_selfRigidbody.velocity.y < -2.6f)
+            if (m_enableCollectVelocityInfo)
             {
-                print(m_selfRigidbody.velocity.y);
+                if (m_selfRigidbody.velocity.y < -2.6f)
+                {
+                    print(m_selfRigidbody.velocity.y);
 
-                ChangeLifeState(false);
-                AllowToRun(false);
+                    ChangeLifeState(false);
+                    AllowToRun(false);
 
-                EnableRagdoll(true);
+                    EnableRagdoll(true);
+                }
             }
         }
     }
@@ -96,6 +101,45 @@ public class PlayerInstance : MonoBehaviour
     private void ChangeLifeState(bool state)
     {
         m_isAlive = state;
+    }
+
+    private void EnableToCollectVelocityInfo(bool state)
+    {
+        m_enableCollectVelocityInfo = state;
+    }
+
+    public void AllowFreeJump(bool state)
+    {
+
+        switch (state)
+        {
+            case true:
+                {
+
+                    break;
+                }
+
+            case false:
+                {
+
+                    break;
+                }
+        }
+
+        m_selfAnimator.Play(m_animationRLevitationName);
+        AllowToRun(state);
+        EnableToCollectVelocityInfo(false);
+
+        m_selfRigidbody.useGravity = state;
+
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].useGravity = state;
+        }
+
+        m_cameraController.EnableFreeCamera(true);
+        m_selfAnimator.enabled = false;
+
     }
 
     private void MoveCharacterForward()
@@ -146,24 +190,21 @@ public class PlayerInstance : MonoBehaviour
                 {
                     m_selfAnimator.enabled = false;
 
-
                     for (int i = 0; i < m_bonesRigidbodies.Length; i++)
                     {
                         m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
-
                         m_bonesRigidbodies[i].useGravity = true;
                     }
                     break;
                 }
             case false:
                 {
-
                     for (int i = 0; i < m_bonesRigidbodies.Length; i++)
                     {
                         m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeRotation;
                         m_bonesRigidbodies[i].useGravity = true;
-
                     }
+
                     break;
                 }
         }

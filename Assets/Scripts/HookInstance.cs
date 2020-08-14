@@ -98,7 +98,7 @@ public class HookInstance : MonoBehaviour
 
                     if (other.gameObject.GetComponent<GrabbingBaseObject>())
                     {
-                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform, m_characterTransform, m_characterRigidbody);
+                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 

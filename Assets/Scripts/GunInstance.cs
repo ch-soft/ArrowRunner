@@ -6,7 +6,6 @@ using NaughtyAttributes;
 [RequireComponent(typeof(LineRenderer))]
 public class GunInstance : MonoBehaviour
 {
-    [BoxGroup("Gun Parameters"), SerializeField] private float m_laserDistance;
 
     [BoxGroup("References"), SerializeField] private Camera m_mainCamera;
     [BoxGroup("References"), SerializeField] private Transform m_rightHand;
@@ -23,6 +22,8 @@ public class GunInstance : MonoBehaviour
     private Vector3 m_startingMousePosition;
 
     private float m_sensitivity = 40f;
+
+    private float m_laserDistance = 20f;
 
     private bool m_laserActivityState;
 
@@ -63,7 +64,7 @@ public class GunInstance : MonoBehaviour
             m_currentgMousePosition.x = 0f;
             m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
 
-            if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
+            if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit, m_laserDistance))
             {
                 Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
                 //m_pointSphere.transform.position = new Vector3(0f, hit.point.y, hit.point.z);
@@ -74,7 +75,6 @@ public class GunInstance : MonoBehaviour
             else
             {
                 m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
-
                 m_laserEndPosition = new Vector3(0f, m_laserEndPosition.y, m_laserEndPosition.z);
                 //EnablePointSphere(false);
             }
@@ -84,8 +84,6 @@ public class GunInstance : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-
-
             ConfirmAimOnTarget();
         }
     }
@@ -119,7 +117,7 @@ public class GunInstance : MonoBehaviour
         m_currentgMousePosition.x = 0f;
         m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
 
-        if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit))
+        if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit, m_laserDistance))
         {
             //if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
             //{
