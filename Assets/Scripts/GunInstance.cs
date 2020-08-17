@@ -7,7 +7,7 @@ using NaughtyAttributes;
 public class GunInstance : MonoBehaviour
 {
 
-    [BoxGroup("References"), SerializeField] private Camera m_mainCamera;
+    //[BoxGroup("References"), SerializeField] private Camera m_mainCamera;
     [BoxGroup("References"), SerializeField] private Transform m_rightHand;
     [BoxGroup("References"), SerializeField] private HookInstance m_hook;
     //[BoxGroup("References"), SerializeField] private GameObject m_pointSphere;
@@ -49,7 +49,7 @@ public class GunInstance : MonoBehaviour
             m_testMousePosition = Input.mousePosition;
             m_testMousePosition.z = 1.0f;
 
-            m_startingMousePosition = m_mainCamera.ScreenToWorldPoint(m_testMousePosition);
+            m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition);
         }
 
         if (m_laserActivityState)
@@ -59,7 +59,7 @@ public class GunInstance : MonoBehaviour
             m_testMousePosition = Input.mousePosition;
             m_testMousePosition.z = 1.0f;
             m_currentgMousePosition =
-                (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
+                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
             m_currentgMousePosition.x = 0f;
             m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
@@ -112,7 +112,7 @@ public class GunInstance : MonoBehaviour
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
         m_currentgMousePosition =
-            (m_mainCamera.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
+            (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
         m_currentgMousePosition.z = 0f;
         m_currentgMousePosition.x = 0f;
         m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;

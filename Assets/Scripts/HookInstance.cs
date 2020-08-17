@@ -73,7 +73,7 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 5f);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 3f);
         if (Vector3.Distance(transform.localPosition, m_hookLocalStartPosition) < 0.1f)
         {
             transform.localPosition = m_hookLocalStartPosition;
@@ -101,7 +101,7 @@ public class HookInstance : MonoBehaviour
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 
-                    StartCoroutine(FixateHitAndReturnHome(1.5f));
+                    StartCoroutine(FixateHitAndReturnHome(1.2f));
                     break;
                 }
             case m_grabbingObjectLayer:

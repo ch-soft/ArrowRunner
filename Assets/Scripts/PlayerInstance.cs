@@ -15,6 +15,8 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private CameraController m_cameraController;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
 
+
+
     [HideInInspector] public bool m_isAlive;
 
 
@@ -58,8 +60,10 @@ public class PlayerInstance : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         if (m_canRun)
         {
+
             MoveCharacterForward();
         }
     }
@@ -67,6 +71,7 @@ public class PlayerInstance : MonoBehaviour
     {
         if (m_isAlive)
         {
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (m_canShootLaserSight)
@@ -91,7 +96,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_enableCollectVelocityInfo)
             {
-                if (m_selfRigidbody.velocity.y < -2.6f)
+                if (m_selfRigidbody.velocity.y < -3f)
                 {
                     print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
 
@@ -172,7 +177,7 @@ public class PlayerInstance : MonoBehaviour
         yield return new WaitForSeconds(1f);
         m_selfAnimator.enabled = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.65f);
         m_cameraController.EnableFreeCamera(false);
         EnableToCollectVelocityInfo(true);
 
