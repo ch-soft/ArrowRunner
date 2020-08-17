@@ -11,10 +11,13 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
 
     [Space]
-    [BoxGroup("Preferences"), SerializeField] private string m_punchAnimName; //we will use this later
+
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
 
     [HideInInspector] public bool m_isAlive;
+
+    private string m_prapareWeaponAnimName = "PrepareAxe"; //we will use this later
+    private string m_punchAnimName; //we will use this later
 
     private bool m_enableDeathColor;
 
@@ -51,10 +54,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             ActivateRagdoll();
             FixateDeath("Hook");
         }
-        else
-        {
-            m_rigidbody.useGravity = true;
-        }
+        //else
+        //{
+        //    m_rigidbody.useGravity = true;
+        //}
     }
 
     private void Update()
@@ -142,5 +145,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             m_selfRenderer.materials[i].color = Color.Lerp(m_selfRenderer.material.color, m_deathColor, Time.fixedDeltaTime * 2f);
         }
+    }
+
+    public void PlayPrepareWeaponAnim()
+    {
+        m_animator.Play(m_prapareWeaponAnimName);
     }
 }
