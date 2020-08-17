@@ -51,6 +51,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             ActivateRagdoll();
             FixateDeath("Hook");
         }
+        else
+        {
+            m_rigidbody.useGravity = true;
+        }
     }
 
     private void Update()

@@ -27,6 +27,9 @@ public class PlayerInstance : MonoBehaviour
 
     private bool m_canRun;
     private bool m_enableCollectVelocityInfo;
+
+    private bool m_canShootLaserSight;
+
     private bool m_isSlowmoEnable;
 
     private Coroutine m_normalizeTime;
@@ -41,6 +44,8 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(EnableShootLaserSight(true, 0f));
+
         EnableRagdoll(false);
         EnableToCollectVelocityInfo(true);
 
@@ -64,16 +69,21 @@ public class PlayerInstance : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (!m_isSlowmoEnable)
+                if (m_canShootLaserSight)
                 {
-                    EnableSlowmo(true);
-                    StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
-                    StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+                    StartCoroutine(EnableShootLaserSight(false, 0f));
+                    if (!m_isSlowmoEnable)
+                    {
+                        EnableSlowmo(true);
+                        StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
+                        StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+                    }
                 }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
+                StartCoroutine(EnableShootLaserSight(true, 0f));
                 StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
                 EnableSlowmo(false);
                 StartCoroutine(m_gun.EnableLaserSight(false, 0f));
@@ -206,6 +216,12 @@ public class PlayerInstance : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(delay);
         m_isSlowmoEnable = state;
+    }
+
+    private IEnumerator EnableShootLaserSight(bool state, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        m_canShootLaserSight = state;
     }
 
     private void EnableRagdoll(bool state)

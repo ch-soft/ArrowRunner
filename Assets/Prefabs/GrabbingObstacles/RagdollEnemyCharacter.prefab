@@ -386,7 +386,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 17
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4323821512664901554
 Rigidbody:
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_parentEnemy: {fileID: 1763197234807951879}
   m_selfRenderer: {fileID: 2602113188034388905}
-  m_farColor: {r: 1, g: 0.84705883, b: 0.2509804, a: 1}
+  m_farColor: {r: 0.9254902, g: 1, b: 0.2509804, a: 1}
   m_closeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1673669888587427881
 GameObject:

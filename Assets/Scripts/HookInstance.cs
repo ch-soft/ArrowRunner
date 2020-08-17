@@ -88,6 +88,7 @@ public class HookInstance : MonoBehaviour
         {
             case 0:
             case 11:
+            case 13:
                 {
                     FixateHitAndReturnHome();
                     break;

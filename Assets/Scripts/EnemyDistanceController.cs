@@ -50,10 +50,13 @@ public class EnemyDistanceController : MonoBehaviour
     private void ChangeColorDueDistance()
     {
         float dist = Vector3.Distance(m_playerTransform.position, transform.position);
+
+        print(dist);
+
         //We will check distance to player and start kill player here
         for (int i = 0; i < m_selfRenderer.materials.Length; i++)
         {
-            m_selfRenderer.materials[i].color = Color.Lerp(m_closeColor, m_farColor, dist / 15f);
+            m_selfRenderer.materials[i].color = Color.Lerp(m_closeColor, m_farColor, dist / 20f);
         }
     }
 
