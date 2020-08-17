@@ -48,17 +48,12 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private IEnumerator GrabCharacter()
     {
         yield return new WaitForSeconds(0.15f);
-        if ((m_isAlive) && (TimeControl.m_characterIsAlive))
-        {
+       
             StartCoroutine(PullObjectToPlayer());
             EnableAnimator(false);
             ActivateRagdoll();
             FixateDeath("Hook");
-        }
-        //else
-        //{
-        //    m_rigidbody.useGravity = true;
-        //}
+       
     }
 
     private void Update()

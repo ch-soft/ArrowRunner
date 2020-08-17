@@ -14,7 +14,7 @@ public class EnemyDistanceController : MonoBehaviour
 
     private bool m_playerIsInSight;
 
-    private float m_maxDistToPlayer = 20f;
+    private float m_maxDistToPlayer = 15f;
     private float m_prepareWeaponDistance = 12.5f;
 
     private bool m_weaponIsReady;
