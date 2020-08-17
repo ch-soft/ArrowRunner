@@ -27,13 +27,25 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         }
     }
 
+
     public void OnHookGrab()
     {
-        m_isFalling = true;
-        PullBridge();
+        StartCoroutine(GrabCharacter());
+    }
 
-        StartCoroutine(DisableBridge());
-
+    private IEnumerator GrabCharacter()
+    {
+        yield return new WaitForSeconds(0.03f);
+        if ((TimeControl.m_characterIsAlive))
+        {
+            m_isFalling = true;
+            PullBridge();
+            StartCoroutine(DisableBridge());
+        }
+        else
+        {
+            gameObject.layer = 0;
+        }
     }
 
     public IEnumerator DisableBridge()

@@ -31,6 +31,7 @@ public class PlayerInstance : MonoBehaviour
 
     private Coroutine m_normalizeTime;
 
+    private const int m_dangerousObjectLayer = 8;
 
     private void Awake()
     {
@@ -82,17 +83,20 @@ public class PlayerInstance : MonoBehaviour
             {
                 if (m_selfRigidbody.velocity.y < -2.6f)
                 {
-                    print(m_selfRigidbody.velocity.y);
+                    print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
 
-                    ChangeLifeState(false);
-                    AllowToRun(false);
-
-                    EnableRagdoll(true);
-
-                    m_levelController.OpenEndgamePanel();
+                    FixateDeath();
                 }
             }
         }
+    }
+
+    private void FixateDeath()
+    {
+        ChangeLifeState(false);
+        AllowToRun(false);
+        EnableRagdoll(true);
+        m_levelController.OpenEndgamePanel();
     }
 
     private void AllowToRun(bool state)
@@ -103,6 +107,7 @@ public class PlayerInstance : MonoBehaviour
     private void ChangeLifeState(bool state)
     {
         m_isAlive = state;
+        TimeControl.m_characterIsAlive = state;
     }
 
     private void EnableToCollectVelocityInfo(bool state)
@@ -110,7 +115,7 @@ public class PlayerInstance : MonoBehaviour
         m_enableCollectVelocityInfo = state;
     }
 
-    public void AllowFreeJump(bool state)
+    public void EnableFreeJump(bool state)
     {
 
         switch (state)
@@ -226,6 +231,18 @@ public class PlayerInstance : MonoBehaviour
                         m_bonesRigidbodies[i].useGravity = true;
                     }
 
+                    break;
+                }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.layer)
+        {
+            case m_dangerousObjectLayer:
+                {
+                    FixateDeath();
                     break;
                 }
         }

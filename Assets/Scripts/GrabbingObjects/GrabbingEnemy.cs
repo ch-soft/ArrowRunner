@@ -38,7 +38,13 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     public void OnHookGrab()
     {
-        if (m_isAlive)
+        StartCoroutine(GrabCharacter());
+    }
+
+    private IEnumerator GrabCharacter()
+    {
+        yield return new WaitForSeconds(0.15f);
+        if ((m_isAlive) && (TimeControl.m_characterIsAlive))
         {
             StartCoroutine(PullObjectToPlayer());
             EnableAnimator(false);
@@ -69,6 +75,13 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         m_animator.enabled = state;
 
+        StartCoroutine(EnableBoxCollider(0.1f, state));
+    }
+
+    private IEnumerator EnableBoxCollider(float delay, bool state)
+    {
+        yield return new WaitForSeconds(delay);
+
         m_boxCollider.enabled = state;
     }
 
@@ -81,18 +94,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             m_bonesRigidbodies[i].gameObject.layer = 1;
         }
 
-        m_boxCollider.enabled = false;
+        StartCoroutine(EnableBoxCollider(0.1f, false));
         m_rigidbody.isKinematic = true;
 
         switch (reason)
         {
             case "Bridge":
                 {
-
                     m_animator.Play("DeathFromBridge");
-
-
-
 
                     break;
                 }

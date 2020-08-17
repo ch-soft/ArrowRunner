@@ -109,8 +109,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
+  m_Constraints: 10
+  m_CollisionDetection: 2
 --- !u!59 &95639545562809267
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.5409994, z: 26.986}
+  m_ConnectedAnchor: {x: 0, y: 0.49299943, z: 19.806}
   m_UseSpring: 0
   m_Spring:
     spring: 0

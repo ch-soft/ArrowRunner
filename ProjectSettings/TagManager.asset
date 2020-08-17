@@ -18,7 +18,7 @@ TagManager:
   - GrabbingHook
   - PlayerCharacter
   - EnemyCheckingSphere
-  - EnemySkeleton
+  - CharacterSkeleton
   - FallingObject
   - GrappableSurface
   - GrapplingHookChain

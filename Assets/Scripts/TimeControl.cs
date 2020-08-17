@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class TimeControl
 {
+    public static bool m_characterIsAlive;
+
     private static float _normalTime = 1f;
     private static float _slowmoTime = 0.3f;
 
