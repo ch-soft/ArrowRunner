@@ -54,7 +54,7 @@ public class EnemyDistanceController : MonoBehaviour
     {
         float dist = Vector3.Distance(m_playerTransform.position, transform.position);
 
-        print(dist);
+        //print(dist);
 
         //We will check distance to player and start kill player here
         for (int i = 0; i < m_selfRenderer.materials.Length; i++)

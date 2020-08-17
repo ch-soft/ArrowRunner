@@ -7,6 +7,6 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
     public void OnHookGrab()
     {
         MakeGrapplingMove();
-        gameObject.layer = 15;
+        gameObject.layer = 1;
     }
 }

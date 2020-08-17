@@ -21,7 +21,7 @@ TagManager:
   - CharacterSkeleton
   - FallingObject
   - GrappableSurface
-  - GrapplingHookChain
+  - GrapplingHookBase
   - 
   - 
   - 

@@ -90,7 +90,18 @@ public class HookInstance : MonoBehaviour
             case 11:
             case 13:
                 {
-                    FixateHitAndReturnHome();
+                    StartCoroutine(FixateHitAndReturnHome(0.0f));
+                    break;
+                }
+            case 15:
+                {
+                    if (other.gameObject.GetComponent<GrabbingBaseObject>())
+                    {
+                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
+                        other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                    }
+
+                    StartCoroutine(FixateHitAndReturnHome(1.5f));
                     break;
                 }
             case m_grabbingObjectLayer:
@@ -103,14 +114,16 @@ public class HookInstance : MonoBehaviour
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 
-                    FixateHitAndReturnHome();
+                    StartCoroutine(FixateHitAndReturnHome(0.0f));
                     break;
                 }
         }
     }
 
-    private void FixateHitAndReturnHome()
+    private IEnumerator FixateHitAndReturnHome(float delay)
     {
+
+        yield return new WaitForSeconds(delay);
         transform.parent = m_parent;
         m_hookState = HookState.FliesToBase;
     }

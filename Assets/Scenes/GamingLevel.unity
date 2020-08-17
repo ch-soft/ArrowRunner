@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 302884301}
   - component: {fileID: 302884300}
   - component: {fileID: 302884302}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: UpPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1497,12 +1497,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750181387}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!137 &824838340 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 4042106137646859242, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1763197234706751686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &827225661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1774,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.514151, g: 0.8604655, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.6273585, g: 0.8790584, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4111,7 +4105,7 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.99806374
+      value: -0.99221385
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
@@ -4121,7 +4115,7 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.06219959
+      value: -0.12454586
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
@@ -4136,18 +4130,13 @@ PrefabInstance:
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -172.86801
+      value: -194.30899
       objectReference: {fileID: 0}
     - target: {fileID: 1763197234807951994, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7665108459146669274, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1,
-        type: 3}
-      propertyPath: m_selfRenderer
-      value: 
-      objectReference: {fileID: 824838340}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b7bf8db32793fc47a4d46ef9a2fc4c1, type: 3}
 --- !u!1001 &2106278816412745165
