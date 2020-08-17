@@ -263,4 +263,9 @@ public class PlayerInstance : MonoBehaviour
                 }
         }
     }
+
+    public void PlayJumpAnumation()
+    {
+        m_selfAnimator.Play("JumpOnLiana");
+    }
 }

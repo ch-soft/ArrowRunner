@@ -70,16 +70,14 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
                 case GrabbingObjectType.GrapplingBase:
                     {
-                        if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 3f)
+                        if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 4f)
                         {
                             m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 10f);
                         }
                         else
                         {
                             m_isGrabbing = false;
-
                             m_playerInstance.EnableFreeJump(false);
-
                         }
 
                         break;
