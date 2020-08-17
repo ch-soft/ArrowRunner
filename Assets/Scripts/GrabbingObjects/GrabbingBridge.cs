@@ -11,7 +11,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     [HideInInspector] public bool m_isFalling;
 
     private bool m_isStanding;
-    private float m_afterFallingDelay = 0.4f;
+    private float m_afterFallingDelay = 0.2f;
 
 
     private void Awake()

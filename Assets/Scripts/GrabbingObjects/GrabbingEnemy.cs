@@ -6,6 +6,7 @@ using NaughtyAttributes;
 public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 {
     [BoxGroup("References"), SerializeField] private Animator m_animator;
+    [BoxGroup("References"), SerializeField] private Animator m_swordAnimator;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private BoxCollider m_boxCollider;
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
@@ -150,5 +151,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     public void PlayPrepareWeaponAnim()
     {
         m_animator.Play(m_prapareWeaponAnimName);
+        m_swordAnimator.Play("GetSwordFromBack");
     }
 }
