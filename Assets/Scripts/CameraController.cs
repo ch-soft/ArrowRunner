@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour
             Vector3 newPosition;
             if (m_enableFreeCamera)
             {
-                newPosition = m_targetPos + new Vector3(_offset.x, 0.5f, _offset.z);
+                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f, _offset.z - 0.2f);
             }
             else
             {

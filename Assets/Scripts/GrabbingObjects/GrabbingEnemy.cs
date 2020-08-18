@@ -139,7 +139,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         for (int i = 0; i < m_selfRenderer.materials.Length; i++)
         {
-            m_selfRenderer.materials[i].color = Color.Lerp(m_selfRenderer.material.color, m_deathColor, Time.fixedDeltaTime * 2f);
+            m_selfRenderer.materials[i].color = Color.Lerp(m_selfRenderer.material.color, m_deathColor, Time.fixedDeltaTime * 4f);
         }
     }
 

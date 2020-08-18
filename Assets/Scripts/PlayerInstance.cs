@@ -12,6 +12,7 @@ public class PlayerInstance : MonoBehaviour
     [Space]
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
+    [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
     [BoxGroup("References"), SerializeField] private CameraController m_cameraController;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
 
@@ -96,7 +97,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_enableCollectVelocityInfo)
             {
-                if (m_selfRigidbody.velocity.y < -3f)
+                if (m_selfRigidbody.velocity.y < -3.25f)
                 {
                     print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
 
@@ -237,19 +238,33 @@ public class PlayerInstance : MonoBehaviour
                 {
                     m_selfAnimator.enabled = false;
 
+                    for (int i = 0; i < m_bonesColliders.Length; i++)
+                    {
+                        m_bonesColliders[i].enabled = true;
+                    }
+
                     for (int i = 0; i < m_bonesRigidbodies.Length; i++)
                     {
                         m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
+                        m_bonesRigidbodies[i].isKinematic = false;
+
                         m_bonesRigidbodies[i].useGravity = true;
                     }
                     break;
                 }
             case false:
                 {
+                    for (int i = 0; i < m_bonesColliders.Length; i++)
+                    {
+                        m_bonesColliders[i].enabled = false;
+                    }
+
                     for (int i = 0; i < m_bonesRigidbodies.Length; i++)
                     {
-                        m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeRotation;
-                        m_bonesRigidbodies[i].useGravity = true;
+                        //m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeRotation;
+                        m_bonesRigidbodies[i].isKinematic = true;
+
+                        m_bonesRigidbodies[i].useGravity = false;
                     }
 
                     break;
