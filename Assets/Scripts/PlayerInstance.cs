@@ -96,7 +96,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_enableCollectVelocityInfo)
             {
-                if (m_selfRigidbody.velocity.y < -3f)
+                if (m_selfRigidbody.velocity.y < -3.25f)
                 {
                     print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
 

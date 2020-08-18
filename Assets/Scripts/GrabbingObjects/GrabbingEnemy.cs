@@ -46,13 +46,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private IEnumerator GrabCharacter()
     {
+        StartCoroutine(EnableBoxCollider(0.0f, false));
+        ActivateRagdoll();
+        EnableAnimator(false);
+        StartCoroutine(PullObjectToPlayer());
+        FixateDeath("Hook");
+        ChangeLayers();
         yield return new WaitForSeconds(0.15f);
-       
-            StartCoroutine(PullObjectToPlayer());
-            EnableAnimator(false);
-            ActivateRagdoll();
-            FixateDeath("Hook");
-       
+
     }
 
     private void Update()
@@ -73,11 +74,20 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         }
     }
 
+    private void ChangeLayers()
+    {
+        m_rigidbody.gameObject.layer = 2;
+
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].gameObject.layer = 2;
+        }
+    }
+
     private void EnableAnimator(bool state)
     {
         m_animator.enabled = state;
 
-        StartCoroutine(EnableBoxCollider(0.1f, state));
     }
 
     private IEnumerator EnableBoxCollider(float delay, bool state)

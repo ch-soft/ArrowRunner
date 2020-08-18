@@ -53,8 +53,8 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
                         transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
 
-                        transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 4f);
-                        if (Vector3.Distance(transform.position, m_pullingDirection) < 3f)
+                        transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 8f);
+                        if (Vector3.Distance(transform.position, m_pullingDirection) < 5f)
                         {
                             m_isGrabbing = false;
                         }
@@ -71,7 +71,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                     {
                         if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 5f)
                         {
-                            m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 12.5f);
+                            m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 14f);
                         }
                         else
                         {
