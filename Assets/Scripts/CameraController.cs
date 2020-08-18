@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour
         {
             if (m_enableFreeCamera)
             {
-                transform.position = new Vector3(0f, m_characterHead.position.y + 0.5f, m_characterHead.position.z) + _offset;
+                transform.position = new Vector3(0f, m_characterHead.position.y, m_characterHead.position.z) + _offset;
             }
             else
             {
@@ -60,7 +60,7 @@ public class CameraController : MonoBehaviour
             Vector3 newPosition;
             if (m_enableFreeCamera)
             {
-                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f, _offset.z - 0.2f);
+                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f + _offset.y, _offset.z - 0.2f);
             }
             else
             {

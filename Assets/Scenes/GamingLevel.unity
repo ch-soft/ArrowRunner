@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 185621182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.014356613, y: -2.91, z: 109.93001}
-  m_LocalScale: {x: 3, y: 2.1, z: 34.283928}
+  m_LocalScale: {x: 4.8009, y: 2.1, z: 34.283928}
   m_Children: []
   m_Father: {fileID: 533389308}
   m_RootOrder: 7
@@ -295,7 +295,7 @@ Transform:
   m_GameObject: {fileID: 376758051}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.014356613, y: -2.91, z: 73.78001}
-  m_LocalScale: {x: 3, y: 2.1, z: 18.432219}
+  m_LocalScale: {x: 4.8009, y: 2.1, z: 18.432219}
   m_Children: []
   m_Father: {fileID: 533389308}
   m_RootOrder: 4
@@ -453,7 +453,7 @@ Transform:
   m_GameObject: {fileID: 423332231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.014356613, y: -2.914, z: 140.89}
-  m_LocalScale: {x: 3, y: 2.1, z: 21.186459}
+  m_LocalScale: {x: 4.8009, y: 2.1, z: 21.186459}
   m_Children: []
   m_Father: {fileID: 533389308}
   m_RootOrder: 9
@@ -640,7 +640,7 @@ Transform:
   m_GameObject: {fileID: 447339267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.01, y: -2.91, z: 46.600002}
-  m_LocalScale: {x: 3, y: 2.1, z: 30.245087}
+  m_LocalScale: {x: 4.8009, y: 2.1, z: 30.245087}
   m_Children: []
   m_Father: {fileID: 533389308}
   m_RootOrder: 3
@@ -1043,7 +1043,7 @@ Transform:
   m_GameObject: {fileID: 579311016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: -2.87, z: -2.27}
-  m_LocalScale: {x: 3, y: 2.1, z: 54.67035}
+  m_LocalScale: {x: 4.8009, y: 2.1, z: 54.67035}
   m_Children: []
   m_Father: {fileID: 533389308}
   m_RootOrder: 1
@@ -4300,7 +4300,7 @@ PrefabInstance:
     - target: {fileID: 577390245202456175, guid: aafa8bed6ec46ac448e73228e09426ad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.27
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 577390245202456175, guid: aafa8bed6ec46ac448e73228e09426ad,
         type: 3}
@@ -4372,6 +4372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera - OverTheShoulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431825493674015836, guid: c3c6c86269a3e7642b73d2f1c3acc581,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1431825493674015833, guid: c3c6c86269a3e7642b73d2f1c3acc581,
         type: 3}
@@ -5477,6 +5482,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera - Platformer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8652117230655717221, guid: f2f157e539c08a54292261be85143227,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8652117230655717216, guid: f2f157e539c08a54292261be85143227,
         type: 3}
