@@ -41,40 +41,39 @@ public class CameraController : MonoBehaviour
 
     private void FollowForPlayer()
     {
-        Vector3 newPosition = Vector3.zero;
+            Vector3 newPosition = Vector3.zero;
 
-        if (m_isConnectWithFace)
-        {
-            if (m_enableFreeCamera)
+            if (m_isConnectWithFace)
             {
-                newPosition = new Vector3(0f, m_characterHead.position.y, m_characterHead.position.z) + _offset;
+                if (m_enableFreeCamera)
+                {
+                    newPosition = new Vector3(0f, m_characterHead.position.y, m_characterHead.position.z) + _offset;
+                }
+                else
+                {
+                    newPosition = new Vector3(0f, _staticYPosition, m_characterHead.position.z) + _offset;
+                }
+
             }
             else
             {
-                newPosition = new Vector3(0f, _staticYPosition, m_characterHead.position.z) + _offset;
+                Vector3 nativePosition = transform.position;
+                Vector3 targetDirection = (_target.transform.position - nativePosition);
+                m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
+                m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.fixedDeltaTime);
+
+                if (m_enableFreeCamera)
+                {
+                    newPosition = m_targetPos + new Vector3(_offset.x, 1.65f + _offset.y, _offset.z);
+                }
+                else
+                {
+                    newPosition = new Vector3(m_targetPos.x + _offset.x, _staticYPosition, m_targetPos.z + _offset.z);
+
+                }
             }
 
-        }
-        else
-        {
-            Vector3 nativePosition = transform.position;
-            Vector3 targetDirection = (_target.transform.position - nativePosition);
-            m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
-            m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.fixedDeltaTime);
-
-            if (m_enableFreeCamera)
-            {
-                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f + _offset.y, _offset.z);
-            }
-            else
-            {
-                newPosition = new Vector3(m_targetPos.x + _offset.x, _staticYPosition, m_targetPos.z + _offset.z);
-
-            }
-        }
-
-        transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
-
+            transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
     }
 
     public void EnableFreeCamera(bool state)

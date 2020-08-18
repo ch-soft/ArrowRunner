@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlendOp: 0
-    - _Brightness: 2
+    - _Brightness: 2.25
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -71,7 +71,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ReceiveShadowsPower: 0.5
-    - _Saturation: 1.63
+    - _Saturation: 0.94
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

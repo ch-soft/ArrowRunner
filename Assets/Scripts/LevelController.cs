@@ -8,15 +8,16 @@ using UnityEngine.SceneManagement;
 public class LevelController : MonoBehaviour
 {
     [BoxGroup("Buttons"), SerializeField] private Button m_levelMenuButton;
+    [BoxGroup("Buttons"), SerializeField] private Button m_restartButton;
     [BoxGroup("Buttons"), SerializeField] private Button m_continueButton;
 
-    [BoxGroup("References"), SerializeField] private Animator m_levelAnimator;
+    [BoxGroup("References"), SerializeField] private Animator m_winnerAnimator;
+    [BoxGroup("References"), SerializeField] private Animator m_defeatAnimator;
 
     private void Awake()
     {
-        m_levelMenuButton.onClick.AddListener(OpenEndgamePanel);
-        m_continueButton.onClick.AddListener(RestartLevel);
-
+        m_levelMenuButton.onClick.AddListener(OpenDefeatPanel);
+        m_restartButton.onClick.AddListener(RestartLevel);
     }
 
     private void Update()
@@ -34,8 +35,19 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void OpenEndgamePanel()
+    public void OpenDefeatPanel()
     {
-        m_levelAnimator.Play("ShowEndgamePanel");
+        if (!TimeControl.m_levelFinished)
+        {
+            m_defeatAnimator.Play("ShowEndgamePanel");
+        }
+    }
+
+    public void OpenWinnerPanel()
+    {
+        if (!TimeControl.m_levelFinished)
+        {
+            m_winnerAnimator.Play("ShowEndgamePanel");
+        }
     }
 }

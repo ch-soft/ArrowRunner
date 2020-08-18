@@ -77,11 +77,11 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private void ChangeLayers()
     {
-        m_rigidbody.gameObject.layer = 2;
+        m_rigidbody.gameObject.layer = 16;
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
-            m_bonesRigidbodies[i].gameObject.layer = 2;
+            m_bonesRigidbodies[i].gameObject.layer = 16;
         }
     }
 

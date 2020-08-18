@@ -111,7 +111,7 @@ public class PlayerInstance : MonoBehaviour
         ChangeLifeState(false);
         AllowToRun(false);
         EnableRagdoll(true);
-        m_levelController.OpenEndgamePanel();
+        m_levelController.OpenDefeatPanel();
     }
 
     private void AllowToRun(bool state)

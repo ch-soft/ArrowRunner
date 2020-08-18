@@ -77,7 +77,7 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 2f);
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 4f);
         if (Vector3.Distance(transform.localPosition, m_hookLocalStartPosition) < 0.1f)
         {
             transform.localPosition = m_hookLocalStartPosition;
