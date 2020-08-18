@@ -25,6 +25,7 @@ public class PlayerInstance : MonoBehaviour
 
     private string m_animationRunName = "Run";
     private string m_animationRLevitationName = "Flying";
+    private string m_animationDancingName = "WinnerDancing";
     private float m_normalizeTimeDelay = 0f;
 
     private bool m_canRun;
@@ -60,10 +61,8 @@ public class PlayerInstance : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (m_canRun)
         {
-
             MoveCharacterForward();
         }
     }
@@ -114,7 +113,7 @@ public class PlayerInstance : MonoBehaviour
         m_levelController.OpenDefeatPanel();
     }
 
-    private void AllowToRun(bool state)
+    public void AllowToRun(bool state)
     {
         m_canRun = state;
     }
@@ -283,8 +282,12 @@ public class PlayerInstance : MonoBehaviour
         }
     }
 
-    public void PlayJumpAnumation()
+    public void PlayDancingAnimation()
     {
-        m_selfAnimator.Play("JumpOnLiana");
+        m_selfAnimator.Play(m_animationDancingName);
+
+        m_selfRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+        m_cameraController.m_rotateAroundCharacter = true;
     }
 }

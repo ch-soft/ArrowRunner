@@ -22,8 +22,8 @@ public class WinnerZone : MonoBehaviour
                 {
                     m_levelManager.OpenWinnerPanel();
                     TimeControl.m_levelFinished = true;
-                    m_playerInstance.m_isAlive = false;
-
+                    m_playerInstance.AllowToRun(false);
+                    m_playerInstance.PlayDancingAnimation();
                     break;
                 }
         }

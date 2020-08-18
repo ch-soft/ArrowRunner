@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
 
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_isConnectWithFace")] private Transform m_characterHead;
 
+    [HideInInspector] public bool m_rotateAroundCharacter;
 
     private bool m_enableFreeCamera;
 
@@ -22,6 +23,8 @@ public class CameraController : MonoBehaviour
     private Vector3 m_targetPos;
     private Vector3 m_velocity = Vector3.zero;
     private float m_headStaticY;
+
+
 
 
     void Start()
@@ -41,6 +44,13 @@ public class CameraController : MonoBehaviour
 
     private void FollowForPlayer()
     {
+        if (m_rotateAroundCharacter)
+        {
+            transform.LookAt(_target.transform);
+            transform.Translate(Vector3.right * Time.deltaTime);
+        }
+        else
+        {
             Vector3 newPosition = Vector3.zero;
 
             if (m_isConnectWithFace)
@@ -74,8 +84,8 @@ public class CameraController : MonoBehaviour
             }
 
             transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
+        }
     }
-
     public void EnableFreeCamera(bool state)
     {
         m_enableFreeCamera = state;

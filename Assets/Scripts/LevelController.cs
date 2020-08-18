@@ -18,6 +18,7 @@ public class LevelController : MonoBehaviour
     {
         m_levelMenuButton.onClick.AddListener(OpenDefeatPanel);
         m_restartButton.onClick.AddListener(RestartLevel);
+        m_continueButton.onClick.AddListener(RestartLevel);
     }
 
     private void Update()
