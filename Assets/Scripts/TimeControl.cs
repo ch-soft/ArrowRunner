@@ -7,7 +7,7 @@ public static class TimeControl
     public static bool m_characterIsAlive;
 
     private static float _normalTime = 1f;
-    private static float _slowmoTime = 0.2f;
+    private static float _slowmoTime = 0.15f;
 
     public static float slowdownFactor = 0.05f;
     public static float slowdownLength = 20f;

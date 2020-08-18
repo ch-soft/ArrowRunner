@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LowPolyWaterMaterial
+  m_Name: TestWater
   m_Shader: {fileID: 4800000, guid: edb06526ed792d8428ab58d00d68280b, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1

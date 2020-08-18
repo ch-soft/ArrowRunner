@@ -25,10 +25,12 @@ public class HookInstance : MonoBehaviour
     private float m_hookMovementSpeed = 35f;
 
     private Vector3 m_hookLocalStartPosition;
+    private Vector3 m_defaultHookScale;
 
     private LineRenderer m_lineRenderer;
 
     private Transform m_parent;
+
 
     private const int m_grabbingObjectLayer = 8;
 
@@ -39,6 +41,8 @@ public class HookInstance : MonoBehaviour
         m_hookState = HookState.Based;
         m_hookLocalStartPosition = transform.localPosition;
         m_parent = gameObject.transform.parent;
+
+        m_defaultHookScale = transform.localScale;
 
         m_lineRenderer = GetComponent<LineRenderer>();
     }
@@ -79,6 +83,8 @@ public class HookInstance : MonoBehaviour
             transform.localPosition = m_hookLocalStartPosition;
             m_hookState = HookState.Based;
             ChangeLocalHookState(false);
+
+            ResetDefaultHookParapemers();
         }
     }
 
@@ -132,5 +138,11 @@ public class HookInstance : MonoBehaviour
     {
         m_isHookInAir = state;
         m_lineRenderer.enabled = state;
+    }
+
+    private void ResetDefaultHookParapemers()
+    {
+        transform.localScale = m_defaultHookScale;
+        transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }

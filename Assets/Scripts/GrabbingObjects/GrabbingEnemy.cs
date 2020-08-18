@@ -46,13 +46,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private IEnumerator GrabCharacter()
     {
+        yield return new WaitForSeconds(0.15f);
+
         StartCoroutine(EnableBoxCollider(0.0f, false));
         ActivateRagdoll();
         EnableAnimator(false);
         StartCoroutine(PullObjectToPlayer());
         FixateDeath("Hook");
         ChangeLayers();
-        yield return new WaitForSeconds(0.15f);
 
     }
 

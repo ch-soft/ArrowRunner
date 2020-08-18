@@ -20,7 +20,7 @@ public class GunInstance : MonoBehaviour
     private Vector3 m_currentgMousePosition;
     private Vector3 m_startingMousePosition;
 
-    private float m_sensitivity = 40f;
+    private float m_sensitivity = 45f;
 
     private float m_laserDistance = 25f;
 
