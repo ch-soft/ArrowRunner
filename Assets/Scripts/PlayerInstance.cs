@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
 
@@ -97,7 +96,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_enableCollectVelocityInfo)
             {
-                if (m_selfRigidbody.velocity.y < -3.25f)
+                if (m_selfRigidbody.velocity.y < -3f)
                 {
                     print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
 

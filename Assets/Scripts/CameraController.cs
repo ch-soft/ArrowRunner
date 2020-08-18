@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using NaughtyAttributes;
 public class CameraController : MonoBehaviour
 {
@@ -13,13 +11,18 @@ public class CameraController : MonoBehaviour
 
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_isConnectWithFace")] private Transform m_characterHead;
 
+
     private bool m_enableFreeCamera;
 
     private float m_interpVelocity;
     private float m_interpVelocityForce = 20f;
 
+    public float smoothTime = 0.3F;
+
     private Vector3 m_targetPos;
+    private Vector3 m_velocity = Vector3.zero;
     private float m_headStaticY;
+
 
     void Start()
     {
@@ -38,15 +41,17 @@ public class CameraController : MonoBehaviour
 
     private void FollowForPlayer()
     {
+        Vector3 newPosition = Vector3.zero;
+
         if (m_isConnectWithFace)
         {
             if (m_enableFreeCamera)
             {
-                transform.position = new Vector3(0f, m_characterHead.position.y, m_characterHead.position.z) + _offset;
+                newPosition = new Vector3(0f, m_characterHead.position.y, m_characterHead.position.z) + _offset;
             }
             else
             {
-                transform.position = new Vector3(0f, _staticYPosition, m_characterHead.position.z) + _offset;
+                newPosition = new Vector3(0f, _staticYPosition, m_characterHead.position.z) + _offset;
             }
 
         }
@@ -57,18 +62,19 @@ public class CameraController : MonoBehaviour
             m_interpVelocity = targetDirection.magnitude * m_interpVelocityForce;
             m_targetPos = transform.position + (targetDirection.normalized * m_interpVelocity * Time.fixedDeltaTime);
 
-            Vector3 newPosition;
             if (m_enableFreeCamera)
             {
-                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f + _offset.y, _offset.z - 0.2f);
+                newPosition = m_targetPos + new Vector3(_offset.x, 1.65f + _offset.y, _offset.z);
             }
             else
             {
                 newPosition = new Vector3(m_targetPos.x + _offset.x, _staticYPosition, m_targetPos.z + _offset.z);
 
             }
-            transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
         }
+
+        transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
+
     }
 
     public void EnableFreeCamera(bool state)

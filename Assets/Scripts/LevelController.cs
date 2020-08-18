@@ -19,6 +19,11 @@ public class LevelController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        TimeControl.AutoNormalizeTime();
+    }
+
     private void Start()
     {
         StartCoroutine(TimeControl.NormalizeTime(0f));
