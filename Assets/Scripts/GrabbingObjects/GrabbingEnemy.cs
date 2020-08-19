@@ -117,7 +117,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
-            m_bonesRigidbodies[i].gameObject.layer = 1;
+            m_bonesRigidbodies[i].gameObject.layer = 16;
         }
 
         StartCoroutine(EnableBoxCollider(0.1f, false));

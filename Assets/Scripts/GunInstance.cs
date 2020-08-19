@@ -13,13 +13,15 @@ public class GunInstance : MonoBehaviour
 
 
     private LineRenderer m_lineRenderer;
+    private CameraController m_cameraController;
 
     private Vector3 m_laserEndPosition;
-    private Vector3 m_secondarylaserEndPosition;
+    private Vector3 m_secondaryLaserEndPosition;
     private Vector3 m_testMousePosition;
     private Vector3 m_currentgMousePosition;
     private Vector3 m_startingMousePosition;
 
+    private Vector3 m_defaultGunPosition;
 
     private float m_sensitivity = 45f;
 
@@ -31,7 +33,7 @@ public class GunInstance : MonoBehaviour
     private void Awake()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
-
+        m_cameraController = Camera.main.GetComponent<CameraController>();
     }
 
     private void Start()
@@ -41,6 +43,8 @@ public class GunInstance : MonoBehaviour
     private void StartingSetup()
     {
         transform.SetParent(m_rightHand);
+
+        m_defaultGunPosition = transform.position;
     }
 
     private void Update()
@@ -66,11 +70,11 @@ public class GunInstance : MonoBehaviour
                 (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
             m_currentgMousePosition.x = 0f;
-            m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
+            m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
 
-            if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit, m_laserDistance))
+            if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
             {
-                Debug.DrawRay(transform.position, m_secondarylaserEndPosition);
+                Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
                 //m_pointSphere.transform.position = new Vector3(0f, hit.point.y, hit.point.z);
                 m_laserEndPosition = hit.point; // this is for full controll
                 m_laserEndPosition.x = 0f;
@@ -78,11 +82,9 @@ public class GunInstance : MonoBehaviour
             }
             else
             {
-                m_laserEndPosition = m_secondarylaserEndPosition + transform.position;
-                m_laserEndPosition = new Vector3(0f, m_laserEndPosition.y, m_laserEndPosition.z);
+                m_laserEndPosition = m_secondaryLaserEndPosition + transform.position;
                 //EnablePointSphere(false);
             }
-
 
             if (!TimeControl.m_levelFinished)
             {
@@ -126,9 +128,9 @@ public class GunInstance : MonoBehaviour
             (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
         m_currentgMousePosition.z = 0f;
         m_currentgMousePosition.x = 0f;
-        m_secondarylaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
+        m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
 
-        if (Physics.Raycast(transform.position, m_secondarylaserEndPosition, out hit, m_laserDistance))
+        if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
         {
             //if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
             //{

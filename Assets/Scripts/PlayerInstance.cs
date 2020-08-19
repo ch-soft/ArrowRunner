@@ -12,7 +12,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
-    [BoxGroup("References"), SerializeField] private CameraController m_cameraController;
+   private CameraController m_cameraController;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
 
 
@@ -43,6 +43,7 @@ public class PlayerInstance : MonoBehaviour
     {
         m_selfRigidbody = GetComponent<Rigidbody>();
         m_selfAnimator = GetComponent<Animator>();
+        m_cameraController = Camera.main.GetComponent<CameraController>();
     }
 
     private void Start()
