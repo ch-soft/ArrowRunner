@@ -20,6 +20,7 @@ public class GunInstance : MonoBehaviour
     private Vector3 m_currentgMousePosition;
     private Vector3 m_startingMousePosition;
 
+
     private float m_sensitivity = 45f;
 
     private float m_laserDistance = 25f;
@@ -30,6 +31,7 @@ public class GunInstance : MonoBehaviour
     private void Awake()
     {
         m_lineRenderer = GetComponent<LineRenderer>();
+
     }
 
     private void Start()
@@ -78,12 +80,16 @@ public class GunInstance : MonoBehaviour
                 //EnablePointSphere(false);
             }
 
+
             ShootLaserFromGun();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            ConfirmAimOnTarget();
+            if(m_hook.m_hookState == HookState.Based)
+            {
+                ConfirmAimOnTarget();
+            }
         }
     }
 

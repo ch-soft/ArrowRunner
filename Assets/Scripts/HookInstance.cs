@@ -41,13 +41,17 @@ public class HookInstance : MonoBehaviour
 
     private void Awake()
     {
-        m_hookState = HookState.Based;
         m_hookLocalStartPosition = transform.localPosition;
         m_parent = gameObject.transform.parent;
 
         m_defaultHookScale = transform.localScale;
 
         m_lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    private void Start()
+    {
+        m_hookState = HookState.Based;
     }
 
     private void FixedUpdate()
@@ -130,7 +134,6 @@ public class HookInstance : MonoBehaviour
 
     private IEnumerator FixateHitAndReturnHome(float delay)
     {
-
         yield return new WaitForSeconds(delay);
         m_hookState = HookState.FliesToBase;
     }
