@@ -47,10 +47,13 @@ public class GunInstance : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            m_testMousePosition = Input.mousePosition;
-            m_testMousePosition.z = 1.0f;
+            if (!TimeControl.m_levelFinished)
+            {
+                m_testMousePosition = Input.mousePosition;
+                m_testMousePosition.z = 1.0f;
 
-            m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition);
+                m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition);
+            }
         }
 
         if (m_laserActivityState)
@@ -81,12 +84,15 @@ public class GunInstance : MonoBehaviour
             }
 
 
-            ShootLaserFromGun();
+            if (!TimeControl.m_levelFinished)
+            {
+                ShootLaserFromGun();
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(m_hook.m_hookState == HookState.Based)
+            if (m_hook.m_hookState == HookState.Based && !TimeControl.m_levelFinished)
             {
                 ConfirmAimOnTarget();
             }

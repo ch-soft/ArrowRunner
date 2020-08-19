@@ -25,7 +25,10 @@ public static class TimeControl
 
     public static void SlowTime()
     {
-        ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
+        if (!m_levelFinished)
+        {
+            ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
+        }
     }
 
   
@@ -40,7 +43,6 @@ public static class TimeControl
     {
         //Time.timeScale = timeScale;
         //Time.fixedDeltaTime = fixedDeltaTimeMultiplier;
-
         Time.timeScale = timeScale;
         Time.fixedDeltaTime = fixedDeltaTimeMultiplier;
 
