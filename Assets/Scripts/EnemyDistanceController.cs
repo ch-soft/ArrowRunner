@@ -16,8 +16,10 @@ public class EnemyDistanceController : MonoBehaviour
 
     private float m_maxDistToPlayer = 15f;
     private float m_prepareWeaponDistance = 12.5f;
+    private float m_hitPlayerDistance = 7f;
 
     private bool m_weaponIsReady;
+    private bool m_playerWasHit;
 
     private void Update()
     {
@@ -68,6 +70,15 @@ public class EnemyDistanceController : MonoBehaviour
             {
                 m_parentEnemy.PlayPrepareWeaponAnim();
                 m_weaponIsReady = true;
+            }
+
+            if (dist <= m_hitPlayerDistance)
+            {
+                if (!m_playerWasHit)
+                {
+                    m_parentEnemy.PlaySwordSlashAnim();
+                    m_playerWasHit = true;
+                }
             }
         }
     }

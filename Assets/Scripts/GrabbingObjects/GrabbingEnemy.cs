@@ -47,13 +47,21 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private IEnumerator GrabCharacter()
     {
         yield return new WaitForSeconds(0.15f);
+        if (TimeControl.m_characterIsAlive)
+        {
+            ActivateRagdoll();
+            EnableAnimator(false);
+            StartCoroutine(PullObjectToPlayer());
+            FixateDeath("Hook");
+            ChangeLayers();
+        }
+        else
+        {
+            m_animator.Play("Idle_0");
+            m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        //StartCoroutine(EnableBoxCollider(0.0f, false));
 
-        StartCoroutine(EnableBoxCollider(0.0f, false));
-        ActivateRagdoll();
-        EnableAnimator(false);
-        StartCoroutine(PullObjectToPlayer());
-        FixateDeath("Hook");
-        ChangeLayers();
 
     }
 
@@ -157,5 +165,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         m_animator.Play(m_prapareWeaponAnimName);
         m_swordAnimator.Play("GetSwordFromBack");
+    }
+
+    public void PlaySwordSlashAnim()
+    {
+        m_animator.Play("SwordSlash");
     }
 }
