@@ -29,6 +29,8 @@ public class LevelController : MonoBehaviour
     private void Start()
     {
         StartCoroutine(TimeControl.NormalizeTime(0f));
+
+        TimeControl.m_levelFinished = false;
     }
 
     private void RestartLevel()

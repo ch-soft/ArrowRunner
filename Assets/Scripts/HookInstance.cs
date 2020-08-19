@@ -17,7 +17,9 @@ public enum HookState
 public class HookInstance : MonoBehaviour
 {
     [SerializeField] private Transform m_characterTransform;
-    [SerializeField] public Rigidbody m_characterRigidbody;
+    [SerializeField] Transform m_hookBase;
+
+    public Rigidbody m_characterRigidbody;
 
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
@@ -26,6 +28,7 @@ public class HookInstance : MonoBehaviour
 
     private Vector3 m_hookLocalStartPosition;
     private Vector3 m_defaultHookScale;
+    private Vector3 m_positinonOffset = new Vector3(0f, 0f, 0.01f);
 
     private LineRenderer m_lineRenderer;
 
@@ -47,7 +50,7 @@ public class HookInstance : MonoBehaviour
         m_lineRenderer = GetComponent<LineRenderer>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (m_isHookInAir)
         {
@@ -72,15 +75,14 @@ public class HookInstance : MonoBehaviour
 
     private void ShootGrabHookToTarget()
     {
-        transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, Time.deltaTime * m_hookMovementSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, Time.fixedDeltaTime * m_hookMovementSpeed);
     }
 
     private void ReturnHookToBase()
     {
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, m_hookLocalStartPosition, Time.deltaTime * m_hookMovementSpeed * 4f);
-        if (Vector3.Distance(transform.localPosition, m_hookLocalStartPosition) < 0.1f)
+        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.3f);
+        if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
         {
-            transform.localPosition = m_hookLocalStartPosition;
             m_hookState = HookState.Based;
             ChangeLocalHookState(false);
 
@@ -107,7 +109,7 @@ public class HookInstance : MonoBehaviour
                         other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
                     }
 
-                    StartCoroutine(FixateHitAndReturnHome(1.2f));
+                    StartCoroutine(FixateHitAndReturnHome(1f));
                     break;
                 }
             case m_grabbingObjectLayer:
@@ -130,7 +132,6 @@ public class HookInstance : MonoBehaviour
     {
 
         yield return new WaitForSeconds(delay);
-        transform.parent = m_parent;
         m_hookState = HookState.FliesToBase;
     }
 
@@ -142,6 +143,8 @@ public class HookInstance : MonoBehaviour
 
     private void ResetDefaultHookParapemers()
     {
+        transform.parent = m_parent;
+        transform.position = m_hookBase.position/* + m_positinonOffset*/;
         transform.localScale = m_defaultHookScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }

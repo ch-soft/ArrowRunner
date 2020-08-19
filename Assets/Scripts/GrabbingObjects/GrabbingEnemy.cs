@@ -59,6 +59,11 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             m_animator.Play("Idle_0");
             m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+            for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+            {
+                m_bonesRigidbodies[i].isKinematic = true;
+            }
         }
         //StartCoroutine(EnableBoxCollider(0.0f, false));
 
