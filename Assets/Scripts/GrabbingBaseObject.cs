@@ -107,7 +107,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     public void MakeGrapplingMove()
     {
         m_isGrabbing = true;
-
+        m_objectWasAttracted = true;
         m_playerInstance.EnableFreeJump(true);
     }
 

@@ -97,49 +97,62 @@ public class HookInstance : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.gameObject.layer)
+        print(other.gameObject.layer);
+        if (m_isHookInAir)
         {
-            case 0:
-            case 11:
-            case 13:
-            case 16:
-                {
-                    StartCoroutine(FixateHitAndReturnHome(0.0f));
-
-                    break;
-                }
-            case 15:
-                {
-                    if (other.gameObject.GetComponent<GrabbingBaseObject>())
+            switch (other.gameObject.layer)
+            {
+                case 0:
+                case 11:
+                case 12:
+                case 13:
+                case 16:
                     {
-                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
-                        other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+
+                        StartCoroutine(FixateHitAndReturnHome(0.0f));
+                        break;
                     }
-
-                    StartCoroutine(FixateHitAndReturnHome(1f));
-                    break;
-                }
-            case m_grabbingObjectLayer:
-                {
-                    //need add more logic here
-
-                    if (other.gameObject.GetComponent<GrabbingBaseObject>())
+                case 15:
                     {
-                        if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
+                        if (other.gameObject.GetComponent<GrabbingBaseObject>())
                         {
-                            other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
-                            other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                            if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
+                            {
+                                other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
+                                other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                            }
+                            else
+                            {
+                                StartCoroutine(FixateHitAndReturnHome(0.0f));
+                            }
                         }
-                        else
-                        {
-                            StartCoroutine(FixateHitAndReturnHome(0.0f));
-                        }
-                    }
 
-                    StartCoroutine(FixateHitAndReturnHome(0.0f));
-                    break;
-                }
+                        StartCoroutine(FixateHitAndReturnHome(1f));
+                        break;
+                    }
+                case m_grabbingObjectLayer:
+                    {
+                        //need add more logic here
+
+                        if (other.gameObject.GetComponent<GrabbingBaseObject>())
+                        {
+                            if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
+                            {
+                                other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
+                                other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                            }
+                            else
+                            {
+                                StartCoroutine(FixateHitAndReturnHome(0.0f));
+                            }
+                        }
+
+                        StartCoroutine(FixateHitAndReturnHome(0.0f));
+                        break;
+                    }
+            }
         }
+        
     }
 
     private IEnumerator FixateHitAndReturnHome(float delay)

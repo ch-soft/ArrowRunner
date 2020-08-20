@@ -5430,6 +5430,11 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.006581993
       objectReference: {fileID: 0}
+    - target: {fileID: 2106278817877407895, guid: 1c2366149d611b249938070bc531f169,
+        type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 5516798063457836793, guid: 1c2366149d611b249938070bc531f169,
         type: 3}
       propertyPath: m_ConnectedAnchor.x

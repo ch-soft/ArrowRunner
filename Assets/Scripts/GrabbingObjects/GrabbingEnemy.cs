@@ -53,7 +53,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             EnableAnimator(false);
             StartCoroutine(PullObjectToPlayer());
             FixateDeath("Hook");
-            ChangeLayers();
+            //ChangeLayers();
         }
         else
         {
