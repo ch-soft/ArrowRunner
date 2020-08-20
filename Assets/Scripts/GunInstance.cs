@@ -56,7 +56,9 @@ public class GunInstance : MonoBehaviour
                 m_testMousePosition = Input.mousePosition;
                 m_testMousePosition.z = 1.0f;
 
-                m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition);
+                Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+
+                m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue;
             }
         }
 
@@ -66,12 +68,14 @@ public class GunInstance : MonoBehaviour
 
             m_testMousePosition = Input.mousePosition;
             m_testMousePosition.z = 1.0f;
+            Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+
             m_currentgMousePosition =
-                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
+                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
             m_currentgMousePosition.x = 0f;
+            print(oneMoreValue);
             m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
-
             if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
             {
                 Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
@@ -124,8 +128,11 @@ public class GunInstance : MonoBehaviour
         RaycastHit hit;
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
+        
+        Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+
         m_currentgMousePosition =
-            (Camera.main.ScreenToWorldPoint(m_testMousePosition) - m_startingMousePosition) * m_sensitivity;
+                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
         m_currentgMousePosition.z = 0f;
         m_currentgMousePosition.x = 0f;
         m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;
