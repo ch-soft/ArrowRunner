@@ -74,7 +74,7 @@ public class GunInstance : MonoBehaviour
                 (Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
             m_currentgMousePosition.x = 0f;
-            print(oneMoreValue);
+
             m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
             if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
             {
