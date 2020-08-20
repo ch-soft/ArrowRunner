@@ -88,6 +88,7 @@ public class HookInstance : MonoBehaviour
         if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
         {
             m_hookState = HookState.Based;
+
             ChangeLocalHookState(false);
 
             ResetDefaultHookParapemers();
@@ -101,8 +102,10 @@ public class HookInstance : MonoBehaviour
             case 0:
             case 11:
             case 13:
+            case 16:
                 {
                     StartCoroutine(FixateHitAndReturnHome(0.0f));
+
                     break;
                 }
             case 15:
@@ -122,8 +125,15 @@ public class HookInstance : MonoBehaviour
 
                     if (other.gameObject.GetComponent<GrabbingBaseObject>())
                     {
-                        other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
-                        other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                        if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
+                        {
+                            other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
+                            other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                        }
+                        else
+                        {
+                            StartCoroutine(FixateHitAndReturnHome(0.0f));
+                        }
                     }
 
                     StartCoroutine(FixateHitAndReturnHome(0.0f));

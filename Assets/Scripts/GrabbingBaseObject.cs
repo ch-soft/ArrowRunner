@@ -22,6 +22,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
     [HideInInspector] public Vector3 m_pullingDirection;
     [HideInInspector] public Transform m_pullingObject;
+    [HideInInspector] public bool m_objectWasAttracted;
 
     private float m_grabbingTime = 1f;
     private bool m_isGrabbing;
@@ -87,11 +88,14 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
     public IEnumerator PullObjectToPlayer()
     {
+        m_objectWasAttracted = true;
+
         m_rigidbody.useGravity = true;
         m_isGrabbing = true;
         m_rigidbody.AddForce(m_pullingDirection + new Vector3(m_forceDirection.x * transform.position.x * -m_pullingForce, m_forceDirection.y * -m_pullingForce, m_forceDirection.z * -m_pullingForce));
         yield return new WaitForSeconds(m_grabbingTime);
         m_isGrabbing = false;
+
     }
 
     public void PullBridge()
