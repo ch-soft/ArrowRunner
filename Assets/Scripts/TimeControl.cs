@@ -11,16 +11,12 @@ public static class TimeControl
     private static float _slowmoTime = 0.15f;
 
     public static float slowdownFactor = 0.05f;
-    public static float slowdownLength = 20f;
+    public static float slowdownLength = 17.5f;
 
     public static void AutoNormalizeTime()
     {
-        Time.timeScale += (1.0f / slowdownLength) * Time.unscaledDeltaTime;
+        Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-        //if (Time.timeScale == 1.0f)
-        //{
-        //    Time.fixedDeltaTime = Time.deltaTime;
-        //}
     }
 
     public static void SlowTime()
@@ -30,8 +26,6 @@ public static class TimeControl
             ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
         }
     }
-
-  
 
     public static IEnumerator NormalizeTime(float unfreezeTime)
     {
