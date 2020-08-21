@@ -18,6 +18,8 @@ public class HookInstance : MonoBehaviour
 {
     [SerializeField] private Transform m_characterTransform;
     [SerializeField] Transform m_hookBase;
+    [Space]
+    [SerializeField] CoolLettering m_coolLettering;
 
     public Rigidbody m_characterRigidbody;
 
@@ -97,7 +99,6 @@ public class HookInstance : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.layer);
         if (m_isHookInAir)
         {
             switch (other.gameObject.layer)
@@ -127,7 +128,9 @@ public class HookInstance : MonoBehaviour
                             }
                         }
 
-                        StartCoroutine(FixateHitAndReturnHome(1f));
+                        StartCoroutine(FixateHitAndReturnHome(1.0f));
+                        StartCoroutine(m_coolLettering.ShowCoolWord(1.0f));
+
                         break;
                     }
                 case m_grabbingObjectLayer:
@@ -144,21 +147,24 @@ public class HookInstance : MonoBehaviour
                             else
                             {
                                 StartCoroutine(FixateHitAndReturnHome(0.0f));
+
                             }
                         }
-
                         StartCoroutine(FixateHitAndReturnHome(0.0f));
+                        StartCoroutine(m_coolLettering.ShowCoolWord(0.0f));
+
                         break;
                     }
             }
         }
-        
+
     }
 
     private IEnumerator FixateHitAndReturnHome(float delay)
     {
         yield return new WaitForSeconds(delay);
         m_hookState = HookState.FliesToBase;
+
     }
 
     public void ChangeLocalHookState(bool state)
