@@ -48,7 +48,7 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-        FollowForPlayer();
+        //FollowForPlayer();
     }
 
     private void FollowForPlayer()
@@ -72,7 +72,6 @@ public class CameraController : MonoBehaviour
                 {
                     newPosition = new Vector3(0f, _staticYPosition, m_characterHead.position.z) + _offset;
                 }
-
             }
             else
             {

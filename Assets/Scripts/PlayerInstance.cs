@@ -112,6 +112,7 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(false);
         EnableRagdoll(true);
         m_levelController.OpenDefeatPanel();
+        TimeControl.m_levelFinished = true;
     }
 
     public void AllowToRun(bool state)
@@ -159,6 +160,7 @@ public class PlayerInstance : MonoBehaviour
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].useGravity = false;
+            m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
         }
         m_cameraController.EnableFreeCamera(true);
 
@@ -173,6 +175,8 @@ public class PlayerInstance : MonoBehaviour
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].useGravity = true;
+            m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
+
         }
         yield return new WaitForSeconds(1f);
         m_selfAnimator.enabled = true;

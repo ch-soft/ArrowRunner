@@ -109,8 +109,6 @@ public class GunInstance : MonoBehaviour
         }
     }
 
-
-
     public IEnumerator EnableLaserSight(bool state, float delay)
     {
         m_laserActivityState = state;
