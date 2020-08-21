@@ -14,6 +14,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
 
+    [Space]
+
+    [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
+    private Material m_disabledMaterial;
+    private Material[] m_localMaterials;
+    private bool m_isOutlineActive;
+
+
     [HideInInspector] public bool m_isAlive;
 
     private string m_prapareWeaponAnimName = "PrepareAxe"; //we will use this later
@@ -27,6 +35,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
         }
+
+        m_disabledMaterial = m_selfRenderer.material;
     }
 
     private void Start()
@@ -66,8 +76,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             }
         }
         //StartCoroutine(EnableBoxCollider(0.0f, false));
-
-
     }
 
     private void Update()
@@ -175,5 +183,31 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     public void PlaySwordSlashAnim()
     {
         m_animator.Play("SwordSlash");
+    }
+
+    public void SwitchOutlineWtate(bool state)
+    {
+        m_localMaterials = m_selfRenderer.materials;
+        switch (state)
+        {
+            case true:
+                {
+                    for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                    {
+                        m_localMaterials[i] = m_activeMaterial;
+                    }
+                    break;
+                }
+            case false:
+                {
+                    for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                    {
+                        m_localMaterials[i] = m_disabledMaterial;
+                    }
+                    break;
+                }
+        }
+        m_selfRenderer.materials = m_localMaterials;
+
     }
 }

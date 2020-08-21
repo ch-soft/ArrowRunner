@@ -18,6 +18,7 @@ public class CoolLettering : MonoBehaviour
         "GREAT!",
         "COOL!",
         "YEAH!",
+        "PERFECT!",
         "BOOM!",
         "POW!",
         "OOPS!",

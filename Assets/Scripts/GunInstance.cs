@@ -14,6 +14,7 @@ public class GunInstance : MonoBehaviour
 
     private LineRenderer m_lineRenderer;
     private CameraController m_cameraController;
+    private Camera m_camera;
 
     private Vector3 m_laserEndPosition;
     private Vector3 m_secondaryLaserEndPosition;
@@ -34,6 +35,7 @@ public class GunInstance : MonoBehaviour
     {
         m_lineRenderer = GetComponent<LineRenderer>();
         m_cameraController = Camera.main.GetComponent<CameraController>();
+        m_camera = Camera.main;
     }
 
     private void Start()
@@ -56,9 +58,9 @@ public class GunInstance : MonoBehaviour
                 m_testMousePosition = Input.mousePosition;
                 m_testMousePosition.z = 1.0f;
 
-                Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+                Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
 
-                m_startingMousePosition = Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue;
+                m_startingMousePosition = m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue;
             }
         }
 
@@ -68,10 +70,10 @@ public class GunInstance : MonoBehaviour
 
             m_testMousePosition = Input.mousePosition;
             m_testMousePosition.z = 1.0f;
-            Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+            Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
 
             m_currentgMousePosition =
-                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
+                (m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
             m_currentgMousePosition.z = 0f;
             m_currentgMousePosition.x = 0f;
 
@@ -131,10 +133,10 @@ public class GunInstance : MonoBehaviour
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
 
-        Vector3 oneMoreValue = Camera.main.ScreenToWorldPoint(Camera.main.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+        Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
 
         m_currentgMousePosition =
-                (Camera.main.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
+                (m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
         m_currentgMousePosition.z = 0f;
         m_currentgMousePosition.x = 0f;
         m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0, 0, m_laserDistance) + m_currentgMousePosition;

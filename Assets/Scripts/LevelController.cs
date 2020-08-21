@@ -21,10 +21,10 @@ public class LevelController : MonoBehaviour
         m_continueButton.onClick.AddListener(RestartLevel);
     }
 
-    private void Update()
-    {
-        TimeControl.AutoNormalizeTime();
-    }
+    //private void Update()
+    //{
+    //    TimeControl.AutoNormalizeTime();
+    //}
 
     private void Start()
     {

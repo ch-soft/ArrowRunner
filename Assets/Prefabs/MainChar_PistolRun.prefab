@@ -717,6 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_characterTransform: {fileID: 6228249367420121753}
   m_hookBase: {fileID: 5558468955525519217}
+  m_coolLettering: {fileID: 0}
   m_characterRigidbody: {fileID: 6932295562791633031}
   m_hookState: 0
   m_targetPosition: {x: 0, y: 0, z: 0}
