@@ -63,7 +63,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             EnableAnimator(false);
             StartCoroutine(PullObjectToPlayer());
             FixateDeath("Hook");
-            //ChangeLayers();
+            ChangeLayers();
         }
         else
         {
@@ -136,7 +136,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             case "Bridge":
                 {
                     m_animator.Play("DeathFromBridge");
-
+                    ChangeLayers();
                     break;
                 }
             case "Hook":
@@ -145,8 +145,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                     break;
                 }
         }
-
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -192,7 +190,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             case true:
                 {
-                    if (!m_isOutlineActive)
+                    if (!m_isOutlineActive && m_isAlive)
                     {
                         for (int i = 0; i < m_selfRenderer.materials.Length; i++)
                         {
