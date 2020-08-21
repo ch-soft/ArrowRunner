@@ -122,7 +122,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private void FixateDeath(string reason)
     {
         ChangeAliveState(false);
-
+        SwitchOutlineWtate(false);
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].gameObject.layer = 16;
@@ -192,22 +192,29 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             case true:
                 {
-                    for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                    if (!m_isOutlineActive)
                     {
-                        m_localMaterials[i] = m_activeMaterial;
+                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                        {
+                            m_localMaterials[i] = m_activeMaterial;
+                        }
+                        m_isOutlineActive = true;
                     }
                     break;
                 }
             case false:
                 {
-                    for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                    if (m_isOutlineActive)
                     {
-                        m_localMaterials[i] = m_disabledMaterial;
+                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                        {
+                            m_localMaterials[i] = m_disabledMaterial;
+                        }
+                        m_isOutlineActive = false;
                     }
                     break;
                 }
         }
         m_selfRenderer.materials = m_localMaterials;
-
     }
 }

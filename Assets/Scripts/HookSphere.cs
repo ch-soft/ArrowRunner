@@ -20,4 +20,25 @@ public class HookSphere : MonoBehaviour
                 }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Enemy":
+                {
+                    m_currentEnemy = other.gameObject.GetComponent<GrabbingEnemy>();
+                    m_currentEnemy.SwitchOutlineWtate(false);
+                    break;
+                }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if(m_currentEnemy != null)
+        {
+            m_currentEnemy.SwitchOutlineWtate(false);
+        }
+    }
 }
