@@ -89,7 +89,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95639545562809268}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b9f97b86f91ab734fa553f65f412a177, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -122,7 +122,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.49099946, z: 157.036}
+  m_ConnectedAnchor: {x: 0, y: 0.49299943, z: 91.53601}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_rigidbody: {fileID: 95639545562809266}
   m_pullingDirection: {x: 0, y: 0, z: 0}
   m_pullingObject: {fileID: 0}
+  m_objectWasAttracted: 0
   m_selfRenderer: {fileID: 95639545562809265}
   m_standColor: {r: 0.37254903, g: 0.40392157, b: 0.8666667, a: 1}
   m_isFalling: 0

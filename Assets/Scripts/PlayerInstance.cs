@@ -12,7 +12,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
-   private CameraController m_cameraController;
+    private CameraController m_cameraController;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
 
 
@@ -157,8 +157,13 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(false);
         EnableToCollectVelocityInfo(false);
         m_selfRigidbody.useGravity = false;
+
+        m_selfRigidbody.constraints = RigidbodyConstraints.None;
+
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
+            m_selfRigidbody.constraints = RigidbodyConstraints.None;
+
             m_bonesRigidbodies[i].useGravity = false;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
         }
@@ -179,12 +184,18 @@ public class PlayerInstance : MonoBehaviour
 
         }
         yield return new WaitForSeconds(1f);
+
         m_selfAnimator.enabled = true;
 
         yield return new WaitForSeconds(.65f);
         m_cameraController.EnableFreeCamera(false);
         EnableToCollectVelocityInfo(true);
+        m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
 
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 
     private void MoveCharacterForward()
@@ -241,6 +252,7 @@ public class PlayerInstance : MonoBehaviour
                 {
                     m_selfAnimator.enabled = false;
 
+
                     for (int i = 0; i < m_bonesColliders.Length; i++)
                     {
                         m_bonesColliders[i].enabled = true;
@@ -257,6 +269,7 @@ public class PlayerInstance : MonoBehaviour
                 }
             case false:
                 {
+
                     for (int i = 0; i < m_bonesColliders.Length; i++)
                     {
                         m_bonesColliders[i].enabled = false;
@@ -292,6 +305,15 @@ public class PlayerInstance : MonoBehaviour
         m_selfAnimator.Play(m_animationDancingName);
 
         m_selfRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+        m_selfRigidbody.interpolation = RigidbodyInterpolation.None;
+
+        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        {
+            m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
+        }
+
+        EnableRagdoll(false);
 
         m_cameraController.m_rotateAroundCharacter = true;
     }

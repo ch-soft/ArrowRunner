@@ -102,6 +102,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     {
         m_isGrabbing = true;
         m_fallingBridgeForce = m_pullingForce;
+        m_objectWasAttracted = true;
     }
 
     public void MakeGrapplingMove()

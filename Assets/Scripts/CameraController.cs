@@ -32,8 +32,6 @@ public class CameraController : MonoBehaviour
     private float m_headStaticY;
 
 
-
-
     void Start()
     {
         m_targetPos = transform.position;
@@ -48,6 +46,11 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (m_rotateAroundCharacter)
+        {
+            transform.LookAt(_target.transform);
+            transform.Translate(Vector3.right * Time.deltaTime);
+        }
         //FollowForPlayer();
     }
 
