@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: free_male_1_body_low
   m_Shader: {fileID: 4800000, guid: 3fa7871ba8a394f48b33e3d822f98480, type: 3}
-  m_ShaderKeywords: _EMISSION_ON _MAINTEX_ON
-  m_LightmapFlags: 5
+  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT _EMISSION _EMISSION_ON _MAINTEX_ON
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -55,25 +55,77 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Ramp:
+        m_Texture: {fileID: 2800000, guid: abc83c21d57d4a74cabe12065fa1a8b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SketchTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BlendOp: 0
+    - _Brightness: 1
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _EnableConstSizeOutline: 0
+    - _EnableTexturedOutline: 0
+    - _EnableZSmooth: 0
+    - _GlossMapScale: 1
     - _Glossiness: 0.75
+    - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Offset1: 0
+    - _Offset2: 0
+    - _Outline: 1
     - _Parallax: 0.02
+    - _RampSmooth: 0.2
+    - _RampSmoothAdd: 0.75
+    - _RampSmoothOtherLights: 0.5
+    - _RampThreshold: 0.5
+    - _RampThresholdOtherLights: 0.5
+    - _RimMax: 0.85
+    - _RimMin: 0.6
+    - _RimStrength: 0.5
+    - _Saturation: 1
+    - _Shadow_HSV_H: 0
+    - _Shadow_HSV_S: 0
+    - _Shadow_HSV_V: 0
+    - _Shininess: 0.078125
+    - _SketchSpeed: 6
+    - _Smoothness: 0.2
+    - _SmoothnessTextureChannel: 0
+    - _SpecBlend: 1
+    - _SpecSmooth: 1
+    - _SpecularHighlights: 1
+    - _SpeedX: 0
+    - _SpeedY: -10
     - _SrcBlend: 1
+    - _TCP2_DISABLE_WRAPPED_LIGHT: 1
+    - _TCP2_RAMPTEXT: 0
+    - _TCP2_SPEC_TOON: 0
+    - _TCP2_STYLIZED_FRESNEL: 0
+    - _TexLod: 5
     - _ToggleColor: 0
     - _ToggleEmission: 1
     - _ToggleMainTex: 1
+    - _ToggleSaturationBrightness: 0
     - _UVSec: 0
+    - _ZSmooth: -0.5
     - _ZTest: 2
     - _ZWrite: 1
+    - __dummy__: 0
+    - __outline_gui_dummy__: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+    - _EmissionColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _OutlineColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.6}
+    - _SColor: {r: 0.25, g: 0.25, b: 0.25, a: 1}
+    - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

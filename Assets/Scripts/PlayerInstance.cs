@@ -158,11 +158,11 @@ public class PlayerInstance : MonoBehaviour
         EnableToCollectVelocityInfo(false);
         m_selfRigidbody.useGravity = false;
 
-        m_selfRigidbody.constraints = RigidbodyConstraints.None;
+        //m_selfRigidbody.constraints = RigidbodyConstraints.None;
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
-            m_selfRigidbody.constraints = RigidbodyConstraints.None;
+            //m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
 
             m_bonesRigidbodies[i].useGravity = false;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
@@ -190,12 +190,12 @@ public class PlayerInstance : MonoBehaviour
         yield return new WaitForSeconds(.65f);
         m_cameraController.EnableFreeCamera(false);
         EnableToCollectVelocityInfo(true);
-        m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
+        //m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
 
-        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
-        {
-            m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
-        }
+        //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        //{
+        //    m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
+        //}
     }
 
     private void MoveCharacterForward()
