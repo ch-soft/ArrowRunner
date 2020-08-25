@@ -12,8 +12,9 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private GunInstance m_gun;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
-    private CameraController m_cameraController;
+    [BoxGroup("References"), SerializeField] private Transform m_characterRig;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
+    private CameraController m_cameraController;
 
 
 
@@ -39,6 +40,8 @@ public class PlayerInstance : MonoBehaviour
 
     private const int m_dangerousObjectLayer = 8;
 
+    private bool m_isRigCentralized;
+
     private void Awake()
     {
         m_selfRigidbody = GetComponent<Rigidbody>();
@@ -58,6 +61,8 @@ public class PlayerInstance : MonoBehaviour
 
         StartRunAnimation();
         AllowToRun(true);
+
+        m_isRigCentralized = true;
     }
 
     private void FixedUpdate()
@@ -71,6 +76,10 @@ public class PlayerInstance : MonoBehaviour
     {
         if (m_isAlive)
         {
+            if (!m_isRigCentralized)
+            {
+                m_characterRig.localPosition = Vector3.Lerp(m_characterRig.localPosition, Vector3.zero, Time.deltaTime * 100f);
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -138,7 +147,7 @@ public class PlayerInstance : MonoBehaviour
         {
             case true:
                 {
-                    AllowToFreeJump();
+                    StartCoroutine(AllowToFreeJump());
                     break;
                 }
 
@@ -152,12 +161,11 @@ public class PlayerInstance : MonoBehaviour
 
     }
 
-    private void AllowToFreeJump()
+    private IEnumerator AllowToFreeJump()
     {
         AllowToRun(false);
         EnableToCollectVelocityInfo(false);
         m_selfRigidbody.useGravity = false;
-
         //m_selfRigidbody.constraints = RigidbodyConstraints.None;
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
@@ -169,13 +177,20 @@ public class PlayerInstance : MonoBehaviour
         }
         m_cameraController.EnableFreeCamera(true);
 
+        PlayRopeJumpAnimation();
+        yield return new WaitForSeconds(0.5f);
         m_selfAnimator.enabled = false;
-
     }
 
     private IEnumerator ForbitToFreeJump()
     {
+        m_selfAnimator.enabled = true;
+
+        PlayFlipAnimation();
+
         AllowToRun(true);
+
+        m_isRigCentralized = false;
         m_selfRigidbody.useGravity = true;
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
@@ -183,19 +198,23 @@ public class PlayerInstance : MonoBehaviour
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
 
         }
-        yield return new WaitForSeconds(1f);
 
-        m_selfAnimator.enabled = true;
-
-        yield return new WaitForSeconds(.65f);
+        yield return new WaitForSeconds(1.0f);
+        StartRunAnimation();
+        yield return new WaitForSeconds(1.0f);
         m_cameraController.EnableFreeCamera(false);
         EnableToCollectVelocityInfo(true);
+
+
         //m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
 
         //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         //{
         //    m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
         //}
+        yield return new WaitForSeconds(1f);
+        m_isRigCentralized = true;
+
     }
 
     private void MoveCharacterForward()
@@ -316,5 +335,15 @@ public class PlayerInstance : MonoBehaviour
         EnableRagdoll(false);
 
         m_cameraController.m_rotateAroundCharacter = true;
+    }
+
+    private void PlayFlipAnimation()
+    {
+        m_selfAnimator.Play("SwingToLand");
+    }
+
+    private void PlayRopeJumpAnimation()
+    {
+        m_selfAnimator.Play("RopeJump");
     }
 }
