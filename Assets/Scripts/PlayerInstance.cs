@@ -147,7 +147,7 @@ public class PlayerInstance : MonoBehaviour
         {
             case true:
                 {
-                    StartCoroutine(AllowToFreeJump());
+                    AllowToFreeJump();
                     break;
                 }
 
@@ -161,7 +161,7 @@ public class PlayerInstance : MonoBehaviour
 
     }
 
-    private IEnumerator AllowToFreeJump()
+    private void AllowToFreeJump()
     {
         AllowToRun(false);
         EnableToCollectVelocityInfo(false);
@@ -177,8 +177,6 @@ public class PlayerInstance : MonoBehaviour
         }
         m_cameraController.EnableFreeCamera(true);
 
-        PlayRopeJumpAnimation();
-        yield return new WaitForSeconds(0.5f);
         m_selfAnimator.enabled = false;
     }
 
@@ -191,13 +189,14 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(true);
 
         m_isRigCentralized = false;
-        m_selfRigidbody.useGravity = true;
+
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].useGravity = true;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
 
         }
+        m_selfRigidbody.useGravity = true;
 
         yield return new WaitForSeconds(1.0f);
         StartRunAnimation();
