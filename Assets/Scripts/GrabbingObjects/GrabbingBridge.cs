@@ -12,6 +12,11 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     private bool m_isStanding;
     private float m_afterFallingDelay = 0.2f;
 
+    private Material[] m_localMaterials;
+    private bool m_isOutlineActive;
+
+    [HideInInspector] public bool m_isAlive;
+
 
     private void Awake()
     {
@@ -63,5 +68,38 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         {
             m_selfRenderer.materials[i].color = Color.Lerp(m_selfRenderer.material.color, m_standColor, Time.fixedDeltaTime * 2f);
         }
+    }
+
+    public void SwitchOutlineWtate(bool state)
+    {
+        m_localMaterials = m_selfRenderer.materials;
+        switch (state)
+        {
+            case true:
+                {
+                    if (!m_isOutlineActive && m_isAlive)
+                    {
+                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                        {
+                            m_localMaterials[i] = m_activeMaterial;
+                        }
+                        m_isOutlineActive = true;
+                    }
+                    break;
+                }
+            case false:
+                {
+                    if (m_isOutlineActive)
+                    {
+                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+                        {
+                            m_localMaterials[i] = m_disabledMaterial;
+                        }
+                        m_isOutlineActive = false;
+                    }
+                    break;
+                }
+        }
+        m_selfRenderer.materials = m_localMaterials;
     }
 }

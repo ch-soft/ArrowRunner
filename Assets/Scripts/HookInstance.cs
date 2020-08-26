@@ -176,6 +176,7 @@ public class HookInstance : MonoBehaviour
 
     public void ResetDefaultHookParapemers()
     {
+        transform.parent = null;
         transform.parent = m_parent;
         transform.position = m_hookBase.position/* + m_positinonOffset*/;
         transform.localScale = m_defaultHookScale;

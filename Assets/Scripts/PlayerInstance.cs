@@ -215,7 +215,7 @@ public class PlayerInstance : MonoBehaviour
         //}
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
-
+        m_gun.m_hook.ResetDefaultHookParapemers();
     }
 
     private void MoveCharacterForward()
