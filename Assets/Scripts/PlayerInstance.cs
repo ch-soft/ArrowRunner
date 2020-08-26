@@ -189,6 +189,7 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(true);
 
         m_isRigCentralized = false;
+        yield return new WaitForSeconds(0.35f);
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
@@ -198,7 +199,8 @@ public class PlayerInstance : MonoBehaviour
         }
         m_selfRigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.65f);
+        m_gun.m_hook.ResetDefaultHookParapemers();
         StartRunAnimation();
         yield return new WaitForSeconds(1.0f);
         m_cameraController.EnableFreeCamera(false);

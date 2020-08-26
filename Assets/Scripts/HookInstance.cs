@@ -94,6 +94,7 @@ public class HookInstance : MonoBehaviour
             ChangeLocalHookState(false);
 
             ResetDefaultHookParapemers();
+            print("Hook was returned");
         }
     }
 
@@ -173,7 +174,7 @@ public class HookInstance : MonoBehaviour
         m_lineRenderer.enabled = state;
     }
 
-    private void ResetDefaultHookParapemers()
+    public void ResetDefaultHookParapemers()
     {
         transform.parent = m_parent;
         transform.position = m_hookBase.position/* + m_positinonOffset*/;

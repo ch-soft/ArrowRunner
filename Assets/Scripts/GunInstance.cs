@@ -8,7 +8,7 @@ public class GunInstance : MonoBehaviour
 
     //[BoxGroup("References"), SerializeField] private Camera m_mainCamera;
     [BoxGroup("References"), SerializeField] private Transform m_rightHand;
-    [BoxGroup("References"), SerializeField] private HookInstance m_hook;
+    [BoxGroup("References")] public HookInstance m_hook;
     [BoxGroup("References"), SerializeField] private GameObject m_pointSphere;
 
 
