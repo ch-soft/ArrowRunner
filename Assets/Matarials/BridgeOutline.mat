@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TestOutline
-  m_Shader: {fileID: 4800000, guid: 0d325ef349acc794da37e3dd556b7a99, type: 3}
-  m_ShaderKeywords: TCP2_DISABLE_WRAPPED_LIGHT _COLOR_ON
+  m_Name: BridgeOutline
+  m_Shader: {fileID: 4800000, guid: d32d215e22d1e144886957542b460d31, type: 3}
+  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_ZSMOOTH_ON _COLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -68,16 +68,16 @@ Material:
     - _DstBlend: 0
     - _EnableConstSizeOutline: 0
     - _EnableTexturedOutline: 0
-    - _EnableZSmooth: 0
+    - _EnableZSmooth: 1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset1: 0
+    - _Offset1: 174.4
     - _Offset2: 0
-    - _Outline: 0.3
+    - _Outline: 10
     - _Parallax: 0.02
     - _RampSmooth: 0
     - _RampSmoothAdd: 0.54
@@ -96,7 +96,7 @@ Material:
     - _ToggleEmission: 0
     - _ToggleMainTex: 0
     - _UVSec: 0
-    - _ZSmooth: -0.5
+    - _ZSmooth: 0.04
     - _ZTest: 2
     - _ZWrite: 1
     - __dummy__: 0
