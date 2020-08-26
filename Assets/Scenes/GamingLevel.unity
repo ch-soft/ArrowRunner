@@ -770,6 +770,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 710830675}
+    - target: {fileID: 5015773597718558342, guid: 7bbba837b58f65440b132d06d1c71580,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.7892811
+      objectReference: {fileID: 0}
+    - target: {fileID: 5015773597718558345, guid: 7bbba837b58f65440b132d06d1c71580,
+        type: 3}
+      propertyPath: m_TagString
+      value: GrapplingSurface
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbba837b58f65440b132d06d1c71580, type: 3}
 --- !u!4 &436761276 stripped
@@ -4759,12 +4769,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904456072}
   m_CullTransparentMesh: 0
---- !u!23 &1908832611 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5015773597718558340, guid: 7bbba837b58f65440b132d06d1c71580,
-    type: 3}
-  m_PrefabInstance: {fileID: 5015773598019851086}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1941000567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013665620186, guid: d241da266d3f50543b0e08c26ccd7a6f,
@@ -6537,40 +6541,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5015773597718558336, guid: 7bbba837b58f65440b132d06d1c71580,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 56.257004
-      objectReference: {fileID: 0}
     - target: {fileID: 5015773597600407490, guid: 7bbba837b58f65440b132d06d1c71580,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 710830675}
-    - target: {fileID: 5015773597718558339, guid: 7bbba837b58f65440b132d06d1c71580,
+    - target: {fileID: 5015773597718558342, guid: 7bbba837b58f65440b132d06d1c71580,
         type: 3}
-      propertyPath: m_selfRenderer
-      value: 
-      objectReference: {fileID: 1908832611}
-    - target: {fileID: 5015773597718558339, guid: 7bbba837b58f65440b132d06d1c71580,
-        type: 3}
-      propertyPath: m_activeMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 4f3591d5f0b85fe4c968bfdcc0a1072f, type: 2}
-    - target: {fileID: 5015773597718558339, guid: 7bbba837b58f65440b132d06d1c71580,
-        type: 3}
-      propertyPath: m_defaultColor.r
-      value: 1
+      propertyPath: m_LocalScale.y
+      value: 2.7892811
       objectReference: {fileID: 0}
-    - target: {fileID: 5015773597718558339, guid: 7bbba837b58f65440b132d06d1c71580,
+    - target: {fileID: 5015773597718558345, guid: 7bbba837b58f65440b132d06d1c71580,
         type: 3}
-      propertyPath: m_defaultColor.g
-      value: 0.49019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 5015773597718558339, guid: 7bbba837b58f65440b132d06d1c71580,
-        type: 3}
-      propertyPath: m_defaultColor.a
-      value: 1
+      propertyPath: m_TagString
+      value: GrapplingSurface
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbba837b58f65440b132d06d1c71580, type: 3}

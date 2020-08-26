@@ -259,6 +259,11 @@ MonoBehaviour:
   m_rigidbody: {fileID: 5015773597600407495}
   m_pullingDirection: {x: 0, y: 0, z: 0}
   m_pullingObject: {fileID: 0}
+  m_objectWasAttracted: 0
+  m_selfRenderer: {fileID: 5015773597718558340}
+  m_defaultColor: {r: 1, g: 0.49019608, b: 0, a: 1}
+  m_isAlive: 0
+  m_activeMaterial: {fileID: 2100000, guid: 4f3591d5f0b85fe4c968bfdcc0a1072f, type: 2}
 --- !u!54 &5015773597718558338
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -286,7 +291,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.014356613, y: 6.085411, z: 55.637}
+  m_ConnectedAnchor: {x: 0.014356613, y: 6.085411, z: 56.257004}
   m_UseSpring: 0
   m_Spring:
     spring: 0

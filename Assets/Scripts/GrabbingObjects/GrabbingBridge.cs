@@ -79,7 +79,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         {
             case true:
                 {
-                    if (!m_isOutlineActive && m_isStanding)
+                    if (!m_isOutlineActive && !m_objectWasAttracted)
                     {
                         m_selfRenderer.material = m_activeMaterial;
                         m_selfRenderer.material.color = m_defaultColor;

@@ -190,7 +190,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             case true:
                 {
-                    if (!m_isOutlineActive && m_isAlive)
+                    if (!m_isOutlineActive && !m_objectWasAttracted)
                     {
                         for (int i = 0; i < m_selfRenderer.materials.Length; i++)
                         {

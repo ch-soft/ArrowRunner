@@ -7,7 +7,7 @@ public class HookSphere : MonoBehaviour
 
     private GrabbingEnemy m_currentEnemy;
     private GrabbingBridge m_currentBridge;
-
+    private GrapplingBase m_currentGrapplingBase;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,6 +23,12 @@ public class HookSphere : MonoBehaviour
                 {
                     m_currentBridge = other.gameObject.GetComponent<GrabbingBridge>();
                     m_currentBridge.SwitchOutlineWtate(true);
+                    break;
+                }
+            case "GrapplingSurface":
+                {
+                    m_currentGrapplingBase = other.gameObject.GetComponent<GrapplingBase>();
+                    m_currentGrapplingBase.SwitchOutlineWtate(true);
                     break;
                 }
         }
@@ -44,12 +50,18 @@ public class HookSphere : MonoBehaviour
                     m_currentBridge.SwitchOutlineWtate(false);
                     break;
                 }
+            case "GrapplingSurface":
+                {
+                    m_currentGrapplingBase = other.gameObject.GetComponent<GrapplingBase>();
+                    m_currentGrapplingBase.SwitchOutlineWtate(false);
+                    break;
+                }
         }
     }
 
     private void OnDisable()
     {
-        if(m_currentEnemy != null)
+        if (m_currentEnemy != null)
         {
             m_currentEnemy.SwitchOutlineWtate(false);
         }
@@ -57,6 +69,11 @@ public class HookSphere : MonoBehaviour
         if (m_currentBridge != null)
         {
             m_currentBridge.SwitchOutlineWtate(false);
+        }
+
+        if (m_currentGrapplingBase != null)
+        {
+            m_currentGrapplingBase.SwitchOutlineWtate(false);
         }
     }
 }
