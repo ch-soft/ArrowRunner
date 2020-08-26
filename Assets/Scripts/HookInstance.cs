@@ -94,7 +94,6 @@ public class HookInstance : MonoBehaviour
             ChangeLocalHookState(false);
 
             ResetDefaultHookParapemers();
-            print("Hook was returned");
         }
     }
 
@@ -102,9 +101,11 @@ public class HookInstance : MonoBehaviour
     {
         if (m_isHookInAir)
         {
+
             switch (other.gameObject.layer)
             {
                 case 0:
+                case 10:
                 case 11:
                 case 12:
                 case 13:
@@ -134,9 +135,8 @@ public class HookInstance : MonoBehaviour
 
                         break;
                     }
-                case m_grabbingObjectLayer:
+                case 8:
                     {
-                        //need add more logic here
 
                         if (other.gameObject.GetComponent<GrabbingBaseObject>())
                         {
@@ -156,6 +156,7 @@ public class HookInstance : MonoBehaviour
 
                         break;
                     }
+              
             }
         }
 
@@ -165,7 +166,6 @@ public class HookInstance : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         m_hookState = HookState.FliesToBase;
-
     }
 
     public void ChangeLocalHookState(bool state)
@@ -182,4 +182,5 @@ public class HookInstance : MonoBehaviour
         transform.localScale = m_defaultHookScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);
     }
+
 }

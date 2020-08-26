@@ -18,7 +18,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
 
-    private void Awake()
+    private void Start()
     {
         m_isStanding = true;
 
@@ -37,22 +37,19 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     public void OnHookGrab()
     {
         StartCoroutine(GrabCharacter());
+        SwitchOutlineWtate(false);
+
     }
 
     private IEnumerator GrabCharacter()
     {
+
         yield return new WaitForSeconds(0.03f);
-        if ((TimeControl.m_characterIsAlive))
-        {
+       
             m_isFalling = true;
             PullBridge();
             StartCoroutine(DisableBridge());
 
-        }
-        else
-        {
-            gameObject.layer = 0;
-        }
     }
 
     public IEnumerator DisableBridge()
@@ -62,7 +59,6 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         m_rigidbody.useGravity = false;
         m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         gameObject.layer = 13;
-        SwitchOutlineWtate(false);
     }
 
     private void ChangeColorDueLifeState()
@@ -79,7 +75,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         {
             case true:
                 {
-                    if (!m_isOutlineActive && !m_objectWasAttracted)
+                    if (!m_isOutlineActive && m_isStanding)
                     {
                         m_selfRenderer.material = m_activeMaterial;
                         m_selfRenderer.material.color = m_defaultColor;

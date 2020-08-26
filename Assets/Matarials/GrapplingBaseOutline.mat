@@ -7,10 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BridgeOutline
+  m_Name: GrapplingBaseOutline
   m_Shader: {fileID: 4800000, guid: d32d215e22d1e144886957542b460d31, type: 3}
-  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_TANGENT_AS_NORMALS TCP2_ZSMOOTH_ON
-    _COLOR_ON
+  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_ZSMOOTH_ON _COLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -67,6 +66,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _DstBlendOutline: 1
     - _EnableConstSizeOutline: 0
     - _EnableTexturedOutline: 0
     - _EnableZSmooth: 1
@@ -76,9 +76,9 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset1: -1
+    - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 10
+    - _Outline: 15
     - _Parallax: 0.02
     - _RampSmooth: 0
     - _RampSmoothAdd: 0.54
@@ -91,13 +91,14 @@ Material:
     - _SpecSmooth: 0.47
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SrcBlendOutline: 5
     - _StencilRef: 1
     - _TexLod: 5
     - _ToggleColor: 1
     - _ToggleEmission: 0
     - _ToggleMainTex: 0
     - _UVSec: 0
-    - _ZSmooth: 0
+    - _ZSmooth: -1.82
     - _ZTest: 2
     - _ZWrite: 1
     - __dummy__: 0

@@ -89,7 +89,6 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     public IEnumerator PullObjectToPlayer()
     {
         m_objectWasAttracted = true;
-
         m_rigidbody.useGravity = true;
         m_isGrabbing = true;
         m_rigidbody.AddForce(m_pullingDirection + new Vector3(m_forceDirection.x * transform.position.x * -m_pullingForce, m_forceDirection.y * -m_pullingForce, m_forceDirection.z * -m_pullingForce));

@@ -42,11 +42,14 @@ public class PlayerInstance : MonoBehaviour
 
     private bool m_isRigCentralized;
 
+    private Quaternion m_rigLocalRotation;
+
     private void Awake()
     {
         m_selfRigidbody = GetComponent<Rigidbody>();
         m_selfAnimator = GetComponent<Animator>();
         m_cameraController = Camera.main.GetComponent<CameraController>();
+        m_rigLocalRotation = m_characterRig.localRotation;
     }
 
     private void Start()
@@ -74,7 +77,7 @@ public class PlayerInstance : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (m_isAlive)
+        if (m_isAlive && !TimeControl.m_levelFinished)
         {
             if (!m_isRigCentralized)
             {
@@ -189,18 +192,17 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(true);
 
         m_isRigCentralized = false;
-        yield return new WaitForSeconds(0.35f);
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].useGravity = true;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
-
         }
         m_selfRigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(0.65f);
-        m_gun.m_hook.ResetDefaultHookParapemers();
+        yield return new WaitForSeconds(0.7f);
+        m_characterRig.localRotation = m_rigLocalRotation;
+        //m_gun.m_hook.ResetDefaultHookParapemers();
         StartRunAnimation();
         yield return new WaitForSeconds(1.0f);
         m_cameraController.EnableFreeCamera(false);
@@ -215,7 +217,6 @@ public class PlayerInstance : MonoBehaviour
         //}
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
-        m_gun.m_hook.ResetDefaultHookParapemers();
     }
 
     private void MoveCharacterForward()

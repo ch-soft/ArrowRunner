@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: EnemyOutline
   m_Shader: {fileID: 4800000, guid: d32d215e22d1e144886957542b460d31, type: 3}
-  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_ZSMOOTH_ON _COLOR_ON
+  m_ShaderKeywords: OUTLINES TCP2_COLORS_AS_NORMALS TCP2_DISABLE_WRAPPED_LIGHT TCP2_ZSMOOTH_ON
+    _COLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -77,7 +78,7 @@ Material:
     - _OcclusionStrength: 1
     - _Offset1: 0
     - _Offset2: 0
-    - _Outline: 3
+    - _Outline: 5
     - _Parallax: 0.02
     - _RampSmooth: 0
     - _RampSmoothAdd: 0.54
@@ -96,7 +97,7 @@ Material:
     - _ToggleEmission: 0
     - _ToggleMainTex: 0
     - _UVSec: 0
-    - _ZSmooth: 1.47
+    - _ZSmooth: 3
     - _ZTest: 2
     - _ZWrite: 1
     - __dummy__: 0

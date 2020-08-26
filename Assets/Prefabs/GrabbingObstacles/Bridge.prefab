@@ -122,7 +122,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -1.75, z: 1.0900002}
+  m_ConnectedAnchor: {x: 0, y: 0.49299955, z: 91.53601}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_objectWasAttracted: 0
   m_selfRenderer: {fileID: 95639545562809265}
   m_standColor: {r: 0.37254903, g: 0.40392157, b: 0.8666667, a: 1}
-  m_defaultColor: {r: 0, g: 0, b: 0, a: 0}
+  m_defaultColor: {r: 1, g: 0.49019608, b: 0, a: 1}
   m_isFalling: 0
   m_isAlive: 0
-  m_activeMaterial: {fileID: 2100000, guid: 280fef4c9f0b64a498fe0f3406767b6c, type: 2}
+  m_activeMaterial: {fileID: 2100000, guid: 4f3591d5f0b85fe4c968bfdcc0a1072f, type: 2}

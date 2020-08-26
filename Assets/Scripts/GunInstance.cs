@@ -51,10 +51,11 @@ public class GunInstance : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!TimeControl.m_levelFinished)
         {
-            if (!TimeControl.m_levelFinished)
+            if (Input.GetMouseButtonDown(0))
             {
+
                 m_testMousePosition = Input.mousePosition;
                 m_testMousePosition.z = 1.0f;
 
@@ -62,51 +63,52 @@ public class GunInstance : MonoBehaviour
 
                 m_startingMousePosition = m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue;
             }
+
+            if (m_laserActivityState)
+            {
+                RaycastHit hit;
+
+                m_testMousePosition = Input.mousePosition;
+                m_testMousePosition.z = 1.0f;
+                Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
+
+                m_currentgMousePosition =
+                    (m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
+                m_currentgMousePosition.z = 0f;
+                m_currentgMousePosition.x = 0f;
+
+                m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
+                if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
+                {
+                    Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
+                    m_laserEndPosition = hit.point; // this is for full controll
+                    m_laserEndPosition.x = 0f;
+
+                    m_pointSphere.transform.position = m_laserEndPosition;
+
+                    EnablePointSphere(true);
+                }
+                else
+                {
+                    m_laserEndPosition = m_secondaryLaserEndPosition + transform.position;
+                    EnablePointSphere(false);
+                }
+
+                if (!TimeControl.m_levelFinished)
+                {
+                    ShootLaserFromGun();
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (m_hook.m_hookState == HookState.Based)
+                {
+                    ConfirmAimOnTarget();
+                }
+            }
         }
 
-        if (m_laserActivityState)
-        {
-            RaycastHit hit;
-
-            m_testMousePosition = Input.mousePosition;
-            m_testMousePosition.z = 1.0f;
-            Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
-
-            m_currentgMousePosition =
-                (m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
-            m_currentgMousePosition.z = 0f;
-            m_currentgMousePosition.x = 0f;
-
-            m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
-            if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
-            {
-                Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
-                m_laserEndPosition = hit.point; // this is for full controll
-                m_laserEndPosition.x = 0f;
-
-                m_pointSphere.transform.position = m_laserEndPosition;
-
-                EnablePointSphere(true);
-            }
-            else
-            {
-                m_laserEndPosition = m_secondaryLaserEndPosition + transform.position;
-                EnablePointSphere(false);
-            }
-
-            if (!TimeControl.m_levelFinished)
-            {
-                ShootLaserFromGun();
-            }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (m_hook.m_hookState == HookState.Based && !TimeControl.m_levelFinished)
-            {
-                ConfirmAimOnTarget();
-            }
-        }
     }
 
     public IEnumerator EnableLaserSight(bool state, float delay)
@@ -128,8 +130,12 @@ public class GunInstance : MonoBehaviour
     private void ConfirmAimOnTarget()
     {
         RaycastHit hit;
+
+
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
+
+
 
         Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
 
@@ -149,6 +155,7 @@ public class GunInstance : MonoBehaviour
             m_hook.transform.parent = null;
             m_hook.ChangeLocalHookState(true);
             //}
+
         }
         else
         {

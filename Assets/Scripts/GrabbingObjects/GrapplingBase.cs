@@ -13,6 +13,11 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
 
+    private void Start()
+    {
+        m_disabledMaterial = m_selfRenderer.material;
+    }
+
     public void OnHookGrab()
     {
         MakeGrapplingMove();
