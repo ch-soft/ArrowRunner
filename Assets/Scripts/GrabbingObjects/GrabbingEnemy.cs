@@ -183,7 +183,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         m_animator.Play("SwordSlash");
         m_rigidbody.isKinematic = true;
-        m_enemyRig.SetActive(false);
+        //m_enemyRig.SetActive(false);
     }
 
     public void SwitchOutlineWtate(bool state)

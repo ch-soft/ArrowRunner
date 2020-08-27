@@ -4,7 +4,6 @@ using UnityEngine;
 using NaughtyAttributes;
 public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
 {
-
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
     [BoxGroup("Preferences"), SerializeField] private Color m_defaultColor;
 
@@ -12,6 +11,8 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
     [HideInInspector] public bool m_isAlive;
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
+    private float m_distanceToCharacter;
+    private float m_timeInAir;
 
     private void Start()
     {
@@ -20,7 +21,26 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
 
     public void OnHookGrab()
     {
-        StartCoroutine(MakeGrapplingMove());
+        m_distanceToCharacter = Vector3.Distance(m_playerInstance.transform.position, transform.position);
+        print(m_distanceToCharacter);
+        if ((m_distanceToCharacter >= 0) && (m_distanceToCharacter < 10))
+        {
+            m_timeInAir = 0.3f;
+        }
+        else if ((m_distanceToCharacter >= 10) && (m_distanceToCharacter < 14))
+        {
+            m_timeInAir = 0.4f;
+        }
+        else if ((m_distanceToCharacter >= 14) && (m_distanceToCharacter < 17))
+        {
+            m_timeInAir = 0.4f;
+        }
+        else if ((m_distanceToCharacter >= 17) && (m_distanceToCharacter < 100))
+        {
+            m_timeInAir = 0.6f;
+        }
+
+        StartCoroutine(MakeGrapplingMove(m_timeInAir));
         //gameObject.layer = 16;
     }
 

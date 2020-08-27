@@ -20,10 +20,12 @@ public class WinnerZone : MonoBehaviour
         {
             case "Player":
                 {
+
                     m_levelManager.OpenWinnerPanel();
                     TimeControl.m_levelFinished = true;
                     m_playerInstance.AllowToRun(false);
-                    m_playerInstance.PlayDancingAnimation();
+                    StartCoroutine(m_playerInstance.PlayDancingAnimation());
+
                     break;
                 }
         }

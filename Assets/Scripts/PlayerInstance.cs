@@ -14,7 +14,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
     [BoxGroup("References"), SerializeField] private Transform m_characterRig;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
-    private CameraController m_cameraController;
+    [HideInInspector] public CameraController m_cameraController;
 
 
 
@@ -73,11 +73,10 @@ public class PlayerInstance : MonoBehaviour
         if (m_canRun)
         {
             MoveCharacterForward();
-            print(m_allowToJump);
 
             if (m_allowToJump)
             {
-                m_selfRigidbody.velocity += new Vector3(0, 0.75f, 0f) / 2f;
+                m_selfRigidbody.velocity += new Vector3(0, 0.85f, 0f) / 2f;
             }
         }
     }
@@ -131,6 +130,7 @@ public class PlayerInstance : MonoBehaviour
         EnableRagdoll(true);
         m_levelController.OpenDefeatPanel();
         TimeControl.m_levelFinished = true;
+        m_cameraController.FreeFromParent();
     }
 
     public void AllowToRun(bool state)
@@ -330,7 +330,7 @@ public class PlayerInstance : MonoBehaviour
         }
     }
 
-    public void PlayDancingAnimation()
+    public IEnumerator PlayDancingAnimation()
     {
         m_selfAnimator.Play(m_animationDancingName);
 
@@ -345,7 +345,11 @@ public class PlayerInstance : MonoBehaviour
 
         EnableRagdoll(false);
 
+        m_cameraController.FreeFromParent();
+        m_cameraController.ResetPosition();
+        yield return new WaitForSeconds(0.3f);
         m_cameraController.m_rotateAroundCharacter = true;
+
     }
 
     private void PlayFlipAnimation()

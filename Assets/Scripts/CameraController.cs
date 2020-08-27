@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
 
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_isConnectWithFace")] private Transform m_characterHead;
 
+    [HideInInspector] private Vector3 m_lastPosition;
     [HideInInspector] public bool m_rotateAroundCharacter;
     [HideInInspector]
     public Vector3 m_HeightDifference()
@@ -18,6 +19,7 @@ public class CameraController : MonoBehaviour
         Vector3 heightDifference = transform.position - m_startingPosition;
         return heightDifference;
     }
+
     private bool m_enableFreeCamera;
 
     private float m_interpVelocity;
@@ -32,8 +34,9 @@ public class CameraController : MonoBehaviour
     private float m_headStaticY;
 
 
-    void Start()
+    void Awake()
     {
+
         m_targetPos = transform.position;
 
         if (m_isConnectWithFace)
@@ -44,14 +47,13 @@ public class CameraController : MonoBehaviour
         m_startingPosition = transform.position;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (m_rotateAroundCharacter)
         {
             transform.LookAt(_target.transform);
             transform.Translate(Vector3.right * Time.deltaTime);
         }
-        //FollowForPlayer();
     }
 
     private void FollowForPlayer()
@@ -100,5 +102,16 @@ public class CameraController : MonoBehaviour
     public void EnableFreeCamera(bool state)
     {
         m_enableFreeCamera = state;
+    }
+
+    public void FreeFromParent()
+    {
+        //transform.parent = null;
+    }
+
+   
+    public void ResetPosition()
+    {
+        transform.position = new Vector3(3f, 1f, _target.transform.position.z);
     }
 }

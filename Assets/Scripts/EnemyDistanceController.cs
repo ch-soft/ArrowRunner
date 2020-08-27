@@ -14,8 +14,8 @@ public class EnemyDistanceController : MonoBehaviour
 
     private bool m_playerIsInSight;
 
-    private float m_maxDistToPlayer = 15f;
-    private float m_prepareWeaponDistance = 12.5f;
+    private float m_maxDistToPlayer = 17f;
+    private float m_prepareWeaponDistance = 15;
     private float m_hitPlayerDistance = 7f;
 
     private bool m_weaponIsReady;
@@ -81,10 +81,5 @@ public class EnemyDistanceController : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void LookAtPlayer()
-    {
-        transform.LookAt(m_playerTransform);
     }
 }
