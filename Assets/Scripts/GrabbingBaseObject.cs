@@ -108,11 +108,11 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     {
         m_isGrabbing = true;
         m_objectWasAttracted = true;
-        StartCoroutine(m_playerInstance.EnableRigidbodyJump());
+        m_playerInstance.EnableRigidbodyJump();
         //m_playerInstance.
         //m_playerInstance.EnableFreeJump(true);
-        yield return new WaitForSecondsRealtime(0.4f);
-        StartCoroutine(m_playerInstance.DisableRigidbodyJump());
+        yield return new WaitForSecondsRealtime(0.5f);
+        m_playerInstance.DisableRigidbodyJump();
         //m_playerInstance.EnableFreeJump(false);
 
         m_isGrabbing = false;
