@@ -189,7 +189,7 @@ public class PlayerInstance : MonoBehaviour
 
         ////m_selfRigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(1.75f);
+        yield return new WaitForSeconds(1.11f);
         m_characterRig.localRotation = m_rigLocalRotation;
         StartRunAnimation();
 
