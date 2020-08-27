@@ -77,7 +77,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_allowToJump)
             {
-                m_selfRigidbody.velocity += new Vector3(0, 0.85f, 0f) / 2f;
+                m_selfRigidbody.velocity += new Vector3(0, 0.75f, 0f) / 2f;
             }
         }
     }
