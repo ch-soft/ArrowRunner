@@ -92,8 +92,10 @@ public class HookInstance : MonoBehaviour
     private void ReturnHookToBase()
     {
         transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.3f);
-        m_handMesh.localScale -= Vector3.one / 10f;
-
+        if (m_handMesh.localScale.x > 1f)
+        {
+            m_handMesh.localScale -= Vector3.one;
+        }
         if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
         {
             m_hookState = HookState.Based;

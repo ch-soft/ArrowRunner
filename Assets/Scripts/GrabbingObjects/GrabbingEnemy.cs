@@ -9,6 +9,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private BoxCollider m_boxCollider;
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
+    [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
 
     [Space]
 
@@ -181,6 +182,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     public void PlaySwordSlashAnim()
     {
         m_animator.Play("SwordSlash");
+        m_rigidbody.isKinematic = true;
+        m_enemyRig.SetActive(false);
     }
 
     public void SwitchOutlineWtate(bool state)
