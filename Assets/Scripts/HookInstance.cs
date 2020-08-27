@@ -17,9 +17,10 @@ public enum HookState
 public class HookInstance : MonoBehaviour
 {
     [SerializeField] private Transform m_characterTransform;
-    [SerializeField] Transform m_hookBase;
+    [SerializeField] private Transform m_hookBase;
+    [SerializeField] private Transform m_handMesh;
     [Space]
-    [SerializeField] CoolLettering m_coolLettering;
+    [SerializeField] private CoolLettering m_coolLettering;
 
     public Rigidbody m_characterRigidbody;
 
@@ -82,11 +83,17 @@ public class HookInstance : MonoBehaviour
     private void ShootGrabHookToTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, Time.fixedDeltaTime * m_hookMovementSpeed);
+        if (m_handMesh.localScale.x < 5f)
+        {
+            m_handMesh.localScale += Vector3.one / 20f;
+        }
     }
 
     private void ReturnHookToBase()
     {
         transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.3f);
+        m_handMesh.localScale -= Vector3.one / 10f;
+
         if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
         {
             m_hookState = HookState.Based;
@@ -156,7 +163,7 @@ public class HookInstance : MonoBehaviour
 
                         break;
                     }
-              
+
             }
         }
 
@@ -181,6 +188,7 @@ public class HookInstance : MonoBehaviour
         transform.position = m_hookBase.position/* + m_positinonOffset*/;
         transform.localScale = m_defaultHookScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);
+        m_handMesh.localScale = Vector3.one;
     }
 
 }
