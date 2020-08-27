@@ -70,15 +70,15 @@ public abstract class GrabbingBaseObject : MonoBehaviour
 
                 case GrabbingObjectType.GrapplingBase:
                     {
-                        if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 4f)
-                        {
-                            m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 14f);
-                        }
-                        else
-                        {
-                            m_isGrabbing = false;
-                            m_playerInstance.EnableFreeJump(false);
-                        }
+                        //if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 4f)
+                        //{
+                        //    m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 14f);
+                        //}
+                        //else
+                        //{
+                        //    m_isGrabbing = false;
+                        //    m_playerInstance.EnableFreeJump(false);
+                        //}
 
                         break;
                     }
@@ -104,11 +104,18 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_objectWasAttracted = true;
     }
 
-    public void MakeGrapplingMove()
+    public IEnumerator MakeGrapplingMove()
     {
         m_isGrabbing = true;
         m_objectWasAttracted = true;
-        m_playerInstance.EnableFreeJump(true);
+        StartCoroutine(m_playerInstance.EnableRigidbodyJump());
+        //m_playerInstance.
+        //m_playerInstance.EnableFreeJump(true);
+        yield return new WaitForSecondsRealtime(0.4f);
+        StartCoroutine(m_playerInstance.DisableRigidbodyJump());
+        //m_playerInstance.EnableFreeJump(false);
+
+        m_isGrabbing = false;
     }
 
     public void PrepareGrabbingObject(Vector3 playerDirection, Transform hook)

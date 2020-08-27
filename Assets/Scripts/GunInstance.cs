@@ -85,7 +85,6 @@ public class GunInstance : MonoBehaviour
                     m_laserEndPosition.x = 0f;
 
                     m_pointSphere.transform.position = m_laserEndPosition;
-                    print(m_laserEndPosition);
                     EnablePointSphere(true);
                 }
                 else

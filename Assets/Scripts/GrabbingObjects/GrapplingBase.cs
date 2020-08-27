@@ -20,7 +20,7 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
 
     public void OnHookGrab()
     {
-        MakeGrapplingMove();
+        StartCoroutine(MakeGrapplingMove());
         //gameObject.layer = 16;
     }
 

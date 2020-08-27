@@ -31,16 +31,16 @@ public class PlayerInstance : MonoBehaviour
 
     private bool m_canRun;
     private bool m_enableCollectVelocityInfo;
-
     private bool m_canShootLaserSight;
-
     private bool m_isSlowmoEnable;
+    private bool m_isRigCentralized;
+
+    private bool m_allowToJump;
 
     private Coroutine m_normalizeTime;
 
     private const int m_dangerousObjectLayer = 8;
 
-    private bool m_isRigCentralized;
 
     private Quaternion m_rigLocalRotation;
 
@@ -73,6 +73,12 @@ public class PlayerInstance : MonoBehaviour
         if (m_canRun)
         {
             MoveCharacterForward();
+            print(m_allowToJump);
+
+            if (m_allowToJump)
+            {
+                m_selfRigidbody.velocity += new Vector3(0, 0.5f, 0f) / 2f;
+            }
         }
     }
     private void LateUpdate()
@@ -166,9 +172,9 @@ public class PlayerInstance : MonoBehaviour
 
     private void AllowToFreeJump()
     {
-        AllowToRun(false);
+        //AllowToRun(false);
         EnableToCollectVelocityInfo(false);
-        m_selfRigidbody.useGravity = false;
+        //m_selfRigidbody.useGravity = false;
         //m_selfRigidbody.constraints = RigidbodyConstraints.None;
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
@@ -179,17 +185,18 @@ public class PlayerInstance : MonoBehaviour
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
         }
         m_cameraController.EnableFreeCamera(true);
+        //PlayFlipAnimation();
 
-        m_selfAnimator.enabled = false;
+        //m_selfAnimator.enabled = false;
     }
 
     private IEnumerator ForbitToFreeJump()
     {
         m_selfAnimator.enabled = true;
 
-        PlayFlipAnimation();
+        //PlayFlipAnimation();
 
-        AllowToRun(true);
+        //AllowToRun(true);
 
         m_isRigCentralized = false;
 
@@ -198,15 +205,13 @@ public class PlayerInstance : MonoBehaviour
             m_bonesRigidbodies[i].useGravity = true;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
         }
-        m_selfRigidbody.useGravity = true;
+        //m_selfRigidbody.useGravity = true;
 
         yield return new WaitForSeconds(0.7f);
         m_characterRig.localRotation = m_rigLocalRotation;
         //m_gun.m_hook.ResetDefaultHookParapemers();
-        StartRunAnimation();
         yield return new WaitForSeconds(1.0f);
         m_cameraController.EnableFreeCamera(false);
-        EnableToCollectVelocityInfo(true);
 
 
         //m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
@@ -217,11 +222,29 @@ public class PlayerInstance : MonoBehaviour
         //}
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
+        EnableToCollectVelocityInfo(true);
+
     }
 
     private void MoveCharacterForward()
     {
         transform.position = Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime); ; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
+    }
+
+    public IEnumerator EnableRigidbodyJump()
+    {
+        PlayFlipAnimation();
+        yield return new WaitForSeconds(0.6f);
+        m_allowToJump = true;
+        EnableFreeJump(true);
+
+    }
+
+    public IEnumerator DisableRigidbodyJump()
+    {
+        m_allowToJump = false;
+        EnableFreeJump(false);
+        yield return new WaitForSeconds(0.0f);
     }
 
     private void StartRunAnimation()
@@ -341,7 +364,8 @@ public class PlayerInstance : MonoBehaviour
 
     private void PlayFlipAnimation()
     {
-        m_selfAnimator.Play("SwingToLand");
+        //m_selfAnimator.Play("SwingToLand");
+        m_selfAnimator.Play("FrontFlip");
     }
 
     private void PlayRopeJumpAnimation()
