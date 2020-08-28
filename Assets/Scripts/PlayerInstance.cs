@@ -14,7 +14,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
     [BoxGroup("References"), SerializeField] private Transform m_characterRig;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
-    [BoxGroup("References"), SerializeField] private Animation m_flipAnimation;
+    [BoxGroup("References"), SerializeField] private CoolLettering m_coolLettering;
     [HideInInspector] public CameraController m_cameraController;
 
 
@@ -41,7 +41,6 @@ public class PlayerInstance : MonoBehaviour
     private Coroutine m_normalizeTime;
 
     private const int m_dangerousObjectLayer = 8;
-
 
     private Quaternion m_rigLocalRotation;
     private float m_defaultSpeed;
@@ -345,7 +344,7 @@ public class PlayerInstance : MonoBehaviour
                 {
                     if (collision.gameObject.GetComponent<GrabbingEnemy>())
                     {
-                        if (collision.gameObject.GetComponent<GrabbingEnemy>().m_isAlive)
+                        if ((collision.gameObject.GetComponent<GrabbingEnemy>().m_isAlive) && !m_allowToJump)
                         {
                             FixateDeath();
                         }
@@ -407,5 +406,10 @@ public class PlayerInstance : MonoBehaviour
     private void SaveDefaultSpeed()
     {
         m_defaultSpeed = m_movementSpeed;
+    }
+
+    public void ShowCoolWord()
+    {
+        StartCoroutine(m_coolLettering.ShowCoolWord(0.0f)); ;
     }
 }

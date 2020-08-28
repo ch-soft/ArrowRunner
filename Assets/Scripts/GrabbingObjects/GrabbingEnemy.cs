@@ -10,27 +10,25 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private BoxCollider m_boxCollider;
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
     [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
-
+    [BoxGroup("References"), SerializeField] private Rigidbody m_headRigidbody;
     [Space]
-
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
-
     [Space]
-
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
     private Material[] m_localMaterials;
     private bool m_isOutlineActive;
 
-
     [HideInInspector] public bool m_isAlive;
-
 
 
     private string m_prapareWeaponAnimName = "PrepareAxe"; //we will use this later
     private string m_punchAnimName; //we will use this later
 
     private bool m_enableDeathColor;
+
+    private float m_headPunchForce = 15f;
+
 
     private void Start()
     {
@@ -56,11 +54,12 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private IEnumerator GrabCharacter()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.0f);
         if (TimeControl.m_characterIsAlive)
         {
-
+            FixateDeath("Hook");
             StartCoroutine(PullObjectToPlayer());
+
         }
         else
         {
@@ -79,9 +78,16 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private void Update()
     {
-        if (!m_isAlive)
+        if (m_enableDeathColor)
         {
             ChangeColorDueLifeState();
+
+            if (m_headPunchForce > 0f)
+            {
+                m_headRigidbody.velocity += new Vector3(0f, m_headPunchForce, m_headPunchForce);
+                m_headPunchForce--;
+            }
+
         }
     }
 
@@ -127,7 +133,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             m_bonesRigidbodies[i].gameObject.layer = 16;
         }
 
-        StartCoroutine(EnableBoxCollider(0.1f, false));
         m_rigidbody.isKinematic = true;
 
         switch (reason)
@@ -165,11 +170,14 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                 {
                     //if (!m_isAlive)
                     //{
-                    FixateDeath("Hook");
-                    ActivateRagdoll();
                     EnableAnimator(false);
                     ChangeLayers();
-                    ChangeAliveState(false);
+                    //StartCoroutine(EnableBoxCollider(0.1f, false));
+                    ActivateRagdoll();
+                    m_enableDeathColor = true;
+
+                    m_playerInstance.ShowCoolWord();
+
                     //}
                     break;
                 }

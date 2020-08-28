@@ -16,19 +16,12 @@ public class WinnerZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (other.gameObject.tag)
+        if (other.gameObject.GetComponent<PlayerInstance>())
         {
-            case "Player":
-                {
-
-                    m_levelManager.OpenWinnerPanel();
-                    TimeControl.m_levelFinished = true;
-                    m_playerInstance.AllowToRun(false);
-                    StartCoroutine(m_playerInstance.PlayDancingAnimation());
-
-                    break;
-                }
+            m_levelManager.OpenWinnerPanel();
+            TimeControl.m_levelFinished = true;
+            m_playerInstance.AllowToRun(false);
+            StartCoroutine(m_playerInstance.PlayDancingAnimation());
         }
     }
-
 }

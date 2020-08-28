@@ -161,7 +161,6 @@ public class HookInstance : MonoBehaviour
                             }
                         }
                         StartCoroutine(FixateHitAndReturnHome(0.0f));
-                        StartCoroutine(m_coolLettering.ShowCoolWord(0.0f));
 
                         break;
                     }
