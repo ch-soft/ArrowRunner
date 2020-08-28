@@ -4,7 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
 {
-    [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
+    [BoxGroup("References"), SerializeField] private Renderer[] m_selfRenderers;
     [BoxGroup("Preferences"), SerializeField] private Color m_defaultColor;
 
     private bool m_isOutlineActive;
@@ -18,7 +18,7 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
 
     private void Start()
     {
-        m_disabledMaterial = m_selfRenderer.material;
+        m_disabledMaterial = m_selfRenderers[0].material;
     }
 
     public void OnHookGrab()
@@ -52,7 +52,7 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
         //gameObject.layer = 16;
     }
 
-    public void SwitchOutlineWtate(bool state)
+    public void SwitchOutlineState(bool state)
     {
         switch (state)
         {
@@ -60,8 +60,13 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
                 {
                     if (!m_isOutlineActive && !m_objectWasAttracted)
                     {
-                        m_selfRenderer.material = m_activeMaterial;
-                        m_selfRenderer.material.color = m_defaultColor;
+                        for (int i = 0; i < m_selfRenderers.Length; i++)
+                        {
+
+                            m_selfRenderers[i].material = m_activeMaterial;
+                            m_selfRenderers[i].material.color = m_defaultColor;
+                        }
+
                         //m_localMaterials = m_activeMaterial;
                         m_isOutlineActive = true;
                     }
@@ -71,7 +76,10 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
                 {
                     if (m_isOutlineActive)
                     {
-                        m_selfRenderer.material = m_disabledMaterial;
+                        for (int i = 0; i < m_selfRenderers.Length; i++)
+                        {
+                            m_selfRenderers[i].material = m_disabledMaterial;
+                        }
 
                         //m_localMaterials = m_disabledMaterial;
                         m_isOutlineActive = false;

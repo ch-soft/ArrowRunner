@@ -37,7 +37,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
     public void OnHookGrab()
     {
         StartCoroutine(GrabCharacter());
-        SwitchOutlineWtate(false);
+        SwitchOutlineState(false);
 
     }
 
@@ -69,7 +69,7 @@ public class GrabbingBridge : GrabbingBaseObject, IOnHookGrab
         }
     }
 
-    public void SwitchOutlineWtate(bool state)
+    public void SwitchOutlineState(bool state)
     {
         switch (state)
         {

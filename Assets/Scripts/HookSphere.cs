@@ -22,13 +22,13 @@ public class HookSphere : MonoBehaviour
             case "Bridge":
                 {
                     m_currentBridge = other.gameObject.GetComponent<GrabbingBridge>();
-                    m_currentBridge.SwitchOutlineWtate(true);
+                    m_currentBridge.SwitchOutlineState(true);
                     break;
                 }
             case "GrapplingSurface":
                 {
                     m_currentGrapplingBase = other.gameObject.GetComponent<GrapplingBase>();
-                    m_currentGrapplingBase.SwitchOutlineWtate(true);
+                    m_currentGrapplingBase.SwitchOutlineState(true);
                     break;
                 }
         }
@@ -47,13 +47,13 @@ public class HookSphere : MonoBehaviour
             case "Bridge":
                 {
                     m_currentBridge = other.gameObject.GetComponent<GrabbingBridge>();
-                    m_currentBridge.SwitchOutlineWtate(false);
+                    m_currentBridge.SwitchOutlineState(false);
                     break;
                 }
             case "GrapplingSurface":
                 {
                     m_currentGrapplingBase = other.gameObject.GetComponent<GrapplingBase>();
-                    m_currentGrapplingBase.SwitchOutlineWtate(false);
+                    m_currentGrapplingBase.SwitchOutlineState(false);
                     break;
                 }
         }
@@ -68,12 +68,12 @@ public class HookSphere : MonoBehaviour
 
         if (m_currentBridge != null)
         {
-            m_currentBridge.SwitchOutlineWtate(false);
+            m_currentBridge.SwitchOutlineState(false);
         }
 
         if (m_currentGrapplingBase != null)
         {
-            m_currentGrapplingBase.SwitchOutlineWtate(false);
+            m_currentGrapplingBase.SwitchOutlineState(false);
         }
     }
 }

@@ -339,7 +339,9 @@ MonoBehaviour:
   m_pullingObject: {fileID: 0}
   m_objectWasAttracted: 0
   m_playerInstance: {fileID: 0}
-  m_selfRenderer: {fileID: 5015773597718558340}
+  m_selfRenderers:
+  - {fileID: 5015773597718558340}
+  - {fileID: 7511639431657685960}
   m_defaultColor: {r: 1, g: 0.49019608, b: 0, a: 1}
   m_isAlive: 0
   m_activeMaterial: {fileID: 2100000, guid: 4f3591d5f0b85fe4c968bfdcc0a1072f, type: 2}
