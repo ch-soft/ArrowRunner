@@ -12,7 +12,9 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
     private float m_distanceToCharacter;
+
     private float m_timeInAir;
+    private float m_animationSpeed;
 
     private void Start()
     {
@@ -25,22 +27,29 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
         print(m_distanceToCharacter);
         if ((m_distanceToCharacter >= 0) && (m_distanceToCharacter < 10))
         {
-            m_timeInAir = 0.3f;
+            m_timeInAir = 0.4f;
+            m_animationSpeed = 1.2f;
+
         }
         else if ((m_distanceToCharacter >= 10) && (m_distanceToCharacter < 14))
         {
-            m_timeInAir = 0.4f;
+            m_timeInAir = 0.45f;
+            m_animationSpeed = 1.0f;
+
         }
         else if ((m_distanceToCharacter >= 14) && (m_distanceToCharacter < 17))
         {
-            m_timeInAir = 0.4f;
+            m_timeInAir = 0.5f;
+            m_animationSpeed = 0.8f;
+
         }
         else if ((m_distanceToCharacter >= 17) && (m_distanceToCharacter < 100))
         {
             m_timeInAir = 0.6f;
+            m_animationSpeed = 0.6f;
         }
 
-        StartCoroutine(MakeGrapplingMove(m_timeInAir));
+        StartCoroutine(MakeGrapplingMove(m_timeInAir, m_animationSpeed));
         //gameObject.layer = 16;
     }
 

@@ -14,6 +14,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private Collider[] m_bonesColliders;
     [BoxGroup("References"), SerializeField] private Transform m_characterRig;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
+    [BoxGroup("References"), SerializeField] private Animation m_flipAnimation;
     [HideInInspector] public CameraController m_cameraController;
 
 
@@ -82,50 +83,50 @@ public class PlayerInstance : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            PlayJumpOverEnemyAnimation();
-        }
-
-        //if (m_isAlive && !TimeControl.m_levelFinished)
+        //if (Input.GetMouseButtonUp(0))
         //{
-        //    if (!m_isRigCentralized)
-        //    {
-        //        m_characterRig.localPosition = Vector3.Lerp(m_characterRig.localPosition, Vector3.zero, Time.deltaTime * 100f);
-        //    }
-
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        if (m_canShootLaserSight)
-        //        {
-        //            StartCoroutine(EnableShootLaserSight(false, 0f));
-        //            if (!m_isSlowmoEnable)
-        //            {
-        //                EnableSlowmo(true);
-        //                StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
-        //                StartCoroutine(ChangeSlowmoLocalState(true, 0f));
-        //            }
-        //        }
-        //    }
-
-        //    if (Input.GetMouseButtonUp(0))
-        //    {
-        //        StartCoroutine(EnableShootLaserSight(true, 0f));
-        //        StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
-        //        EnableSlowmo(false);
-        //        StartCoroutine(m_gun.EnableLaserSight(false, 0f));
-        //    }
-
-        //    if (m_enableCollectVelocityInfo)
-        //    {
-        //        if (m_selfRigidbody.velocity.y < -3.25f)
-        //        {
-        //            print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
-
-        //            FixateDeath();
-        //        }
-        //    }
+        //    PlayJumpOverEnemyAnimation();
         //}
+
+        if (m_isAlive && !TimeControl.m_levelFinished)
+        {
+            if (!m_isRigCentralized)
+            {
+                m_characterRig.localPosition = Vector3.Lerp(m_characterRig.localPosition, Vector3.zero, Time.deltaTime * 100f);
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (m_canShootLaserSight)
+                {
+                    StartCoroutine(EnableShootLaserSight(false, 0f));
+                    if (!m_isSlowmoEnable)
+                    {
+                        EnableSlowmo(true);
+                        StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
+                        StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+                    }
+                }
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(EnableShootLaserSight(true, 0f));
+                StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
+                EnableSlowmo(false);
+                StartCoroutine(m_gun.EnableLaserSight(false, 0f));
+            }
+
+            if (m_enableCollectVelocityInfo)
+            {
+                if (m_selfRigidbody.velocity.y < -3.25f)
+                {
+                    print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
+
+                    FixateDeath();
+                }
+            }
+        }
     }
 
     private void FixateDeath()
@@ -154,7 +155,7 @@ public class PlayerInstance : MonoBehaviour
         m_enableCollectVelocityInfo = state;
     }
 
-    public void EnableFreeJump(bool state)
+    public void EnableFreeJump(bool state, float delay)
     {
 
         switch (state)
@@ -167,7 +168,7 @@ public class PlayerInstance : MonoBehaviour
 
             case false:
                 {
-                    StartCoroutine(ForbitToFreeJump());
+                    StartCoroutine(ForbitToFreeJump(delay));
                     break;
                 }
         }
@@ -188,14 +189,15 @@ public class PlayerInstance : MonoBehaviour
         m_cameraController.EnableFreeCamera(true);
     }
 
-    private IEnumerator ForbitToFreeJump()
+    private IEnumerator ForbitToFreeJump(float delay)
     {
         m_isRigCentralized = false;
 
         ////m_selfRigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(1.11f);
+        yield return new WaitForSeconds(delay);
         m_characterRig.localRotation = m_rigLocalRotation;
+        m_selfAnimator.speed = 1f;
         StartRunAnimation();
 
         //m_gun.m_hook.ResetDefaultHookParapemers();
@@ -216,7 +218,6 @@ public class PlayerInstance : MonoBehaviour
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
         EnableToCollectVelocityInfo(true);
-
     }
 
     private void MoveCharacterForward()
@@ -224,18 +225,17 @@ public class PlayerInstance : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime); ; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
     }
 
-    public void EnableRigidbodyJump()
+    public void EnableRigidbodyJump(float animaSpeed)
     {
-        PlayFlipAnimation();
+        PlayFlipAnimation(animaSpeed);
         m_allowToJump = true;
-        EnableFreeJump(true);
-
+        EnableFreeJump(true, 0f);
     }
 
-    public void DisableRigidbodyJump()
+    public void DisableRigidbodyJump(float delay)
     {
         m_allowToJump = false;
-        EnableFreeJump(false);
+        EnableFreeJump(false, delay);
     }
 
     private void StartRunAnimation()
@@ -357,10 +357,12 @@ public class PlayerInstance : MonoBehaviour
 
     }
 
-    private void PlayFlipAnimation()
+    private void PlayFlipAnimation(float animSpeed)
     {
+        m_selfAnimator.speed = animSpeed;
         //m_selfAnimator.Play("SwingToLand");
         m_selfAnimator.Play("BackFlip");
+        //Animation backFlipAnim = m_selfAnimator["BackFlip"];
     }
 
     private void PlayRopeJumpAnimation()

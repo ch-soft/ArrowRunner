@@ -36,7 +36,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     [HideInInspector] public PlayerInstance m_playerInstance;
     private Transform m_playerInstanceTransform;
 
-    
+
 
     private void Awake()
     {
@@ -106,17 +106,17 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_objectWasAttracted = true;
     }
 
-    public IEnumerator MakeGrapplingMove(float timeInAir)
+    public IEnumerator MakeGrapplingMove(float timeInAir, float animSpeed)
     {
         m_isGrabbing = true;
         m_objectWasAttracted = true;
-        m_playerInstance.EnableRigidbodyJump();
+        m_playerInstance.EnableRigidbodyJump(animSpeed);
         //m_playerInstance.
         //m_playerInstance.EnableFreeJump(true);
 
 
         yield return new WaitForSecondsRealtime(timeInAir); //можно сделать зависимость этого числа от расстояния до персонажа
-        m_playerInstance.DisableRigidbodyJump();
+        m_playerInstance.DisableRigidbodyJump(timeInAir * 2.2f);
         //m_playerInstance.EnableFreeJump(false);
 
         m_isGrabbing = false;
