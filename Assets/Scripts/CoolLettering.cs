@@ -41,7 +41,7 @@ public class CoolLettering : MonoBehaviour
 
         m_coolText.rectTransform.anchoredPosition =
             new Vector2(Random.Range(Screen.width / 4f, Screen.width / 1.5f) / 2f * Random.Range(-1, 2),
-                        Random.Range(Screen.height / 8f, Screen.height / 3f));
+                        Random.Range(Screen.height / 8f, Screen.height / 2f));
 
         m_animator.Play("TestAnim");
 

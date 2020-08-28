@@ -27,7 +27,7 @@ public class HookInstance : MonoBehaviour
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 35f;
+    private float m_hookMovementSpeed = 40f;
 
     private Vector3 m_hookLocalStartPosition;
     private Vector3 m_defaultHookScale;
