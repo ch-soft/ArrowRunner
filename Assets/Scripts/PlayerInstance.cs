@@ -44,6 +44,7 @@ public class PlayerInstance : MonoBehaviour
 
 
     private Quaternion m_rigLocalRotation;
+    private float m_defaultSpeed;
 
     private void Awake()
     {
@@ -63,9 +64,9 @@ public class PlayerInstance : MonoBehaviour
         //EnableSlowmo(false);
         ChangeLifeState(true);
 
-        StartRunAnimation();
+        PlayRunAnimation();
         AllowToRun(true);
-
+        SaveDefaultSpeed();
         m_isRigCentralized = true;
     }
 
@@ -198,7 +199,7 @@ public class PlayerInstance : MonoBehaviour
         yield return new WaitForSeconds(delay);
         m_characterRig.localRotation = m_rigLocalRotation;
         m_selfAnimator.speed = 1f;
-        StartRunAnimation();
+        PlayRunAnimation();
 
         //m_gun.m_hook.ResetDefaultHookParapemers();
         yield return new WaitForSeconds(1.0f);
@@ -238,7 +239,19 @@ public class PlayerInstance : MonoBehaviour
         EnableFreeJump(false, delay);
     }
 
-    private void StartRunAnimation()
+    public IEnumerator PlayKillEnemyAnimation()
+    {
+        PlayJumpOverEnemyAnimation();
+        ChangeSpeed(m_defaultSpeed * 3f);
+        EnableSlowmo(true);
+        yield return new WaitForSecondsRealtime(2f);
+        PlayRunAnimation();
+        ChangeSpeed(m_defaultSpeed);
+        EnableSlowmo(false);
+
+    }
+
+    private void PlayRunAnimation()
     {
         m_selfAnimator.Play(m_animationRunName);
     }
@@ -373,5 +386,15 @@ public class PlayerInstance : MonoBehaviour
     private void PlayJumpOverEnemyAnimation()
     {
         m_selfAnimator.Play("OnEnemyJump_P1");
+    }
+
+    private void ChangeSpeed(float speed)
+    {
+        m_movementSpeed = speed;
+    }
+
+    private void SaveDefaultSpeed()
+    {
+        m_defaultSpeed = m_movementSpeed;
     }
 }

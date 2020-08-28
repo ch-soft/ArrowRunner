@@ -53,12 +53,12 @@ public abstract class GrabbingBaseObject : MonoBehaviour
             {
                 case GrabbingObjectType.EnemyCharacter:
                     {
+                        //transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
+                        //transform.position = Vector3.Lerp(transform.position, m_playerInstance.transform.position, Time.fixedDeltaTime * m_pullingForce);
 
-                        transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
-
-                        transform.position = Vector3.MoveTowards(transform.position, m_pullingObject.position, Time.deltaTime * m_pullingForce / 8f);
-                        if (Vector3.Distance(transform.position, m_pullingDirection) < 5f)
+                        if (Vector3.Distance(transform.position, m_playerInstance.transform.position) < 15f)
                         {
+                            StartCoroutine(m_playerInstance.PlayKillEnemyAnimation());
                             m_isGrabbing = false;
                         }
                         break;
@@ -93,10 +93,9 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_objectWasAttracted = true;
         m_rigidbody.useGravity = true;
         m_isGrabbing = true;
-        m_rigidbody.AddForce(m_pullingDirection + new Vector3(m_forceDirection.x * transform.position.x * -m_pullingForce, m_forceDirection.y * -m_pullingForce, m_forceDirection.z * -m_pullingForce));
+        //m_rigidbody.AddForce(m_pullingDirection + new Vector3(m_forceDirection.x * transform.position.x * -m_pullingForce, m_forceDirection.y * -m_pullingForce, m_forceDirection.z * -m_pullingForce));
         yield return new WaitForSeconds(m_grabbingTime);
-        m_isGrabbing = false;
-
+        //m_isGrabbing = false;
     }
 
     public void PullBridge()

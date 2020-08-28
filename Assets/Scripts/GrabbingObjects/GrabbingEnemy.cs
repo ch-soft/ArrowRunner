@@ -30,7 +30,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private bool m_enableDeathColor;
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
@@ -38,10 +38,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         }
 
         m_disabledMaterial = m_selfRenderer.material;
-    }
 
-    private void Start()
-    {
         ChangeAliveState(true);
     }
 
