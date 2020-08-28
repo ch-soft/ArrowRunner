@@ -243,8 +243,9 @@ public class PlayerInstance : MonoBehaviour
     {
         PlayJumpOverEnemyAnimation();
         ChangeSpeed(m_defaultSpeed * 3f);
-        EnableSlowmo(true);
-        yield return new WaitForSecondsRealtime(2f);
+        //EnableSlowmo(true);
+        TimeControl.PunchSlowTime();
+        yield return new WaitForSecondsRealtime(1.5f);
         PlayRunAnimation();
         ChangeSpeed(m_defaultSpeed);
         EnableSlowmo(false);
@@ -342,7 +343,17 @@ public class PlayerInstance : MonoBehaviour
         {
             case m_dangerousObjectLayer:
                 {
-                    FixateDeath();
+                    if (collision.gameObject.GetComponent<GrabbingEnemy>())
+                    {
+                        if (collision.gameObject.GetComponent<GrabbingEnemy>().m_isAlive)
+                        {
+                            FixateDeath();
+                        }
+                    }
+                    else
+                    {
+                        FixateDeath();
+                    }
                     break;
                 }
         }

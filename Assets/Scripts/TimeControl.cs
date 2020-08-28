@@ -30,6 +30,17 @@ public static class TimeControl
         }
     }
 
+    public static void PunchSlowTime()
+    {
+        if (!m_levelFinished)
+        {
+            //ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
+
+            Time.timeScale = 0.25f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        }
+    }
+
     public static IEnumerator NormalizeTime(float unfreezeTime)
     {
         yield return new WaitForSecondsRealtime(unfreezeTime);
