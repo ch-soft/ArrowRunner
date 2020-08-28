@@ -82,45 +82,50 @@ public class PlayerInstance : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (m_isAlive && !TimeControl.m_levelFinished)
+        if (Input.GetMouseButtonUp(0))
         {
-            if (!m_isRigCentralized)
-            {
-                m_characterRig.localPosition = Vector3.Lerp(m_characterRig.localPosition, Vector3.zero, Time.deltaTime * 100f);
-            }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (m_canShootLaserSight)
-                {
-                    StartCoroutine(EnableShootLaserSight(false, 0f));
-                    if (!m_isSlowmoEnable)
-                    {
-                        EnableSlowmo(true);
-                        StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
-                        StartCoroutine(ChangeSlowmoLocalState(true, 0f));
-                    }
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                StartCoroutine(EnableShootLaserSight(true, 0f));
-                StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
-                EnableSlowmo(false);
-                StartCoroutine(m_gun.EnableLaserSight(false, 0f));
-            }
-
-            if (m_enableCollectVelocityInfo)
-            {
-                if (m_selfRigidbody.velocity.y < -3.25f)
-                {
-                    print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
-
-                    FixateDeath();
-                }
-            }
+            PlayJumpOverEnemyAnimation();
         }
+
+        //if (m_isAlive && !TimeControl.m_levelFinished)
+        //{
+        //    if (!m_isRigCentralized)
+        //    {
+        //        m_characterRig.localPosition = Vector3.Lerp(m_characterRig.localPosition, Vector3.zero, Time.deltaTime * 100f);
+        //    }
+
+        //    if (Input.GetMouseButtonDown(0))
+        //    {
+        //        if (m_canShootLaserSight)
+        //        {
+        //            StartCoroutine(EnableShootLaserSight(false, 0f));
+        //            if (!m_isSlowmoEnable)
+        //            {
+        //                EnableSlowmo(true);
+        //                StartCoroutine(m_gun.EnableLaserSight(true, 0.01f));
+        //                StartCoroutine(ChangeSlowmoLocalState(true, 0f));
+        //            }
+        //        }
+        //    }
+
+        //    if (Input.GetMouseButtonUp(0))
+        //    {
+        //        StartCoroutine(EnableShootLaserSight(true, 0f));
+        //        StartCoroutine(ChangeSlowmoLocalState(false, m_normalizeTimeDelay));
+        //        EnableSlowmo(false);
+        //        StartCoroutine(m_gun.EnableLaserSight(false, 0f));
+        //    }
+
+        //    if (m_enableCollectVelocityInfo)
+        //    {
+        //        if (m_selfRigidbody.velocity.y < -3.25f)
+        //        {
+        //            print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
+
+        //            FixateDeath();
+        //        }
+        //    }
+        //}
     }
 
     private void FixateDeath()
@@ -361,5 +366,10 @@ public class PlayerInstance : MonoBehaviour
     private void PlayRopeJumpAnimation()
     {
         m_selfAnimator.Play("RopeJump");
+    }
+
+    private void PlayJumpOverEnemyAnimation()
+    {
+        m_selfAnimator.Play("OnEnemyJump_P1");
     }
 }
