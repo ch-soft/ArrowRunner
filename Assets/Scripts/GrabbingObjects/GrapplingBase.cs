@@ -24,17 +24,16 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
     public void OnHookGrab()
     {
         m_distanceToCharacter = Vector3.Distance(m_playerInstance.transform.position, transform.position);
-        print(m_distanceToCharacter);
         if ((m_distanceToCharacter >= 0) && (m_distanceToCharacter < 10))
         {
             m_timeInAir = 0.4f;
-            m_animationSpeed = 1.2f;
+            m_animationSpeed = 1.1f;
 
         }
         else if ((m_distanceToCharacter >= 10) && (m_distanceToCharacter < 14))
         {
             m_timeInAir = 0.45f;
-            m_animationSpeed = 1.0f;
+            m_animationSpeed = 0.9f;
 
         }
         else if ((m_distanceToCharacter >= 14) && (m_distanceToCharacter < 17))
@@ -46,7 +45,7 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
         else if ((m_distanceToCharacter >= 17) && (m_distanceToCharacter < 100))
         {
             m_timeInAir = 0.6f;
-            m_animationSpeed = 0.6f;
+            m_animationSpeed = 0.7f;
         }
 
         StartCoroutine(MakeGrapplingMove(m_timeInAir, m_animationSpeed));
