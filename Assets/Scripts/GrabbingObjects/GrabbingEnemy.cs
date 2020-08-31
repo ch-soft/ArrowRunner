@@ -57,8 +57,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         yield return new WaitForSeconds(0.0f);
         if (TimeControl.m_characterIsAlive)
         {
-            FixateDeath("Hook");
             StartCoroutine(PullObjectToPlayer());
+            FixateDeath("Hook");
         }
         else
         {
@@ -167,7 +167,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             case "Player":
                 {
-                    if (m_playerInstance.m_isAlive)
+                    if ((m_playerInstance.m_isAlive))
                     {
                         EnableAnimator(false);
                         ChangeLayers();

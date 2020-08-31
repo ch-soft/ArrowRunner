@@ -26,7 +26,7 @@ public class GunInstance : MonoBehaviour
 
     private float m_sensitivity = 45f;
 
-    private float m_laserDistance = 20f;
+    private float m_laserDistance = 25f;
 
     private bool m_laserActivityState;
 
@@ -102,7 +102,7 @@ public class GunInstance : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                if ((m_hook.m_hookState == HookState.Based) || (m_hook.m_hookState == HookState.FliesToBase) && (!m_playerInstance.m_playerIsKnocks))
+                if ((m_hook.m_hookState == HookState.Based) && (!m_playerInstance.m_playerIsKnocks))
                 {
                     ConfirmAimOnTarget();
                 }
@@ -149,7 +149,6 @@ public class GunInstance : MonoBehaviour
             {
                 case 0:
                 case 8:
-                case 12:
                 case 15:
                     {
                         m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);

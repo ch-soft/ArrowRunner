@@ -360,7 +360,6 @@ public class PlayerInstance : MonoBehaviour
 
     public IEnumerator PlayDancingAnimation()
     {
-        m_selfAnimator.Play(m_animationDancingName);
 
         m_selfRigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
@@ -373,11 +372,12 @@ public class PlayerInstance : MonoBehaviour
 
         EnableRagdoll(false);
 
-        m_cameraController.FreeFromParent();
-        m_cameraController.ResetPosition();
-        yield return new WaitForSeconds(0.3f);
-        m_cameraController.m_rotateAroundCharacter = true;
-
+        m_selfAnimator.enabled = false;
+        m_cameraController.ChangeActiveCamera();
+        //m_cameraController.ResetPosition();
+        yield return new WaitForSeconds(0.1f);
+        m_selfAnimator.enabled = true;
+        m_selfAnimator.Play(m_animationDancingName);
     }
 
     private void PlayFlipAnimation(float animSpeed)

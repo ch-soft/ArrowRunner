@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
 
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_isConnectWithFace")] private Transform m_characterHead;
 
+    [SerializeField] private CameraController m_secondCamera;
+
     [HideInInspector] private Vector3 m_lastPosition;
     [HideInInspector] public bool m_rotateAroundCharacter;
     [HideInInspector]
@@ -31,12 +33,13 @@ public class CameraController : MonoBehaviour
     private Vector3 m_velocity = Vector3.zero;
     private Vector3 m_startingPosition;
 
-    private float m_headStaticY;
+    private Transform m_winnerZoneTransform;
 
+    private float m_headStaticY;
 
     void Awake()
     {
-
+        m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
         m_targetPos = transform.position;
 
         if (m_isConnectWithFace)
@@ -60,7 +63,7 @@ public class CameraController : MonoBehaviour
     {
         if (m_rotateAroundCharacter)
         {
-            transform.LookAt(_target.transform);
+            transform.LookAt(m_winnerZoneTransform);
             transform.Translate(Vector3.right * Time.deltaTime);
         }
         else
@@ -99,6 +102,16 @@ public class CameraController : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, newPosition, _durability);
         }
     }
+
+
+    public void ChangeActiveCamera()
+    {
+        m_secondCamera.gameObject.SetActive(true);
+        m_secondCamera.transform.position = transform.position;
+        m_secondCamera.m_rotateAroundCharacter = true;
+        gameObject.SetActive(false);
+    }
+
     public void EnableFreeCamera(bool state)
     {
         m_enableFreeCamera = state;
@@ -109,9 +122,9 @@ public class CameraController : MonoBehaviour
         transform.parent = null;
     }
 
-   
+
     public void ResetPosition()
     {
-        transform.position = new Vector3(3f, 1f, _target.transform.position.z);
+        transform.position = m_winnerZoneTransform.position;
     }
 }
