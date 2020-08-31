@@ -106,7 +106,7 @@ public class CameraController : MonoBehaviour
 
     public void FreeFromParent()
     {
-        //transform.parent = null;
+        transform.parent = null;
     }
 
    

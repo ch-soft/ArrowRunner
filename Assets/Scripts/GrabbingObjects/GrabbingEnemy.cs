@@ -177,7 +177,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                     m_enableDeathColor = true;
 
                     m_playerInstance.ShowCoolWord();
-
+                    m_playerInstance.NormalizeSpeedAndTime();
                     //}
                     break;
                 }

@@ -44,9 +44,12 @@ public static class TimeControl
     public static IEnumerator NormalizeTime(float unfreezeTime)
     {
         yield return new WaitForSecondsRealtime(unfreezeTime);
+        if (Time.timeScale != 1f)
+        {
+            Time.timeScale = _normalTime;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        }
 
-        Time.timeScale = _normalTime;
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     private static void ChangeTimeScale(float timeScale, float fixedDeltaTimeMultiplier)

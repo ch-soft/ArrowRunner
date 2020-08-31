@@ -17,13 +17,12 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private CoolLettering m_coolLettering;
     [HideInInspector] public CameraController m_cameraController;
 
-
-
     [HideInInspector] public bool m_isAlive;
-
+    [HideInInspector] public bool m_playerIsKnocks;
 
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
+    private Quaternion m_rigLocalRotation;
 
     private string m_animationRunName = "Run";
     private string m_animationRLevitationName = "Flying";
@@ -35,15 +34,11 @@ public class PlayerInstance : MonoBehaviour
     private bool m_canShootLaserSight;
     private bool m_isSlowmoEnable;
     private bool m_isRigCentralized;
-
     private bool m_allowToJump;
 
-    private Coroutine m_normalizeTime;
-
     private const int m_dangerousObjectLayer = 8;
-
-    private Quaternion m_rigLocalRotation;
     private float m_defaultSpeed;
+
 
     private void Awake()
     {
@@ -227,6 +222,7 @@ public class PlayerInstance : MonoBehaviour
 
     public void EnableRigidbodyJump(float animaSpeed)
     {
+        
         PlayFlipAnimation(animaSpeed);
         m_allowToJump = true;
         EnableFreeJump(true, 0f);
@@ -240,6 +236,9 @@ public class PlayerInstance : MonoBehaviour
 
     public IEnumerator PlayKillEnemyAnimation()
     {
+        m_playerIsKnocks = true;
+        Debug.Log(m_playerIsKnocks);
+
         PlayJumpOverEnemyAnimation();
         ChangeSpeed(m_defaultSpeed * 3f);
         //EnableSlowmo(true);
@@ -258,25 +257,29 @@ public class PlayerInstance : MonoBehaviour
 
     private void EnableSlowmo(bool state)
     {
-        switch (state)
+        if (!m_playerIsKnocks)
         {
-            case true:
-                {
-                    if (!m_isSlowmoEnable)
+            switch (state)
+            {
+                case true:
                     {
-                        TimeControl.SlowTime();
-                        if (m_normalizeTime != null)
+                        if (!m_isSlowmoEnable)
                         {
-                            StopCoroutine(m_normalizeTime);
+                            TimeControl.SlowTime();
+                            //if (m_normalizeTime != null)
+                            //{
+                            //    StopCoroutine(m_normalizeTime);
+                            //}
                         }
+                        break;
                     }
-                    break;
-                }
-            case false:
-                {
-                    m_normalizeTime = StartCoroutine(TimeControl.NormalizeTime(m_normalizeTimeDelay));
-                    break;
-                }
+                case false:
+                    {
+                        StartCoroutine(TimeControl.NormalizeTime(m_normalizeTimeDelay));
+                        //THIS
+                        break;
+                    }
+            }
         }
     }
 
@@ -411,5 +414,17 @@ public class PlayerInstance : MonoBehaviour
     public void ShowCoolWord()
     {
         StartCoroutine(m_coolLettering.ShowCoolWord(0.0f)); ;
+    }
+
+    public void NormalizeSpeedAndTime()
+    {
+        if (!m_allowToJump)
+        {
+            ChangeSpeed(1f);
+            StartCoroutine(TimeControl.NormalizeTime(0.3f));
+            m_playerIsKnocks = false;
+            Debug.Log(m_playerIsKnocks);
+
+        }
     }
 }

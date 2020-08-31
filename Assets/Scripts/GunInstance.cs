@@ -11,7 +11,7 @@ public class GunInstance : MonoBehaviour
     [BoxGroup("References")] public HookInstance m_hook;
     [BoxGroup("References"), SerializeField] private GameObject m_pointSphere;
 
-
+    private PlayerInstance m_playerInstance;
     private LineRenderer m_lineRenderer;
     private CameraController m_cameraController;
     private Camera m_camera;
@@ -26,13 +26,14 @@ public class GunInstance : MonoBehaviour
 
     private float m_sensitivity = 45f;
 
-    private float m_laserDistance = 25f;
+    private float m_laserDistance = 20f;
 
     private bool m_laserActivityState;
 
 
     private void Awake()
     {
+        m_playerInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInstance>();
         m_lineRenderer = GetComponent<LineRenderer>();
         m_cameraController = Camera.main.GetComponent<CameraController>();
         m_camera = Camera.main;
@@ -101,7 +102,7 @@ public class GunInstance : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (m_hook.m_hookState == HookState.Based)
+                if ((m_hook.m_hookState == HookState.Based) && (!m_playerInstance.m_playerIsKnocks))
                 {
                     ConfirmAimOnTarget();
                 }
