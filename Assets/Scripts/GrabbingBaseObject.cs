@@ -56,7 +56,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                         //transform.RotateAround(transform.position, Vector3.left, m_pullingForce * 10f * Time.fixedDeltaTime);
                         //transform.position = Vector3.Lerp(transform.position, m_playerInstance.transform.position, Time.fixedDeltaTime * m_pullingForce);
 
-                        if (Vector3.Distance(transform.position, m_playerInstance.transform.position) < 17f)
+                        if (Vector3.Distance(transform.position, m_playerInstance.transform.position) < 10f)
                         {
                             StartCoroutine(m_playerInstance.PlayKillEnemyAnimation());
                             m_isGrabbing = false;

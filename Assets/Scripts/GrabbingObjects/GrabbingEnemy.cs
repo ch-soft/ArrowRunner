@@ -59,7 +59,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             FixateDeath("Hook");
             StartCoroutine(PullObjectToPlayer());
-
         }
         else
         {
@@ -168,17 +167,17 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             case "Player":
                 {
-                    //if (!m_isAlive)
-                    //{
-                    EnableAnimator(false);
-                    ChangeLayers();
-                    //StartCoroutine(EnableBoxCollider(0.1f, false));
-                    ActivateRagdoll();
-                    m_enableDeathColor = true;
+                    if (m_playerInstance.m_isAlive)
+                    {
+                        EnableAnimator(false);
+                        ChangeLayers();
+                        //StartCoroutine(EnableBoxCollider(0.1f, false));
+                        ActivateRagdoll();
+                        m_enableDeathColor = true;
 
-                    m_playerInstance.ShowCoolWord();
-                    m_playerInstance.NormalizeSpeedAndTime();
-                    //}
+                        m_playerInstance.ShowCoolWord();
+                        m_playerInstance.NormalizeSpeedAndTime();
+                    }
                     break;
                 }
         }

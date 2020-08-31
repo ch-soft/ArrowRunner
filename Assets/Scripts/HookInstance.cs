@@ -92,11 +92,12 @@ public class HookInstance : MonoBehaviour
     private void ReturnHookToBase()
     {
         transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.3f);
+
         if (m_handMesh.localScale.x > 1f)
         {
             m_handMesh.localScale -= Vector3.one;
         }
-        if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
+        if (Vector3.Distance(transform.position, m_hookBase.position) <= 1f)
         {
             m_hookState = HookState.Based;
 
@@ -110,7 +111,6 @@ public class HookInstance : MonoBehaviour
     {
         if (m_isHookInAir)
         {
-
             switch (other.gameObject.layer)
             {
                 case 0:
@@ -167,7 +167,10 @@ public class HookInstance : MonoBehaviour
 
             }
         }
-
+        else
+        {
+            StartCoroutine(FixateHitAndReturnHome(0.0f));
+        }
     }
 
     private IEnumerator FixateHitAndReturnHome(float delay)
@@ -191,5 +194,4 @@ public class HookInstance : MonoBehaviour
         transform.rotation = Quaternion.Euler(Vector3.zero);
         m_handMesh.localScale = Vector3.one;
     }
-
 }

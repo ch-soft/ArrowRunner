@@ -222,7 +222,7 @@ public class PlayerInstance : MonoBehaviour
 
     public void EnableRigidbodyJump(float animaSpeed)
     {
-        
+
         PlayFlipAnimation(animaSpeed);
         m_allowToJump = true;
         EnableFreeJump(true, 0f);
@@ -237,8 +237,6 @@ public class PlayerInstance : MonoBehaviour
     public IEnumerator PlayKillEnemyAnimation()
     {
         m_playerIsKnocks = true;
-        Debug.Log(m_playerIsKnocks);
-
         PlayJumpOverEnemyAnimation();
         ChangeSpeed(m_defaultSpeed * 3f);
         //EnableSlowmo(true);
@@ -247,7 +245,6 @@ public class PlayerInstance : MonoBehaviour
         PlayRunAnimation();
         ChangeSpeed(m_defaultSpeed);
         EnableSlowmo(false);
-
     }
 
     private void PlayRunAnimation()
@@ -423,8 +420,6 @@ public class PlayerInstance : MonoBehaviour
             ChangeSpeed(1f);
             StartCoroutine(TimeControl.NormalizeTime(0.3f));
             m_playerIsKnocks = false;
-            Debug.Log(m_playerIsKnocks);
-
         }
     }
 }

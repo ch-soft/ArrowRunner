@@ -102,7 +102,7 @@ public class GunInstance : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                if ((m_hook.m_hookState == HookState.Based) && (!m_playerInstance.m_playerIsKnocks))
+                if ((m_hook.m_hookState == HookState.Based) || (m_hook.m_hookState == HookState.FliesToBase) && (!m_playerInstance.m_playerIsKnocks))
                 {
                     ConfirmAimOnTarget();
                 }
@@ -135,8 +135,6 @@ public class GunInstance : MonoBehaviour
         m_testMousePosition = Input.mousePosition;
         m_testMousePosition.z = 1.0f;
 
-
-
         Vector3 oneMoreValue = m_camera.ScreenToWorldPoint(m_camera.WorldToScreenPoint(new Vector3(0f, m_cameraController.m_HeightDifference().y, 0f)));
 
         m_currentgMousePosition =
@@ -147,15 +145,20 @@ public class GunInstance : MonoBehaviour
 
         if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
         {
-            //if (hit.collider.gameObject.layer == m_grabbingObjectLayer)
-            //{
-            //enemy was found, we can shoot hook
-            m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
-            m_hook.m_hookState = HookState.FliesToTarget;
-            m_hook.transform.parent = null;
-            m_hook.ChangeLocalHookState(true);
-            //}
-
+            switch (hit.transform.gameObject.layer)
+            {
+                case 0:
+                case 8:
+                case 12:
+                case 15:
+                    {
+                        m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
+                        m_hook.m_hookState = HookState.FliesToTarget;
+                        m_hook.transform.parent = null;
+                        m_hook.ChangeLocalHookState(true);
+                        break;
+                    }
+            }
         }
         else
         {
