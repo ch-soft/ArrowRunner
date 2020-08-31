@@ -26,7 +26,7 @@ public class GunInstance : MonoBehaviour
 
     private float m_sensitivity = 45f;
 
-    private float m_laserDistance = 25f;
+    private float m_laserDistance = 20f;
 
     private bool m_laserActivityState;
 
@@ -102,13 +102,16 @@ public class GunInstance : MonoBehaviour
 
             if (Input.GetMouseButtonUp(0))
             {
-                if ((m_hook.m_hookState == HookState.Based) && (!m_playerInstance.m_playerIsKnocks))
+                if (!m_playerInstance.m_playerIsKnocks)
                 {
-                    ConfirmAimOnTarget();
+                    if ((m_hook.m_hookState == HookState.Based) || (m_hook.m_hookState == HookState.FliesToBase))
+                    {
+                        print("check");
+                        ConfirmAimOnTarget();
+                    }
                 }
             }
         }
-
     }
 
     public IEnumerator EnableLaserSight(bool state, float delay)
