@@ -104,6 +104,8 @@ public class HookInstance : MonoBehaviour
             ChangeLocalHookState(false);
 
             ResetDefaultHookParapemers();
+
+            ResetTransform();
         }
     }
 
@@ -196,5 +198,11 @@ public class HookInstance : MonoBehaviour
         transform.localScale = m_defaultHookScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);
         m_handMesh.localScale = Vector3.one;
+    }
+
+    private void ResetTransform()
+    {
+        transform.localPosition = new Vector3(0f, 0f, 0.63f);
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
     }
 }
