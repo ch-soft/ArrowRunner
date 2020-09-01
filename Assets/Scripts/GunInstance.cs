@@ -77,16 +77,14 @@ public class GunInstance : MonoBehaviour
                     (m_camera.ScreenToWorldPoint(m_testMousePosition) - oneMoreValue - m_startingMousePosition) * m_sensitivity;
                 m_currentgMousePosition.z = 0f;
                 m_currentgMousePosition.x = 0f;
-
                 m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
                 if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
                 {
+                    EnablePointSphere(true);
                     Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
                     m_laserEndPosition = hit.point; // this is for full controll
-                    m_laserEndPosition.x = 0f;
-
-                    m_pointSphere.transform.position = m_laserEndPosition;
-                    EnablePointSphere(true);
+                    //m_laserEndPosition.x = 0f;
+                    m_pointSphere.transform.position = hit.point;
                 }
                 else
                 {
@@ -94,10 +92,7 @@ public class GunInstance : MonoBehaviour
                     EnablePointSphere(false);
                 }
 
-                if (!TimeControl.m_levelFinished)
-                {
-                    ShootLaserFromGun();
-                }
+                ShootLaserFromGun();
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -106,7 +101,6 @@ public class GunInstance : MonoBehaviour
                 {
                     if ((m_hook.m_hookState == HookState.Based) || (m_hook.m_hookState == HookState.FliesToBase))
                     {
-                        print("check");
                         ConfirmAimOnTarget();
                     }
                 }

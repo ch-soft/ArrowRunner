@@ -10,7 +10,7 @@ public static class TimeControl
     private static float _normalTime = 1f;
     private static float _slowmoTime = 0.15f;
 
-    public static float slowdownFactor = 0.15f;
+    public static float slowdownFactor = 0.125f;
     public static float slowdownLength = 2f;
 
     public static void AutoNormalizeTime()

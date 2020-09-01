@@ -747,6 +747,7 @@ MonoBehaviour:
   m_selfRenderer: {fileID: 4042106137646859242}
   m_enemyRig: {fileID: 8620897597518332263}
   m_headRigidbody: {fileID: 408003540710695951}
+  m_distanceController: {fileID: 7665108459146669274}
   m_deathColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
   m_activeMaterial: {fileID: 2100000, guid: 280fef4c9f0b64a498fe0f3406767b6c, type: 2}
   m_isAlive: 0

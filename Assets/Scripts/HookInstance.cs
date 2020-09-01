@@ -83,7 +83,7 @@ public class HookInstance : MonoBehaviour
     private void ShootGrabHookToTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, Time.fixedDeltaTime * m_hookMovementSpeed);
-        if (m_handMesh.localScale.x < 5f)
+        if (m_handMesh.localScale.x < 3f)
         {
             m_handMesh.localScale += Vector3.one / 20f;
         }

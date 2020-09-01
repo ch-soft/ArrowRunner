@@ -11,6 +11,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
     [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
     [BoxGroup("References"), SerializeField] private Rigidbody m_headRigidbody;
+    [BoxGroup("References"), SerializeField] private EnemyDistanceController m_distanceController;
     [Space]
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
     [Space]
@@ -170,11 +171,11 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                     if ((m_playerInstance.m_isAlive))
                     {
                         EnableAnimator(false);
-                        ChangeLayers();
-                        //StartCoroutine(EnableBoxCollider(0.1f, false));
+                        m_boxCollider.enabled = false;
                         ActivateRagdoll();
+                        ChangeLayers();
                         m_enableDeathColor = true;
-
+                        m_distanceController.gameObject.SetActive(false);
                         m_playerInstance.ShowCoolWord();
                         m_playerInstance.NormalizeSpeedAndTime();
                     }
