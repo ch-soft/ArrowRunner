@@ -2374,7 +2374,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 7.294, y: -30.939001, z: -0.79200006}
+        value: {x: 7.294, y: -26.254002, z: -0.79200006}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -2702,7 +2702,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 9.48, y: 4.2, z: -11.74}
+        value: {x: 8.93, y: 4.2, z: -12.56}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -3776,7 +3776,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 9.48
+        value: 8.93
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3814,7 +3814,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -11.74
+        value: -12.56
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3852,7 +3852,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -30.939001
+        value: -26.254002
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -20796,7 +20796,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main Camera - OTS_myCustom
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -20806,17 +20806,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main Camera - OTS_myCustom
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Main Camera - OTS_myCustom
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -20835,8 +20825,18 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Main Camera - OTS_myCustom
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: 
+    path: Main Camera - OTS_myCustom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -20846,7 +20846,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: 
+    path: Main Camera - OTS_myCustom
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
