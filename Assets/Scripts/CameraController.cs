@@ -50,12 +50,12 @@ public class CameraController : MonoBehaviour
         m_startingPosition = transform.position;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (m_rotateAroundCharacter)
         {
             transform.LookAt(_target.transform);
-            transform.Translate(Vector3.right * Time.deltaTime);
+            transform.Translate(Vector3.right * 4f * Time.deltaTime);
         }
     }
 

@@ -101,13 +101,13 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         }
     }
 
-    private void ChangeLayers()
+    private void ChangeLayers(int newLayer)
     {
-        m_rigidbody.gameObject.layer = 16;
+        m_rigidbody.gameObject.layer = newLayer;
 
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
-            m_bonesRigidbodies[i].gameObject.layer = 16;
+            m_bonesRigidbodies[i].gameObject.layer = newLayer;
         }
     }
 
@@ -128,10 +128,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         ChangeAliveState(false);
         SwitchOutlineWtate(false);
-        for (int i = 0; i < m_bonesRigidbodies.Length; i++)
-        {
-            m_bonesRigidbodies[i].gameObject.layer = 16;
-        }
+        //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        //{
+        //    m_bonesRigidbodies[i].gameObject.layer = 16;
+        //}
 
         m_rigidbody.isKinematic = true;
 
@@ -140,7 +140,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             case "Bridge":
                 {
                     m_animator.Play("DeathFromBridge");
-                    ChangeLayers();
+                    ChangeLayers(16);
                     break;
                 }
             case "Hook":
@@ -173,7 +173,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                         EnableAnimator(false);
                         m_boxCollider.enabled = false;
                         ActivateRagdoll();
-                        ChangeLayers();
+                        ChangeLayers(2);
                         m_enableDeathColor = true;
                         m_distanceController.gameObject.SetActive(false);
                         m_playerInstance.ShowCoolWord();
