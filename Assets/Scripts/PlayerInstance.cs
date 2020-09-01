@@ -235,14 +235,34 @@ public class PlayerInstance : MonoBehaviour
         EnableFreeJump(false, delay);
     }
 
-    public IEnumerator PlayKillEnemyAnimation()
+    public IEnumerator PlayKillEnemyAnimation(float distanceToPlayer)
     {
         m_playerIsKnocks = true;
         PlayJumpOverEnemyAnimation();
         ChangeSpeed(m_defaultSpeed * 3f);
         //EnableSlowmo(true);
         TimeControl.PunchSlowTime();
-        yield return new WaitForSecondsRealtime(1.5f);
+
+        float timeFromDistance;
+
+        if ((distanceToPlayer >= 0f) && (distanceToPlayer < 7f))
+        {
+            m_selfAnimator.speed = 1.5f;
+        }
+        else if ((distanceToPlayer >= 5f) && (distanceToPlayer < 9f))
+        {
+            m_selfAnimator.speed = 1.2f;
+        }
+        else if ((distanceToPlayer >= 9f) && (distanceToPlayer < 12f))
+        {
+            m_selfAnimator.speed = 1f;
+        }
+        else if ((distanceToPlayer >= 12f) && (distanceToPlayer < 100f))
+        {
+            m_selfAnimator.speed = 0.65f;
+        }
+
+        yield return new WaitForSecondsRealtime(distanceToPlayer / 6.66f);
         PlayRunAnimation();
         ChangeSpeed(m_defaultSpeed);
         EnableSlowmo(false);
@@ -422,6 +442,7 @@ public class PlayerInstance : MonoBehaviour
             StartCoroutine(TimeControl.NormalizeTime(0.3f));
             m_playerIsKnocks = false;
             StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
+            m_selfAnimator.speed = 1f;
         }
     }
 }
