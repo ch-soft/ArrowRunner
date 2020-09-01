@@ -245,11 +245,11 @@ public class PlayerInstance : MonoBehaviour
 
         float timeFromDistance;
 
-        if ((distanceToPlayer >= 0f) && (distanceToPlayer < 7f))
+        if ((distanceToPlayer >= 0f) && (distanceToPlayer < 4f))
         {
-            m_selfAnimator.speed = 1.5f;
+            m_selfAnimator.speed = 1.75f;
         }
-        else if ((distanceToPlayer >= 5f) && (distanceToPlayer < 9f))
+        else if ((distanceToPlayer >= 4f) && (distanceToPlayer < 9f))
         {
             m_selfAnimator.speed = 1.2f;
         }

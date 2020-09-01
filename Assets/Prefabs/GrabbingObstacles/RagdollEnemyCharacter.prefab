@@ -743,18 +743,6 @@ MonoBehaviour:
   - {fileID: 408003540710695951}
   - {fileID: 2040988456880519189}
   - {fileID: 7918899502691163762}
-  m_bonesColliders:
-  - {fileID: 3615140890501168502}
-  - {fileID: 8955845006954802023}
-  - {fileID: 8390654159661241188}
-  - {fileID: 6071272332117791185}
-  - {fileID: 4680353693651980127}
-  - {fileID: 7867350550398202360}
-  - {fileID: 1464402226773141134}
-  - {fileID: 9141553897439647156}
-  - {fileID: 7803616783762930559}
-  - {fileID: 1442064025087703748}
-  - {fileID: 8309783382758850586}
   m_boxCollider: {fileID: 1182771595}
   m_selfRenderer: {fileID: 4042106137646859242}
   m_enemyRig: {fileID: 8620897597518332263}
@@ -790,8 +778,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.32555524, y: 0.84711933, z: 0.4325878}
-  m_Center: {x: -0.008620083, y: 0.41924572, z: 0.003045477}
+  m_Size: {x: 0.5424806, y: 0.91295093, z: 0.4325878}
+  m_Center: {x: 0.019373558, y: 0.45216158, z: 0.0030454807}
 --- !u!1 &2056873811504400219
 GameObject:
   m_ObjectHideFlags: 0
