@@ -23,7 +23,9 @@ public class PlayerInstance : MonoBehaviour
 
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
-    private Quaternion m_rigLocalRotation;
+    private Quaternion m_rigLocalRotation; //old
+
+
 
     private string m_animationRunName = "Run";
     private string m_animationRLevitationName = "Flying";
@@ -51,9 +53,10 @@ public class PlayerInstance : MonoBehaviour
 
     private void Start()
     {
+        EnableRagdoll(false);
+
         StartCoroutine(EnableShootLaserSight(true, 0f));
 
-        EnableRagdoll(false);
         EnableToCollectVelocityInfo(true);
 
         //EnableSlowmo(false);

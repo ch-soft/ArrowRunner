@@ -35,6 +35,7 @@ public class LevelController : MonoBehaviour
 
     private void RestartLevel()
     {
+        TimeControl.NormalizeTime(0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
