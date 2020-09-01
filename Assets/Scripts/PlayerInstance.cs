@@ -15,6 +15,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private Transform m_characterRig;
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
     [BoxGroup("References"), SerializeField] private CoolLettering m_coolLettering;
+    [BoxGroup("References"), SerializeField] private HookInstance m_hookInstance;
     [HideInInspector] public CameraController m_cameraController;
 
     [HideInInspector] public bool m_isAlive;
@@ -420,6 +421,7 @@ public class PlayerInstance : MonoBehaviour
             ChangeSpeed(1f);
             StartCoroutine(TimeControl.NormalizeTime(0.3f));
             m_playerIsKnocks = false;
+            StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
         }
     }
 }

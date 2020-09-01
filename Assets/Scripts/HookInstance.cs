@@ -83,7 +83,7 @@ public class HookInstance : MonoBehaviour
     private void ShootGrabHookToTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, Time.fixedDeltaTime * m_hookMovementSpeed);
-        if (m_handMesh.localScale.x < 3f)
+        if (m_handMesh.localScale.x < 2f)
         {
             m_handMesh.localScale += Vector3.one / 20f;
         }
@@ -147,6 +147,7 @@ public class HookInstance : MonoBehaviour
                 case 8:
                     {
 
+
                         if (other.gameObject.GetComponent<GrabbingBaseObject>())
                         {
                             if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
@@ -160,8 +161,10 @@ public class HookInstance : MonoBehaviour
 
                             }
                         }
-                        StartCoroutine(FixateHitAndReturnHome(0.0f));
-
+                        if (!other.gameObject.GetComponent<GrabbingEnemy>())
+                        {
+                            StartCoroutine(FixateHitAndReturnHome(0.0f));
+                        }
                         break;
                     }
 
@@ -173,7 +176,7 @@ public class HookInstance : MonoBehaviour
         }
     }
 
-    private IEnumerator FixateHitAndReturnHome(float delay)
+    public IEnumerator FixateHitAndReturnHome(float delay)
     {
         yield return new WaitForSeconds(delay);
         m_hookState = HookState.FliesToBase;
