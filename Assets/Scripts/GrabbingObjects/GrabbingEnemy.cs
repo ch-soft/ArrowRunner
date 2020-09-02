@@ -30,6 +30,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
     private float m_headPunchForce = 15f;
 
+    private float m_horizontalX;
 
     private void Start()
     {
@@ -41,6 +42,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         m_disabledMaterial = m_selfRenderer.material;
 
         ChangeAliveState(true);
+
+        m_horizontalX = transform.position.x * 10f;
     }
 
     private void ChangeAliveState(bool state)
@@ -84,7 +87,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             if (m_headPunchForce > 0f)
             {
-                m_headRigidbody.velocity += new Vector3(0f, m_headPunchForce, m_headPunchForce);
+                m_headRigidbody.velocity += new Vector3(m_horizontalX, m_headPunchForce, m_headPunchForce);
                 m_headPunchForce--;
             }
 
@@ -168,19 +171,24 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             case "Player":
                 {
-                    if ((m_playerInstance.m_isAlive))
-                    {
-                        EnableAnimator(false);
-                        m_boxCollider.enabled = false;
-                        ActivateRagdoll();
-                        ChangeLayers(2);
-                        m_enableDeathColor = true;
-                        m_distanceController.gameObject.SetActive(false);
-                        m_playerInstance.ShowCoolWord();
-                        m_playerInstance.NormalizeSpeedAndTime();
-                    }
+                    PushEnemyBack();
                     break;
                 }
+        }
+    }
+
+    public void PushEnemyBack()
+    {
+        if ((m_playerInstance.m_isAlive))
+        {
+            EnableAnimator(false);
+            m_boxCollider.enabled = false;
+            ActivateRagdoll();
+            ChangeLayers(2);
+            m_enableDeathColor = true;
+            m_distanceController.gameObject.SetActive(false);
+            m_playerInstance.ShowCoolWord();
+            m_playerInstance.NormalizeSpeedAndTime();
         }
     }
 

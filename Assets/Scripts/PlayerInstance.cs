@@ -283,7 +283,7 @@ public class PlayerInstance : MonoBehaviour
         yield return new WaitForSecondsRealtime(0f);
     }
 
-    private void PlayRunAnimation()
+    public void PlayRunAnimation()
     {
         m_selfAnimator.Play(m_animationRunName);
     }
@@ -459,5 +459,10 @@ public class PlayerInstance : MonoBehaviour
             StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
             m_selfAnimator.speed = 1f;
         }
+    }
+
+    public void ResetSpeed()
+    {
+        ChangeSpeed(m_defaultSpeed);
     }
 }

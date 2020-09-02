@@ -10,6 +10,7 @@ TagManager:
   - WinnerZone
   - CoolLettering
   - Barrel
+  - Pusher
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - WinnerZone
   - GunInstance
   - FallenBarrel
-  - 
+  - Pusher
   - 
   - 
   - 

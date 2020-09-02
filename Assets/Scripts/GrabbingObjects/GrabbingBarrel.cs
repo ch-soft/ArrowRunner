@@ -6,6 +6,8 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
 {
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
     [BoxGroup("References"), SerializeField] private Transform m_endPoint;
+    [BoxGroup("References"), SerializeField] private ParticleSystem m_explosionParticles;
+
 
     [HideInInspector] public bool m_isFalling;
 
@@ -16,10 +18,12 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     [HideInInspector] public bool m_isAlive;
     [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
     private Material m_disabledMaterial;
-
     private bool m_enableFlyToEndpoint;
-
     private float m_beatingForce = 50f;
+    private bool m_barrelWasBlowUp;
+    private bool m_isDisintegrating;
+
+    private const float m_findEnemiesRadius = 10f;
 
     private void Start()
     {
@@ -33,6 +37,10 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
         if (m_enableFlyToEndpoint)
         {
             transform.position = Vector3.MoveTowards(transform.position, m_endPoint.position, Time.deltaTime * m_beatingForce);
+        }
+        if ((m_isDisintegrating) && (transform.localScale.x > 0.01f))
+        {
+            transform.localScale -= Vector3.one / 10f;
         }
     }
 
@@ -86,16 +94,22 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
 
     private void OnCollisionEnter(Collision collision)
     {
-        print(collision.gameObject.name);
-        switch (collision.gameObject.tag)
+        if (!m_barrelWasBlowUp)
         {
-            case "Player":
-                {
-                    ThrowToEndPoint();
-                    PlayerInstance player = collision.gameObject.GetComponent<PlayerInstance>();
-                    player.NormalizeSpeedAndTime();
-                    break;
-                }
+            switch (collision.gameObject.tag)
+            {
+                case "Player":
+                    {
+                        ThrowToEndPoint();
+
+                        break;
+                    }
+                case "Enemy":
+                    {
+                        StartCoroutine(BlowUpBarrel());
+                        break;
+                    }
+            }
         }
     }
 
@@ -103,7 +117,39 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     private void ThrowToEndPoint()
     {
         m_isGrabbing = false;
-
         m_enableFlyToEndpoint = true;
+    }
+
+    private IEnumerator BlowUpBarrel()
+    {
+        m_barrelWasBlowUp = true;
+        m_isDisintegrating = true;
+        m_explosionParticles.Play();
+        FindNearestEnemies();
+        yield return new WaitForSecondsRealtime(1f);
+        m_playerInstance.PlayRunAnimation();
+        m_playerInstance.NormalizeSpeedAndTime();
+        m_playerInstance.ResetSpeed();
+        Destroy(gameObject);
+        yield return new WaitForSecondsRealtime(1f);
+    }
+
+    private void FindNearestEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        Vector3 selfPosition = transform.position;
+
+        foreach (GameObject enemy in enemies)
+        {
+            Vector3 difference = enemy.transform.position - selfPosition;
+
+            float currentDistance = difference.sqrMagnitude;
+
+            if (currentDistance < m_findEnemiesRadius)
+            {
+                enemy.GetComponent<GrabbingEnemy>().PushEnemyBack();
+            }
+        }
     }
 }
