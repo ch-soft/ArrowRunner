@@ -19,12 +19,15 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     [Space]
     [BoxGroup("References"), SerializeField] public Rigidbody m_rigidbody;
 
+    [BoxGroup("Spec parameters"), SerializeField] private bool m_useCharacterRig; // for First Person View
+    [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_useCharacterRig")] private Transform m_characterRig;
+
     [HideInInspector] public Vector3 m_pullingDirection;
     [HideInInspector] public Transform m_pullingObject;
     [HideInInspector] public bool m_objectWasAttracted;
 
     private float m_grabbingTime = 1f;
-    private bool m_isGrabbing;
+    [HideInInspector] public bool m_isGrabbing;
 
     //Bridge
     private Vector3 m_targetRotation = new Vector3(-90f, 0f, 0f);
@@ -72,7 +75,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                     {
                         transform.RotateAround(transform.position, transform.position + Vector3.down, m_pullingForce * 50f * Time.fixedDeltaTime);
 
-                        transform.position = Vector3.Slerp(transform.position, m_playerInstance.transform.position, Time.fixedDeltaTime * m_pullingForce);
+                        transform.position = Vector3.Lerp(transform.position, m_characterRig.position, Time.fixedDeltaTime * m_pullingForce);
                         //StartCoroutine(m_playerInstance.PlayKillEnemyAnimation(Vector3.Distance(m_playerInstance.transform.position, transform.position)));
                         //m_isGrabbing = false;
                         break;
@@ -102,7 +105,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     {
         m_isGrabbing = true;
         m_objectWasAttracted = true;
-        //StartCoroutine(m_playerInstance.PlayKickBarrelAnimation());
+        StartCoroutine(m_playerInstance.PlayKickBarrelAnimation());
     }
 
     public IEnumerator MakeGrapplingMove(float timeInAir, float animSpeed)
