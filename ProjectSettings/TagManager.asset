@@ -9,6 +9,7 @@ TagManager:
   - GrapplingSurface
   - WinnerZone
   - CoolLettering
+  - Barrel
   layers:
   - Default
   - TransparentFX

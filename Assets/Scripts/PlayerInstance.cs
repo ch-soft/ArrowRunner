@@ -271,6 +271,18 @@ public class PlayerInstance : MonoBehaviour
         EnableSlowmo(false);
     }
 
+    //public IEnumerator PlayKickBarrelAnimation()
+    //{
+    //    TimeControl.PunchSlowTime();
+    //    ChangeSpeed(m_defaultSpeed * 3f);
+
+    //    m_selfAnimator.speed = 0;
+
+    //    m_selfAnimator.Play("BarrelKick");
+
+    //    yield return new WaitForSecondsRealtime(0f);
+    //}
+
     private void PlayRunAnimation()
     {
         m_selfAnimator.Play(m_animationRunName);

@@ -5,9 +5,8 @@ using NaughtyAttributes;
 public enum GrabbingObjectType
 {
     None = 0,
-    GrabObject,
     EnemyCharacter,
-    EnvironmentObject,
+    Barrel,
     Bridge,
     GrapplingBase
 }
@@ -69,19 +68,13 @@ public abstract class GrabbingBaseObject : MonoBehaviour
                         m_fallingBridgeForce += 1f;
                         break;
                     }
-
-                case GrabbingObjectType.GrapplingBase:
+                case GrabbingObjectType.Barrel:
                     {
-                        //if (Vector3.Distance(transform.position, m_playerInstanceTransform.position) > 4f)
-                        //{
-                        //    m_playerInstance.transform.position = Vector3.MoveTowards(m_playerInstance.transform.position, transform.position, Time.deltaTime * 14f);
-                        //}
-                        //else
-                        //{
-                        //    m_isGrabbing = false;
-                        //    m_playerInstance.EnableFreeJump(false);
-                        //}
+                        transform.RotateAround(transform.position, transform.position + Vector3.down, m_pullingForce * 50f * Time.fixedDeltaTime);
 
+                        transform.position = Vector3.Slerp(transform.position, m_playerInstance.transform.position, Time.fixedDeltaTime * m_pullingForce);
+                        //StartCoroutine(m_playerInstance.PlayKillEnemyAnimation(Vector3.Distance(m_playerInstance.transform.position, transform.position)));
+                        //m_isGrabbing = false;
                         break;
                     }
             }
@@ -103,6 +96,13 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_isGrabbing = true;
         m_fallingBridgeForce = m_pullingForce;
         m_objectWasAttracted = true;
+    }
+
+    public void PullBarrel()
+    {
+        m_isGrabbing = true;
+        m_objectWasAttracted = true;
+        //StartCoroutine(m_playerInstance.PlayKickBarrelAnimation());
     }
 
     public IEnumerator MakeGrapplingMove(float timeInAir, float animSpeed)

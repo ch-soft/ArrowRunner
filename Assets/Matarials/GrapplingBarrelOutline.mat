@@ -7,9 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GrapplingBaseOutline
+  m_Name: GrapplingBarrelOutline
   m_Shader: {fileID: 4800000, guid: d32d215e22d1e144886957542b460d31, type: 3}
-  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_ZSMOOTH_ON _COLOR_ON
+  m_ShaderKeywords: OUTLINES TCP2_DISABLE_WRAPPED_LIGHT TCP2_OUTLINE_CONST_SIZE TCP2_ZSMOOTH_ON
+    _COLOR_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 23efc4c2bad7f2148a93dcc2d5d935ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -76,9 +77,9 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset1: 0
+    - _Offset1: -1.53
     - _Offset2: 0
-    - _Outline: 15
+    - _Outline: 0.5
     - _Parallax: 0.02
     - _RampSmooth: 0
     - _RampSmoothAdd: 0.54
@@ -98,14 +99,14 @@ Material:
     - _ToggleEmission: 0
     - _ToggleMainTex: 0
     - _UVSec: 0
-    - _ZSmooth: -1.82
+    - _ZSmooth: -3
     - _ZTest: 2
     - _ZWrite: 1
     - __dummy__: 0
     - __outline_gui_dummy__: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.89767873, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HColor: {r: 0.8862745, g: 0.8862745, b: 0.8862745, a: 1}
     - _OutlineColor: {r: 0.052918315, g: 1, b: 0, a: 1}
-    - _SColor: {r: 0.8301887, g: 0.49811324, b: 0, a: 1}
+    - _SColor: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}

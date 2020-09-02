@@ -28,29 +28,15 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     {
         StartCoroutine(GrabCharacter());
         SwitchOutlineState(false);
-
     }
 
     private IEnumerator GrabCharacter()
     {
-
         yield return new WaitForSeconds(0.03f);
-       
-            m_isFalling = true;
-            PullBridge();
-            StartCoroutine(DisableBridge());
+        PullBarrel();
+        //m_isFalling = true;
 
     }
-
-    public IEnumerator DisableBridge()
-    {
-        yield return new WaitForSeconds(m_afterFallingDelay);
-        m_isStanding = false;
-        m_rigidbody.useGravity = false;
-        m_rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-        gameObject.layer = 13;
-    }
-
 
     public void SwitchOutlineState(bool state)
     {
@@ -74,6 +60,21 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
                         //m_localMaterials = m_disabledMaterial;
                         m_isOutlineActive = false;
                     }
+                    break;
+                }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Player":
+                {
+                    PlayerInstance player = collision.gameObject.GetComponent<PlayerInstance>();
+
+
+
                     break;
                 }
         }
