@@ -15,20 +15,20 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [Space]
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
     [Space]
-    [BoxGroup("Preferences"), SerializeField] private Material m_activeMaterial;
-    private Material m_disabledMaterial;
+    [BoxGroup("Preferences"), SerializeField] private Material[] m_activeMaterials;
+    private Material[] m_disabledMaterials;
     private Material[] m_localMaterials;
     private bool m_isOutlineActive;
 
     [HideInInspector] public bool m_isAlive;
 
 
-    private string m_prapareWeaponAnimName = "PrepareAxe"; //we will use this later
+    private string m_prapareWeaponAnimName = "GetAxeFromBack"; //we will use this later
     private string m_punchAnimName; //we will use this later
 
     private bool m_enableDeathColor;
 
-    private float m_headPunchForce = 15f;
+    private float m_headPunchForce = 12f;
 
     private float m_horizontalX;
 
@@ -39,7 +39,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
         }
 
-        m_disabledMaterial = m_selfRenderer.material;
+        m_disabledMaterials = m_selfRenderer.materials;
 
         ChangeAliveState(true);
 
@@ -222,10 +222,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                 {
                     if (!m_isOutlineActive && m_isAlive)
                     {
-                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
-                        {
-                            m_localMaterials[i] = m_activeMaterial;
-                        }
+                        m_localMaterials = m_activeMaterials;
+
                         m_isOutlineActive = true;
                     }
                     break;
@@ -234,10 +232,9 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                 {
                     if (m_isOutlineActive)
                     {
-                        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
-                        {
-                            m_localMaterials[i] = m_disabledMaterial;
-                        }
+
+                        m_localMaterials = m_disabledMaterials;
+
                         m_isOutlineActive = false;
                     }
                     break;

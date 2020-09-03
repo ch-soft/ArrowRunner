@@ -14,9 +14,8 @@ public class EnemyDistanceController : MonoBehaviour
 
     private bool m_playerIsInSight;
 
-    private float m_maxDistToPlayer = 17f;
-    private float m_prepareWeaponDistance = 15f;
-    private float m_hitPlayerDistance = 7f;
+    private float m_prepareWeaponDistance = 18f;
+    private float m_hitPlayerDistance =  7f;
 
     private bool m_weaponIsReady;
     private bool m_playerWasHit;
@@ -59,10 +58,10 @@ public class EnemyDistanceController : MonoBehaviour
         //print(dist);
 
         //We will check distance to player and start kill player here
-        for (int i = 0; i < m_selfRenderer.materials.Length; i++)
-        {
-            m_selfRenderer.materials[i].color = Color.Lerp(m_closeColor, m_farColor, dist / m_maxDistToPlayer);
-        }
+        //for (int i = 0; i < m_selfRenderer.materials.Length; i++)
+        //{
+        //    m_selfRenderer.materials[i].color = Color.Lerp(m_closeColor, m_farColor, dist / m_maxDistToPlayer);
+        //}
 
         if (dist <= m_prepareWeaponDistance)
         {

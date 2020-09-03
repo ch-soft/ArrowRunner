@@ -23,7 +23,7 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     private bool m_barrelWasBlowUp;
     private bool m_isDisintegrating;
 
-    private const float m_findEnemiesRadius = 10f;
+    private const float m_findEnemiesRadius = 20f;
 
     private void Start()
     {
