@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5015773597718558336}
   m_Layer: 15
   m_Name: UpPillar
-  m_TagString: GrapplingSurface
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,14 +333,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pullingForce: 10
   m_forceDirection: {x: 0, y: 0, z: 0}
-  m_grabbingObjectType: 4
+  m_grabbingObjectType: 5
   m_rigidbody: {fileID: 5015773597600407495}
-  m_useCharacterRig: 0
-  m_characterRig: {fileID: 0}
   m_pullingDirection: {x: 0, y: 0, z: 0}
   m_pullingObject: {fileID: 0}
   m_objectWasAttracted: 0
-  m_isGrabbing: 0
   m_playerInstance: {fileID: 0}
   m_selfRenderers:
   - {fileID: 5015773597718558340}
@@ -375,7 +372,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.026441813, y: 6.5484085, z: 56.317448}
+  m_ConnectedAnchor: {x: 0.0099, y: 4.301, z: 1.8310001}
   m_UseSpring: 0
   m_Spring:
     spring: 0
