@@ -27,7 +27,7 @@ public class HookInstance : MonoBehaviour
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
-    private float m_hookMovementSpeed = 40f;
+    private float m_hookMovementSpeed = 35f;
 
     private Vector3 m_hookLocalStartPosition;
     private Vector3 m_defaultHookScale;
@@ -91,7 +91,7 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.3f);
+        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.17f);
 
         if (m_handMesh.localScale.x > 1f)
         {
