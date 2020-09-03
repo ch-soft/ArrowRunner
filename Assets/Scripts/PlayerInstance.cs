@@ -66,6 +66,8 @@ public class PlayerInstance : MonoBehaviour
         AllowToRun(true);
         SaveDefaultSpeed();
         m_isRigCentralized = true;
+
+        CheckPlayerTag();
     }
 
     private void FixedUpdate()
@@ -124,6 +126,19 @@ public class PlayerInstance : MonoBehaviour
 
                     FixateDeath();
                 }
+            }
+        }
+    }
+
+    private void CheckPlayerTag()
+    {
+        if (GameObject.FindGameObjectsWithTag("Player").Length > 1)
+        {
+            print("Тэг Player может быть только один!");
+
+            for (int i = 0; i < GameObject.FindGameObjectsWithTag("Player").Length; i++)
+            {
+                print(GameObject.FindGameObjectsWithTag("Player")[i].name);
             }
         }
     }

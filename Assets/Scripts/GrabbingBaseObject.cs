@@ -45,6 +45,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInstance>();
         m_playerInstanceTransform = m_playerInstance.transform;
+
     }
 
     private void FixedUpdate()
