@@ -113,17 +113,6 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     {
         m_isGrabbing = false;
         m_enableFlyToEndpoint = true;
-        switch (collision.gameObject.tag)
-        {
-            case "Player":
-                {
-                    PlayerInstance player = collision.gameObject.GetComponent<PlayerInstance>();
-
-
-
-                    break;
-                }
-        }
 
     }
 

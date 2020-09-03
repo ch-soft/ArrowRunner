@@ -24,7 +24,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     [HideInInspector] public bool m_objectWasAttracted;
 
     private float m_grabbingTime = 1f;
-    private bool m_isGrabbing;
+    [HideInInspector] public bool m_isGrabbing;
 
     //Bridge
     private Vector3 m_targetRotation = new Vector3(-90f, 0f, 0f);
