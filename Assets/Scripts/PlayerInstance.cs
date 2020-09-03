@@ -271,17 +271,17 @@ public class PlayerInstance : MonoBehaviour
         EnableSlowmo(false);
     }
 
-    //public IEnumerator PlayKickBarrelAnimation()
-    //{
-    //    TimeControl.PunchSlowTime();
-    //    ChangeSpeed(m_defaultSpeed * 3f);
+    public IEnumerator PlayKickBarrelAnimation()
+    {
+        TimeControl.PunchSlowTime();
+        ChangeSpeed(3f);
 
-    //    m_selfAnimator.speed = 0;
+        m_selfAnimator.speed = 2f;
 
-    //    m_selfAnimator.Play("BarrelKick");
+        m_selfAnimator.Play("BarrelKick");
 
-    //    yield return new WaitForSecondsRealtime(0f);
-    //}
+        yield return new WaitForSecondsRealtime(0f);
+    }
 
     public void PlayRunAnimation()
     {
@@ -380,7 +380,7 @@ public class PlayerInstance : MonoBehaviour
                 {
                     if (collision.gameObject.GetComponent<GrabbingEnemy>())
                     {
-                        if ((collision.gameObject.GetComponent<GrabbingEnemy>().m_isAlive) && !m_allowToJump)
+                        if (collision.gameObject.GetComponent<GrabbingEnemy>().m_isAlive && !m_allowToJump)
                         {
                             FixateDeath();
                         }

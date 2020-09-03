@@ -25,7 +25,6 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
 
     private const float m_findEnemiesRadius = 10f;
 
-
     private void Start()
     {
         m_isStanding = true;
@@ -45,7 +44,6 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
         }
     }
 
-
     public void OnHookGrab()
     {
         StartCoroutine(GrabCharacter());
@@ -56,8 +54,15 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     {
         yield return new WaitForSeconds(0.03f);
         PullBarrel();
+
+        DisableBarrel();
         //m_isFalling = true;
 
+    }
+
+    private void DisableBarrel()
+    {
+        gameObject.layer = 19;
     }
 
     public void SwitchOutlineState(bool state)
@@ -113,7 +118,6 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     {
         m_isGrabbing = false;
         m_enableFlyToEndpoint = true;
-
     }
 
     private IEnumerator BlowUpBarrel()
