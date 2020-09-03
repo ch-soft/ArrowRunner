@@ -7,9 +7,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Animator m_animator;
     [BoxGroup("References"), SerializeField] private Animator m_swordAnimator;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
-    [BoxGroup("References"), SerializeField] private BoxCollider m_boxCollider;
+    [BoxGroup("References"), SerializeField] private Collider m_collider;
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
-    [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
     [BoxGroup("References"), SerializeField] private Rigidbody m_headRigidbody;
     [BoxGroup("References"), SerializeField] private EnemyDistanceController m_distanceController;
     [Space]
@@ -124,7 +123,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         yield return new WaitForSeconds(delay);
 
-        m_boxCollider.enabled = state;
+        m_collider.enabled = state;
     }
 
     private void FixateDeath(string reason)
@@ -182,7 +181,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         if ((m_playerInstance.m_isAlive))
         {
             EnableAnimator(false);
-            m_boxCollider.enabled = false;
+            m_collider.enabled = false;
             ActivateRagdoll();
             ChangeLayers(2);
             m_enableDeathColor = true;

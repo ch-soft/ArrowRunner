@@ -1089,8 +1089,8 @@ GameObject:
   - component: {fileID: 7645796168338425095}
   - component: {fileID: 7645796168338425115}
   - component: {fileID: 7645796168338425114}
-  - component: {fileID: 7645796168338425113}
   - component: {fileID: 7645796168338425112}
+  - component: {fileID: 7291829696713858890}
   m_Layer: 8
   m_Name: Enemy_Soldier
   m_TagString: Enemy
@@ -1149,20 +1149,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 114
-  m_CollisionDetection: 0
---- !u!65 &7645796168338425113
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7645796168338425094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.71649545, y: 1.276449, z: 0.7031378}
-  m_Center: {x: -0.067634024, y: 0.63391054, z: 0.13832073}
+  m_CollisionDetection: 2
 --- !u!114 &7645796168338425112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,9 +1187,8 @@ MonoBehaviour:
   - {fileID: 7645796169047856204}
   - {fileID: 7645796167898678393}
   - {fileID: 7645796167947786248}
-  m_boxCollider: {fileID: 7645796168338425113}
+  m_collider: {fileID: 7291829696713858890}
   m_selfRenderer: {fileID: 7645796168123094633}
-  m_enemyRig: {fileID: 7645796168800572558}
   m_headRigidbody: {fileID: 7645796168585435831}
   m_distanceController: {fileID: 19347639605548121}
   m_deathColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
@@ -1210,6 +1196,20 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 280fef4c9f0b64a498fe0f3406767b6c, type: 2}
   - {fileID: 2100000, guid: bb55d91d41b353d41ae2ea0280a5bb28, type: 2}
   m_isAlive: 0
+--- !u!136 &7291829696713858890
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7645796168338425094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.59
+  m_Height: 1.46
+  m_Direction: 1
+  m_Center: {x: -0.17, y: 0.72, z: 0.19}
 --- !u!1 &7645796168495967918
 GameObject:
   m_ObjectHideFlags: 0

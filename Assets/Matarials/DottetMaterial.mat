@@ -79,11 +79,11 @@ Material:
     - _RampSmooth: 0.1
     - _RampThreshold: 0.5
     - _ReceiveShadowsPower: 0.5
-    - _RepeatCount: 0.7
+    - _RepeatCount: 1.62
     - _Saturation: 1
     - _Shininess: 0.078125
     - _SmoothnessTextureChannel: 0
-    - _Spacing: 6.93
+    - _Spacing: 3.47
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Stencil: 0

@@ -30,6 +30,7 @@ public class GunInstance : MonoBehaviour
 
     private bool m_laserActivityState;
 
+    private bool m_laserisOnObject;
 
     private void Awake()
     {
@@ -80,6 +81,18 @@ public class GunInstance : MonoBehaviour
                 m_secondaryLaserEndPosition = /*transform.position + */new Vector3(0f, 0f, m_laserDistance) + m_currentgMousePosition;
                 if (Physics.Raycast(transform.position, m_secondaryLaserEndPosition, out hit, m_laserDistance))
                 {
+                    if ((hit.collider.gameObject.layer == 8) || (hit.collider.gameObject.layer == 15))
+                    {
+                        if (!m_laserisOnObject)
+                        {
+                            ChangeLaserColor(true);
+                        }
+                    }
+                    else
+                    {
+                        ChangeLaserColor(false);
+                    }
+
                     EnablePointSphere(true);
                     Debug.DrawRay(transform.position, m_secondaryLaserEndPosition);
                     m_laserEndPosition = hit.point; // this is for full controll
@@ -90,7 +103,12 @@ public class GunInstance : MonoBehaviour
                 {
                     m_laserEndPosition = m_secondaryLaserEndPosition + transform.position;
                     EnablePointSphere(false);
+
+
+                    ChangeLaserColor(false);
                 }
+
+                //ChangeLaserColor(false);
 
                 ShootLaserFromGun();
             }
@@ -106,6 +124,26 @@ public class GunInstance : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ChangeLaserColor(bool isOnObject)
+    {
+        switch (isOnObject)
+        {
+            case true:
+                {
+                    m_lineRenderer.SetColors(Color.green, Color.green);
+                    break;
+                }
+
+            case false:
+                {
+                    m_lineRenderer.SetColors(Color.red, Color.red);
+                    break;
+                }
+        }
+
+        m_laserisOnObject = isOnObject;
     }
 
     public IEnumerator EnableLaserSight(bool state, float delay)

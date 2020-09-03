@@ -16,35 +16,28 @@ public enum HookState
 [RequireComponent(typeof(LineRenderer))]
 public class HookInstance : MonoBehaviour
 {
-    [SerializeField] private Transform m_characterTransform;
     [SerializeField] private Transform m_hookBase;
     [SerializeField] private Transform m_handMesh;
     [Space]
     [SerializeField] private CoolLettering m_coolLettering;
-
-    public Rigidbody m_characterRigidbody;
 
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
 
     private float m_hookMovementSpeed = 35f;
 
-    private Vector3 m_hookLocalStartPosition;
     private Vector3 m_defaultHookScale;
-    private Vector3 m_positinonOffset = new Vector3(0f, 0f, 0.01f);
 
     private LineRenderer m_lineRenderer;
 
     private Transform m_parent;
 
 
-    private const int m_grabbingObjectLayer = 8;
 
     private bool m_isHookInAir;
 
     private void Awake()
     {
-        m_hookLocalStartPosition = transform.localPosition;
         m_parent = gameObject.transform.parent;
 
         m_defaultHookScale = transform.localScale;
@@ -91,7 +84,7 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.17f);
+        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.25f);
 
         if (m_handMesh.localScale.x > 1f)
         {
@@ -111,6 +104,7 @@ public class HookInstance : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.gameObject.name);
         if (m_isHookInAir)
         {
             switch (other.gameObject.layer)
@@ -148,8 +142,6 @@ public class HookInstance : MonoBehaviour
                     }
                 case 8:
                     {
-
-
                         if (other.gameObject.GetComponent<GrabbingBaseObject>())
                         {
                             if (!other.gameObject.GetComponent<GrabbingBaseObject>().m_objectWasAttracted)
