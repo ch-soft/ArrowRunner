@@ -182,11 +182,30 @@ public class GunInstance : MonoBehaviour
         {
             switch (hit.transform.gameObject.layer)
             {
-                case 0:
                 case 8:
+                    {
+                        if (hit.transform.gameObject.GetComponent<GrabbingBarrel>())
+                        {
+                            m_hook.m_returnableObject = ReturnableObject.Barrel;
+                        }
+                        else
+                        {
+                            m_hook.m_returnableObject = ReturnableObject.Enemy;
+                        }
+
+                        m_hook.m_targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+                        m_hook.m_hookState = HookState.FliesToTarget;
+                        m_hook.transform.parent = null;
+                        m_hook.ChangeLocalHookState(true);
+                        break;
+                    }
+                case 0:
                 case 15:
                     {
-                        m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
+                        //m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
+                        m_hook.m_returnableObject = ReturnableObject.Other;
+
+                        m_hook.m_targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                         m_hook.m_hookState = HookState.FliesToTarget;
                         m_hook.transform.parent = null;
                         m_hook.ChangeLocalHookState(true);

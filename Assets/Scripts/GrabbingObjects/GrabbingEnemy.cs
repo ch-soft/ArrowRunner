@@ -99,7 +99,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             //m_rigidbody.MovePosition(transform.position + m_playerInstance.transform.position);
 
-            m_rigidbody.velocity = ((m_playerInstance.transform.position - transform.position) * Time.deltaTime * 400f);
+            m_rigidbody.velocity = ((m_playerInstance.transform.position - transform.position) * Time.deltaTime * 700f);
 
             //m_rigidbody.velocity -= m_playerInstance.transform.position / 10f;
             //transform.position = Vector3.Lerp(transform.position, m_playerInstance.transform.position, Time.deltaTime * 5f);
@@ -184,6 +184,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             case "Player":
                 {
+                    m_playerInstance.PlayPunchParticles(m_headRigidbody.transform.position);
                     PushEnemyBack();
                     break;
                 }

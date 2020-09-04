@@ -16,6 +16,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private LevelController m_levelController;
     [BoxGroup("References"), SerializeField] private CoolLettering m_coolLettering;
     [BoxGroup("References"), SerializeField] private HookInstance m_hookInstance;
+    [BoxGroup("References"), SerializeField] private ParticleSystem m_punchParticles;
     [HideInInspector] public CameraController m_cameraController;
 
     [HideInInspector] public bool m_isAlive;
@@ -479,5 +480,11 @@ public class PlayerInstance : MonoBehaviour
     public void ResetSpeed()
     {
         ChangeSpeed(m_defaultSpeed);
+    }
+
+    public void PlayPunchParticles(Vector3 collisionContactPoint)
+    {
+        m_punchParticles.transform.position = collisionContactPoint;
+        m_punchParticles.Play();
     }
 }

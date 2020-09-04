@@ -13,6 +13,14 @@ public enum HookState
     FliesToBase
 }
 
+public enum ReturnableObject
+{
+    None = 0,
+    Barrel,
+    Enemy,
+    Other
+}
+
 [RequireComponent(typeof(LineRenderer))]
 public class HookInstance : MonoBehaviour
 {
@@ -23,16 +31,18 @@ public class HookInstance : MonoBehaviour
 
     [HideInInspector] public HookState m_hookState;
     [HideInInspector] public Vector3 m_targetPosition;
+    [HideInInspector] public ReturnableObject m_returnableObject;
 
     private float m_hookMovementSpeed = 35f;
+
+    private float m_enemyReturnSpeed = 0.12f;
+    private float m_barrelReturnSpeed = 0.17f;
 
     private Vector3 m_defaultHookScale;
 
     private LineRenderer m_lineRenderer;
 
     private Transform m_parent;
-
-
 
     private bool m_isHookInAir;
 
@@ -84,26 +94,71 @@ public class HookInstance : MonoBehaviour
 
     private void ReturnHookToBase()
     {
-        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * 0.25f);
-
-        if (m_handMesh.localScale.x > 1f)
+        switch (m_returnableObject)
         {
-            m_handMesh.localScale -= Vector3.one;
+            case ReturnableObject.Enemy:
+            case ReturnableObject.Other:
+                {
+                    if ((Vector3.Distance(transform.position, m_hookBase.position) >= 2f) && (Vector3.Distance(transform.position, m_hookBase.position) < 100f))
+                    {
+                        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * m_enemyReturnSpeed);
+                    }
+                    else if (Vector3.Distance(transform.position, m_hookBase.position) < 3f)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed);
+                    }
+
+                    if (m_handMesh.localScale.x > 1f)
+                    {
+                        m_handMesh.localScale -= Vector3.one / 10f;
+                    }
+                    if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
+                    {
+                        m_hookState = HookState.Based;
+
+                        ChangeLocalHookState(false);
+
+                        ResetDefaultHookParapemers();
+
+                        ResetTransform();
+                    }
+                    break;
+                }
+            case ReturnableObject.Barrel:
+                {
+                    if ((Vector3.Distance(transform.position, m_hookBase.position) >= 2f) && (Vector3.Distance(transform.position, m_hookBase.position) < 100f))
+                    {
+                        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed * m_barrelReturnSpeed);
+                    }
+                    else if (Vector3.Distance(transform.position, m_hookBase.position) < 3f)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, m_hookBase.position, Time.fixedDeltaTime * m_hookMovementSpeed);
+                    }
+
+                    if (m_handMesh.localScale.x > 1f)
+                    {
+                        m_handMesh.localScale -= Vector3.one / 10f;
+                    }
+                    if (Vector3.Distance(transform.position, m_hookBase.position) < 1f)
+                    {
+                        m_hookState = HookState.Based;
+
+                        ChangeLocalHookState(false);
+
+                        ResetDefaultHookParapemers();
+
+                        ResetTransform();
+                    }
+                    break;
+                }
         }
-        if (Vector3.Distance(transform.position, m_hookBase.position) <= 1f)
-        {
-            m_hookState = HookState.Based;
 
-            ChangeLocalHookState(false);
 
-            ResetDefaultHookParapemers();
-
-            ResetTransform();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        print(other.gameObject.name);
         if (m_isHookInAir)
         {
             switch (other.gameObject.layer)
@@ -158,6 +213,13 @@ public class HookInstance : MonoBehaviour
                         {
                             StartCoroutine(FixateHitAndReturnHome(0.0f));
                         }
+                        else
+                        {
+                            if (Vector3.Distance(transform.position, m_hookBase.position) < 7f)
+                            {
+                                StartCoroutine(FixateHitAndReturnHome(0.0f));
+                            }
+                        }
                         break;
                     }
 
@@ -189,6 +251,8 @@ public class HookInstance : MonoBehaviour
         transform.localScale = m_defaultHookScale;
         transform.rotation = Quaternion.Euler(Vector3.zero);
         m_handMesh.localScale = Vector3.one;
+
+        m_returnableObject = ReturnableObject.None;
     }
 
     private void ResetTransform()

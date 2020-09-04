@@ -100,6 +100,7 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
             {
                 case "Player":
                     {
+                        m_playerInstance.PlayPunchParticles(transform.position);
                         ThrowToEndPoint();
 
                         break;
