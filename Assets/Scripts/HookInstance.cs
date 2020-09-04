@@ -104,7 +104,6 @@ public class HookInstance : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.name);
         if (m_isHookInAir)
         {
             switch (other.gameObject.layer)

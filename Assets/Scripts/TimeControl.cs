@@ -36,7 +36,7 @@ public static class TimeControl
         {
             //ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
 
-            Time.timeScale = 0.3f;
+            Time.timeScale = 0.275f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }

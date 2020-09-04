@@ -280,7 +280,7 @@ public class PlayerInstance : MonoBehaviour
             m_selfAnimator.speed = 0.65f;
         }
 
-        yield return new WaitForSecondsRealtime(distanceToPlayer / 8f);
+        yield return new WaitForSecondsRealtime(distanceToPlayer / 9f);
         PlayRunAnimation();
         ChangeSpeed(m_defaultSpeed);
         EnableSlowmo(false);

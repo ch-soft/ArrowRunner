@@ -138,7 +138,7 @@ public class GunInstance : MonoBehaviour
 
             case false:
                 {
-                    m_lineRenderer.SetColors(Color.red, Color.red);
+                    m_lineRenderer.SetColors(Color.white, Color.white);
                     break;
                 }
         }

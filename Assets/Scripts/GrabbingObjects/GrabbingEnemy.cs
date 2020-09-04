@@ -11,25 +11,27 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
     [BoxGroup("References"), SerializeField] private Rigidbody m_headRigidbody;
     [BoxGroup("References"), SerializeField] private EnemyDistanceController m_distanceController;
+    [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
+
     [Space]
     [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
     [Space]
     [BoxGroup("Preferences"), SerializeField] private Material[] m_activeMaterials;
-    private Material[] m_disabledMaterials;
-    private Material[] m_localMaterials;
-    private bool m_isOutlineActive;
 
     [HideInInspector] public bool m_isAlive;
 
+    private Material[] m_disabledMaterials;
+    private Material[] m_localMaterials;
 
     private string m_prapareWeaponAnimName = "GetAxeFromBack"; //we will use this later
     private string m_punchAnimName; //we will use this later
 
-    private bool m_enableDeathColor;
-
-    private float m_headPunchForce = 12f;
-
+    private float m_headPunchForce = 15f;
     private float m_horizontalX;
+
+    private bool m_enableDeathColor;
+    private bool m_isOutlineActive;
+    private bool m_canFlyToPlayer;
 
     private void Start()
     {
@@ -44,6 +46,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
         m_horizontalX = transform.position.x * 10f;
     }
+
 
     private void ChangeAliveState(bool state)
     {
@@ -62,6 +65,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             StartCoroutine(PullObjectToPlayer());
             FixateDeath("Hook");
+            StartCoroutine(PushEnemyToPlayer());
         }
         else
         {
@@ -86,15 +90,26 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             if (m_headPunchForce > 0f)
             {
-                m_headRigidbody.velocity += new Vector3(m_horizontalX, m_headPunchForce, m_headPunchForce);
+                m_headRigidbody.velocity += new Vector3(m_horizontalX, m_headPunchForce, m_headPunchForce * 1.5f);
                 m_headPunchForce--;
             }
+        }
 
+        if (m_canFlyToPlayer)
+        {
+            //m_rigidbody.MovePosition(transform.position + m_playerInstance.transform.position);
+
+            m_rigidbody.velocity = ((m_playerInstance.transform.position - transform.position) * Time.deltaTime * 400f);
+
+            //m_rigidbody.velocity -= m_playerInstance.transform.position / 10f;
+            //transform.position = Vector3.Lerp(transform.position, m_playerInstance.transform.position, Time.deltaTime * 5f);
         }
     }
 
     private void ActivateRagdoll()
     {
+        m_enemyRig.SetActive(true);
+
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
@@ -116,7 +131,6 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private void EnableAnimator(bool state)
     {
         m_animator.enabled = state;
-
     }
 
     private IEnumerator EnableBoxCollider(float delay, bool state)
@@ -135,7 +149,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         //    m_bonesRigidbodies[i].gameObject.layer = 16;
         //}
 
-        m_rigidbody.isKinematic = true;
+        //m_rigidbody.isKinematic = true;
 
         switch (reason)
         {
@@ -180,6 +194,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     {
         if ((m_playerInstance.m_isAlive))
         {
+            m_canFlyToPlayer = false;
+
             EnableAnimator(false);
             m_collider.enabled = false;
             ActivateRagdoll();
@@ -189,6 +205,26 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
             m_playerInstance.ShowCoolWord();
             m_playerInstance.NormalizeSpeedAndTime();
         }
+    }
+
+    private IEnumerator PushEnemyToPlayer()
+    {
+        PlayGrabbingPoseAnim();
+        m_enemyRig.SetActive(false);
+
+        //m_collider.enabled = false;
+        //ActivateRagdoll();
+        //ChangeLayers(2);
+
+        //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
+        //{
+        //    m_bonesRigidbodies[i].isKinematic = true;
+        //}
+        m_distanceController.gameObject.SetActive(false);
+        m_canFlyToPlayer = true;
+
+        yield return new WaitForSecondsRealtime(0.2f);
+        EnableAnimator(false);
     }
 
     private void ChangeColorDueLifeState()
@@ -240,5 +276,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
                 }
         }
         m_selfRenderer.materials = m_localMaterials;
+    }
+
+    private void PlayGrabbingPoseAnim()
+    {
+        m_animator.Play("GrabbingPose");
     }
 }
