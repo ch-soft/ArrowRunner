@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
 
     private float m_interpVelocity;
     private float m_interpVelocityForce = 20f;
-    private float m_returnToBaseSpeed = 0.5f;
+    private float m_returnToBaseSpeed = 0.1f;
     public float smoothTime = 0.3F;
 
     private Vector3 m_targetPos;
@@ -144,16 +144,16 @@ public class CameraController : MonoBehaviour
 
     private void ReturnCameraBack()
     {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.deltaTime * 10f);
+        transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.fixedDeltaTime * m_returnToBaseSpeed);
 
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.deltaTime * m_returnToBaseSpeed);
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.fixedDeltaTime * m_returnToBaseSpeed);
+        print("ha-ha");
 
         if (Vector3.Distance(transform.localPosition, m_defaultPosition) < 0.5f)
         {
             AllowToReturnCamera(false);
             StartingSetup();
 
-            print("ha-ha");
         }
     }
 
