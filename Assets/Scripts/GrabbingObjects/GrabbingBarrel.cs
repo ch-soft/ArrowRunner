@@ -128,7 +128,6 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
         m_explosionParticles.Play();
         FindNearestEnemies();
         yield return new WaitForSecondsRealtime(1f);
-        m_playerInstance.PlayRunAnimation();
         m_playerInstance.NormalizeSpeedAndTime();
         m_playerInstance.ResetSpeed();
         Destroy(gameObject);

@@ -39,12 +39,14 @@ public class HookInstance : MonoBehaviour
     private float m_barrelReturnSpeed = 0.17f;
 
     private Vector3 m_defaultHookScale;
+    private Vector3 m_defaultHookPosition = new Vector3(0f, 0f, 0.63f);
 
     private LineRenderer m_lineRenderer;
 
     private Transform m_parent;
 
     private bool m_isHookInAir;
+    private bool m_isBased;
 
     private void Awake()
     {
@@ -58,6 +60,7 @@ public class HookInstance : MonoBehaviour
     private void Start()
     {
         m_hookState = HookState.Based;
+        m_isBased = true;
     }
 
     private void FixedUpdate()
@@ -80,6 +83,11 @@ public class HookInstance : MonoBehaviour
 
             m_lineRenderer.SetPosition(0, m_parent.position);
             m_lineRenderer.SetPosition(1, transform.position);
+        }
+
+        if (!m_isBased && transform.parent != null)
+        {
+            transform.localPosition = m_defaultHookPosition;
         }
     }
 
@@ -122,6 +130,7 @@ public class HookInstance : MonoBehaviour
 
                         ResetTransform();
                     }
+
                     break;
                 }
             case ReturnableObject.Barrel:
@@ -149,6 +158,7 @@ public class HookInstance : MonoBehaviour
 
                         ResetTransform();
                     }
+
                     break;
                 }
         }
@@ -251,7 +261,12 @@ public class HookInstance : MonoBehaviour
 
     public void ResetTransform()
     {
-        transform.localPosition = new Vector3(0f, 0f, 0.63f);
+        transform.localPosition = m_defaultHookPosition;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    public void AllowReturnToBase(bool state)
+    {
+        m_isBased = state;
     }
 }

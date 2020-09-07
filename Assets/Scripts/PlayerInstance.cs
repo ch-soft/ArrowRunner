@@ -31,6 +31,7 @@ public class PlayerInstance : MonoBehaviour
     private string m_animationRunName = "Run";
     private string m_animationRLevitationName = "Flying";
     private string m_animationDancingName = "WinnerDancing";
+    private string m_barrelKickAnimName = "BarrelKick";
     private float m_normalizeTimeDelay = 0f;
 
     private bool m_canRun;
@@ -201,31 +202,34 @@ public class PlayerInstance : MonoBehaviour
             m_bonesRigidbodies[i].useGravity = false;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.None;
         }
-        m_cameraController.EnableFreeCamera(true);
+        //m_cameraController.EnableFreeCamera(true);
+
     }
 
     private IEnumerator ForbitToFreeJump(float delay)
     {
+        m_hookInstance.AllowReturnToBase(false);
         m_isRigCentralized = false;
-
-        ////m_selfRigidbody.useGravity = true;
 
         yield return new WaitForSeconds(delay);
         m_characterRig.localRotation = m_rigLocalRotation;
         m_selfAnimator.speed = 1f;
+        //m_gun.m_hook.ResetTransform();
         PlayRunAnimation();
-        m_gun.m_hook.ResetTransform();
-        yield return new WaitForSeconds(1.0f);
-        m_cameraController.EnableFreeCamera(false);
+
+        yield return new WaitForSeconds(.5f);
+        m_hookInstance.AllowReturnToBase(true);
+        yield return new WaitForSeconds(.5f);
+
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             m_bonesRigidbodies[i].useGravity = true;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
         }
+
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
         EnableToCollectVelocityInfo(true);
-
     }
 
     private void MoveCharacterForward()
@@ -235,7 +239,6 @@ public class PlayerInstance : MonoBehaviour
 
     public void EnableRigidbodyJump(float animaSpeed)
     {
-
         PlayFlipAnimation(animaSpeed);
         m_allowToJump = true;
         EnableFreeJump(true, 0f);
@@ -251,7 +254,7 @@ public class PlayerInstance : MonoBehaviour
     {
         m_playerIsKnocks = true;
         PlayJumpOverEnemyAnimation();
-        StartCoroutine(CheckAnimationCompleted());
+        StartCoroutine(CheckEnemyHitAnimationCompleted());
 
         ChangeSpeed(m_defaultSpeed * 3f);
         //EnableSlowmo(true);
@@ -292,7 +295,9 @@ public class PlayerInstance : MonoBehaviour
 
         m_selfAnimator.speed = 2f;
 
-        m_selfAnimator.Play("BarrelKick");
+        m_selfAnimator.Play(m_barrelKickAnimName);
+
+        StartCoroutine(CheckEnemyHitAnimationCompleted());
 
         yield return new WaitForSecondsRealtime(0f);
     }
@@ -489,13 +494,13 @@ public class PlayerInstance : MonoBehaviour
         m_punchParticles.Play();
     }
 
-    private IEnumerator CheckAnimationCompleted()
+    public IEnumerator CheckEnemyHitAnimationCompleted()
     {
-        while ((m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) % 1 < 0.9f)
+        while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.8f)
         {
+            print(m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1);
             yield return null;
         }
         PlayRunAnimation();
-        //StopCoroutine(m_checkRunAnimation);
     }
 }
