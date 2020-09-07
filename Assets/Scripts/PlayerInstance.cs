@@ -467,6 +467,8 @@ public class PlayerInstance : MonoBehaviour
             m_playerIsKnocks = false;
             StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
             m_selfAnimator.speed = 1f;
+
+            m_cameraController.AllowToReturnCamera(true);
         }
     }
 

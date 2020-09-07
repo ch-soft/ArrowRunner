@@ -7,13 +7,15 @@ public class CameraController : MonoBehaviour
     [BoxGroup("Parameters"), SerializeField] private float _durability; //from 0 to 1
     [BoxGroup("Parameters"), SerializeField] private float _staticYPosition;
     [Space]
+    [BoxGroup("Parameters"), SerializeField] private Vector3 m_defaultPosition;
+    [BoxGroup("Parameters"), SerializeField] private Vector3 m_defaultRotation;
+    [Space]
     [BoxGroup("Spec parameters"), SerializeField] private bool m_isConnectWithFace; // for First Person View
 
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_isConnectWithFace")] private Transform m_characterHead;
 
     [SerializeField] private CameraController m_secondCamera;
 
-    [HideInInspector] private Vector3 m_lastPosition;
     [HideInInspector] public bool m_rotateAroundCharacter;
     [HideInInspector]
     public Vector3 m_HeightDifference()
@@ -23,15 +25,17 @@ public class CameraController : MonoBehaviour
     }
 
     private bool m_enableFreeCamera;
+    private bool m_canReturnCameraToBase;
 
     private float m_interpVelocity;
     private float m_interpVelocityForce = 20f;
-
+    private float m_returnToBaseSpeed = 0.5f;
     public float smoothTime = 0.3F;
 
     private Vector3 m_targetPos;
     private Vector3 m_velocity = Vector3.zero;
     private Vector3 m_startingPosition;
+    private Vector3 m_lastPosition;
 
     private Transform m_winnerZoneTransform;
 
@@ -50,12 +54,22 @@ public class CameraController : MonoBehaviour
         m_startingPosition = transform.position;
     }
 
+    private void Start()
+    {
+        StartingSetup();
+    }
+
     void FixedUpdate()
     {
         if (m_rotateAroundCharacter)
         {
             transform.LookAt(_target.transform);
             transform.Translate(Vector3.right * 4f * Time.deltaTime);
+        }
+
+        if (m_canReturnCameraToBase)
+        {
+            ReturnCameraBack();
         }
     }
 
@@ -126,5 +140,32 @@ public class CameraController : MonoBehaviour
     public void ResetPosition()
     {
         transform.position = m_winnerZoneTransform.position;
+    }
+
+    private void ReturnCameraBack()
+    {
+        transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.deltaTime * 10f);
+
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.deltaTime * m_returnToBaseSpeed);
+
+        if (Vector3.Distance(transform.localPosition, m_defaultPosition) < 0.5f)
+        {
+            AllowToReturnCamera(false);
+            StartingSetup();
+
+            print("ha-ha");
+        }
+    }
+
+    private void StartingSetup()
+    {
+        transform.localPosition = m_defaultPosition;
+        transform.localRotation = Quaternion.Euler(m_defaultRotation);
+
+    }
+
+    public void AllowToReturnCamera(bool state)
+    {
+        m_canReturnCameraToBase = state;
     }
 }
