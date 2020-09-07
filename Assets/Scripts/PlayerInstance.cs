@@ -496,7 +496,7 @@ public class PlayerInstance : MonoBehaviour
 
     public IEnumerator CheckEnemyHitAnimationCompleted()
     {
-        while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.8f)
+        while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.95f)
         {
             print(m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1);
             yield return null;
