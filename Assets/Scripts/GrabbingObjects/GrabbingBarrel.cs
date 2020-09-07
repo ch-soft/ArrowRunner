@@ -23,7 +23,7 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
     private bool m_barrelWasBlowUp;
     private bool m_isDisintegrating;
 
-    private const float m_findEnemiesRadius = 20f;
+    private const float m_findEnemiesRadius = 50f;
 
     private void Start()
     {
@@ -148,7 +148,7 @@ public class GrabbingBarrel : GrabbingBaseObject, IOnHookGrab
 
             if (currentDistance < m_findEnemiesRadius)
             {
-                enemy.GetComponent<GrabbingEnemy>().PushEnemyBack();
+                enemy.GetComponent<GrabbingEnemy>().PushEnemyByExplosion();
             }
         }
     }

@@ -59,14 +59,14 @@ public class PlayerInstance : MonoBehaviour
 
         StartCoroutine(EnableShootLaserSight(true, 0f));
 
-        EnableToCollectVelocityInfo(true);
+        StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
 
         //EnableSlowmo(false);
         ChangeLifeState(true);
+        SaveDefaultSpeed();
 
         PlayRunAnimation();
         AllowToRun(true);
-        SaveDefaultSpeed();
         m_isRigCentralized = true;
 
         CheckPlayerTag();
@@ -166,8 +166,9 @@ public class PlayerInstance : MonoBehaviour
         TimeControl.m_characterIsAlive = state;
     }
 
-    private void EnableToCollectVelocityInfo(bool state)
+    private IEnumerator EnableToCollectVelocityInfo(bool state, float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
         m_enableCollectVelocityInfo = state;
     }
 
@@ -194,7 +195,7 @@ public class PlayerInstance : MonoBehaviour
 
     private void AllowToFreeJump()
     {
-        EnableToCollectVelocityInfo(false);
+        StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             //m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
@@ -229,7 +230,7 @@ public class PlayerInstance : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
-        EnableToCollectVelocityInfo(true);
+        StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
     }
 
     private void MoveCharacterForward()
@@ -305,6 +306,7 @@ public class PlayerInstance : MonoBehaviour
     public void PlayRunAnimation()
     {
         m_selfAnimator.Play(m_animationRunName);
+        ResetSpeed();
     }
 
     private void EnableSlowmo(bool state)
@@ -479,7 +481,6 @@ public class PlayerInstance : MonoBehaviour
             m_selfAnimator.speed = 1f;
 
             m_cameraController.AllowToReturnCamera(true);
-
         }
     }
 
@@ -498,9 +499,29 @@ public class PlayerInstance : MonoBehaviour
     {
         while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.95f)
         {
-            print(m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1);
             yield return null;
         }
         PlayRunAnimation();
+    }
+
+    public IEnumerator PlayJumpOverAnimation()
+    {
+        StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
+        m_selfAnimator.Play("JumpingDown");
+        //m_selfRigidbody.velocity += new Vector3(0f, 7.5f, 5.5f);
+
+        m_allowToJump = true;
+        ChangeSpeed(0.5f);
+        StartCoroutine(TimeControl.NormalizeTime(0.15f));
+        m_playerIsKnocks = false;
+        StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
+        m_selfAnimator.speed = 1f;
+
+        StartCoroutine(CheckEnemyHitAnimationCompleted());
+
+        StartCoroutine(EnableToCollectVelocityInfo(true, 2f));
+        yield return new WaitForSecondsRealtime(0.4f);
+        m_allowToJump = false;
+
     }
 }

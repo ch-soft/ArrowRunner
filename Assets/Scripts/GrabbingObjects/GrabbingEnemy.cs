@@ -14,9 +14,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
 
     [Space]
-    [BoxGroup("Preferences"), SerializeField] private Color m_deathColor;
+    [BoxGroup("Settings"), SerializeField] private Color m_deathColor;
     [Space]
-    [BoxGroup("Preferences"), SerializeField] private Material[] m_activeMaterials;
+    [BoxGroup("Settings"), SerializeField] private Material[] m_activeMaterials;
+    [BoxGroup("Settings")] public DeathType m_deathType;
 
     [HideInInspector] public bool m_isAlive;
 
@@ -32,6 +33,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     private bool m_enableDeathColor;
     private bool m_isOutlineActive;
     private bool m_canFlyToPlayer;
+
+    private bool m_isExplosionDeath;
 
     private void Start()
     {
@@ -99,7 +102,7 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         {
             //m_rigidbody.MovePosition(transform.position + m_playerInstance.transform.position);
 
-            m_rigidbody.velocity = ((m_playerInstance.transform.position - transform.position) * Time.deltaTime * 700f);
+            m_rigidbody.velocity = (m_playerInstance.transform.position - transform.position) * Time.deltaTime * 700f;
 
             //m_rigidbody.velocity -= m_playerInstance.transform.position / 10f;
             //transform.position = Vector3.Lerp(transform.position, m_playerInstance.transform.position, Time.deltaTime * 5f);
@@ -191,38 +194,85 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         }
     }
 
+    public void PushEnemyByExplosion()
+    {
+        m_canFlyToPlayer = false;
+        EnableAnimator(false);
+        m_collider.enabled = false;
+        ActivateRagdoll();
+        ChangeLayers(2);
+        m_enableDeathColor = true;
+        m_distanceController.gameObject.SetActive(false);
+        m_playerInstance.ShowCoolWord();
+
+        m_playerInstance.NormalizeSpeedAndTime(); //type 1
+    }
+
     public void PushEnemyBack()
     {
         if ((m_playerInstance.m_isAlive))
         {
-            m_canFlyToPlayer = false;
+            switch (m_deathType)
+            {
+                case DeathType.Forward:
+                    {
+                        m_canFlyToPlayer = false;
+                        EnableAnimator(false);
+                        m_collider.enabled = false;
+                        ActivateRagdoll();
+                        ChangeLayers(2);
+                        m_enableDeathColor = true;
+                        m_distanceController.gameObject.SetActive(false);
+                        m_playerInstance.ShowCoolWord();
 
-            EnableAnimator(false);
-            m_collider.enabled = false;
-            ActivateRagdoll();
-            ChangeLayers(2);
-            m_enableDeathColor = true;
-            m_distanceController.gameObject.SetActive(false);
-            m_playerInstance.ShowCoolWord();
-            m_playerInstance.NormalizeSpeedAndTime();
+                        m_playerInstance.NormalizeSpeedAndTime(); //type 1
+                        break;
+                    }
+                case DeathType.Down:
+                    {
+                        m_canFlyToPlayer = false;
+                        EnableAnimator(false);
+                        m_collider.enabled = false;
+                        //ActivateRagdoll();
+                        ChangeLayers(2);
+                        m_enableDeathColor = true;
+                        m_distanceController.gameObject.SetActive(false);
+                        m_playerInstance.ShowCoolWord();
+
+                        m_rigidbody.velocity += m_rigidbody.velocity + Vector3.down * 10f;
+
+                        StartCoroutine(m_playerInstance.PlayJumpOverAnimation()); //type 1
+                        break;
+                    }
+
+            }
         }
     }
 
     private IEnumerator PushEnemyToPlayer()
     {
-        PlayGrabbingPoseAnim();
-        m_enemyRig.SetActive(false);
+        switch (m_deathType)
+        {
+            case DeathType.Forward:
+                {
+                    PlayGrabbingPoseAnim();
+                    m_enemyRig.SetActive(false);
+                    m_distanceController.gameObject.SetActive(false);
+                    m_canFlyToPlayer = true;
+                    break;
+                }
 
-        //m_collider.enabled = false;
-        //ActivateRagdoll();
-        //ChangeLayers(2);
+            case DeathType.Down:
+                {
+                    //PlayGrabbingPoseAnim();
+                    m_enemyRig.SetActive(false);
+                    m_distanceController.gameObject.SetActive(false);
+                    //m_canFlyToPlayer = true;
+                    break;
+                }
+        }
 
-        //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
-        //{
-        //    m_bonesRigidbodies[i].isKinematic = true;
-        //}
-        m_distanceController.gameObject.SetActive(false);
-        m_canFlyToPlayer = true;
+
 
         yield return new WaitForSecondsRealtime(0.2f);
         EnableAnimator(false);

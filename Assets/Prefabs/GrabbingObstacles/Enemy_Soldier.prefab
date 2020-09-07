@@ -1227,6 +1227,7 @@ MonoBehaviour:
   m_activeMaterials:
   - {fileID: 2100000, guid: 280fef4c9f0b64a498fe0f3406767b6c, type: 2}
   - {fileID: 2100000, guid: bb55d91d41b353d41ae2ea0280a5bb28, type: 2}
+  m_deathType: 0
   m_isAlive: 0
 --- !u!136 &3856146068665991900
 CapsuleCollider:

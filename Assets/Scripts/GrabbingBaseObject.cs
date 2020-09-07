@@ -11,6 +11,12 @@ public enum GrabbingObjectType
     GrapplingBase
 }
 
+public enum DeathType
+{
+    Forward = 0,
+    Down
+}
+
 public abstract class GrabbingBaseObject : MonoBehaviour
 {
     [BoxGroup("Settings"), SerializeField] private float m_pullingForce;
