@@ -251,6 +251,8 @@ public class PlayerInstance : MonoBehaviour
     {
         m_playerIsKnocks = true;
         PlayJumpOverEnemyAnimation();
+        StartCoroutine(CheckAnimationCompleted());
+
         ChangeSpeed(m_defaultSpeed * 3f);
         //EnableSlowmo(true);
         TimeControl.PunchSlowTime();
@@ -274,7 +276,6 @@ public class PlayerInstance : MonoBehaviour
             m_selfAnimator.speed = 0.65f;
         }
 
-        StartCoroutine(CheckAnimationCompleted());
 
         yield return new WaitForSecondsRealtime(distanceToPlayer / 9f);
         ChangeSpeed(m_defaultSpeed);
@@ -490,9 +491,11 @@ public class PlayerInstance : MonoBehaviour
 
     private IEnumerator CheckAnimationCompleted()
     {
-        while (!m_selfAnimator.GetCurrentAnimatorStateInfo(0).IsName("OnEnemyJump_P1"))
+        while ((m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime) % 1 < 0.9f)
+        {
             yield return null;
+        }
         PlayRunAnimation();
-        StopCoroutine(m_checkRunAnimation);
+        //StopCoroutine(m_checkRunAnimation);
     }
 }

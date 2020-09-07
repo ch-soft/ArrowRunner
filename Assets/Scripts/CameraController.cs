@@ -64,11 +64,6 @@ public class CameraController : MonoBehaviour
             transform.LookAt(_target.transform);
             transform.Translate(Vector3.right * 4f * Time.deltaTime);
         }
-
-        //if (m_canReturnCameraToBase)
-        //{
-        //    ReturnCameraBack();
-        //}
     }
 
     private void FollowForPlayer()
@@ -139,20 +134,6 @@ public class CameraController : MonoBehaviour
     {
         transform.position = m_winnerZoneTransform.position;
     }
-
-    //private void ReturnCameraBack()
-    //{
-    //    transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.fixedDeltaTime * m_returnToBaseSpeed);
-
-    //    transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.fixedDeltaTime * m_returnToBaseSpeed);
-    //    print("ha-ha");
-
-    //    if (Vector3.Distance(transform.localPosition, m_defaultPosition) < 0.01f)
-    //    {
-    //        AllowToReturnCamera(false);
-    //        StartingSetup();
-    //    }
-    //}
 
     private void StartingSetup()
     {
