@@ -152,13 +152,10 @@ public class HookInstance : MonoBehaviour
                     break;
                 }
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.gameObject.name);
         if (m_isHookInAir)
         {
             switch (other.gameObject.layer)
@@ -191,7 +188,6 @@ public class HookInstance : MonoBehaviour
 
                         StartCoroutine(FixateHitAndReturnHome(0.5f));
                         StartCoroutine(m_coolLettering.ShowCoolWord(0.5f));
-
                         break;
                     }
                 case 8:
@@ -247,15 +243,13 @@ public class HookInstance : MonoBehaviour
     {
         transform.parent = null;
         transform.parent = m_parent;
-        transform.position = m_hookBase.position/* + m_positinonOffset*/;
         transform.localScale = m_defaultHookScale;
-        transform.rotation = Quaternion.Euler(Vector3.zero);
         m_handMesh.localScale = Vector3.one;
 
         m_returnableObject = ReturnableObject.None;
     }
 
-    private void ResetTransform()
+    public void ResetTransform()
     {
         transform.localPosition = new Vector3(0f, 0f, 0.63f);
         transform.localRotation = Quaternion.Euler(Vector3.zero);

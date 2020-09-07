@@ -214,8 +214,7 @@ public class PlayerInstance : MonoBehaviour
         m_characterRig.localRotation = m_rigLocalRotation;
         m_selfAnimator.speed = 1f;
         PlayRunAnimation();
-
-        //m_gun.m_hook.ResetDefaultHookParapemers();
+        m_gun.m_hook.ResetTransform();
         yield return new WaitForSeconds(1.0f);
         m_cameraController.EnableFreeCamera(false);
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
@@ -223,16 +222,10 @@ public class PlayerInstance : MonoBehaviour
             m_bonesRigidbodies[i].useGravity = true;
             m_bonesRigidbodies[i].interpolation = RigidbodyInterpolation.Interpolate;
         }
-
-        //m_selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY;
-
-        //for (int i = 0; i < m_bonesRigidbodies.Length; i++)
-        //{
-        //    m_bonesRigidbodies[i].constraints = RigidbodyConstraints.FreezeAll;
-        //}
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
         EnableToCollectVelocityInfo(true);
+
     }
 
     private void MoveCharacterForward()

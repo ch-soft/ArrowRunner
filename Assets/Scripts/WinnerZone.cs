@@ -5,6 +5,7 @@ using NaughtyAttributes;
 public class WinnerZone : MonoBehaviour
 {
     [BoxGroup("References"), SerializeField] private LevelController m_levelManager;
+    [BoxGroup("References"), SerializeField] private ParticleSystem[] m_confetti;
 
     private bool m_isLevelFinished;
     private PlayerInstance m_playerInstance;
@@ -22,6 +23,11 @@ public class WinnerZone : MonoBehaviour
             TimeControl.m_levelFinished = true;
             m_playerInstance.AllowToRun(false);
             StartCoroutine(m_playerInstance.PlayDancingAnimation());
+
+            for (int i = 0; i < m_confetti.Length; i++)
+            {
+                m_confetti[i].Play();
+            }
         }
     }
 }
