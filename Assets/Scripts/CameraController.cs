@@ -33,9 +33,7 @@ public class CameraController : MonoBehaviour
     public float smoothTime = 0.3F;
 
     private Vector3 m_targetPos;
-    private Vector3 m_velocity = Vector3.zero;
     private Vector3 m_startingPosition;
-    private Vector3 m_lastPosition;
 
     private Transform m_winnerZoneTransform;
 
@@ -67,10 +65,10 @@ public class CameraController : MonoBehaviour
             transform.Translate(Vector3.right * 4f * Time.deltaTime);
         }
 
-        if (m_canReturnCameraToBase)
-        {
-            ReturnCameraBack();
-        }
+        //if (m_canReturnCameraToBase)
+        //{
+        //    ReturnCameraBack();
+        //}
     }
 
     private void FollowForPlayer()
@@ -142,26 +140,24 @@ public class CameraController : MonoBehaviour
         transform.position = m_winnerZoneTransform.position;
     }
 
-    private void ReturnCameraBack()
-    {
-        transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.fixedDeltaTime * m_returnToBaseSpeed);
+    //private void ReturnCameraBack()
+    //{
+    //    transform.localPosition = Vector3.Lerp(transform.localPosition, m_defaultPosition, Time.fixedDeltaTime * m_returnToBaseSpeed);
 
-        transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.fixedDeltaTime * m_returnToBaseSpeed);
-        print("ha-ha");
+    //    transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(m_defaultRotation), Time.fixedDeltaTime * m_returnToBaseSpeed);
+    //    print("ha-ha");
 
-        if (Vector3.Distance(transform.localPosition, m_defaultPosition) < 0.5f)
-        {
-            AllowToReturnCamera(false);
-            StartingSetup();
-
-        }
-    }
+    //    if (Vector3.Distance(transform.localPosition, m_defaultPosition) < 0.01f)
+    //    {
+    //        AllowToReturnCamera(false);
+    //        StartingSetup();
+    //    }
+    //}
 
     private void StartingSetup()
     {
         transform.localPosition = m_defaultPosition;
         transform.localRotation = Quaternion.Euler(m_defaultRotation);
-
     }
 
     public void AllowToReturnCamera(bool state)

@@ -25,7 +25,7 @@ public class PlayerInstance : MonoBehaviour
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
     private Quaternion m_rigLocalRotation; //old
-
+    private IEnumerator m_checkRunAnimation;
 
 
     private string m_animationRunName = "Run";
@@ -274,10 +274,14 @@ public class PlayerInstance : MonoBehaviour
             m_selfAnimator.speed = 0.65f;
         }
 
+        StartCoroutine(CheckAnimationCompleted());
+
         yield return new WaitForSecondsRealtime(distanceToPlayer / 9f);
-        PlayRunAnimation();
         ChangeSpeed(m_defaultSpeed);
         EnableSlowmo(false);
+
+        yield return new WaitForSecondsRealtime(0.1f);
+        //PlayRunAnimation();
     }
 
     public IEnumerator PlayKickBarrelAnimation()
@@ -469,6 +473,7 @@ public class PlayerInstance : MonoBehaviour
             m_selfAnimator.speed = 1f;
 
             m_cameraController.AllowToReturnCamera(true);
+
         }
     }
 
@@ -481,5 +486,13 @@ public class PlayerInstance : MonoBehaviour
     {
         m_punchParticles.transform.position = collisionContactPoint;
         m_punchParticles.Play();
+    }
+
+    private IEnumerator CheckAnimationCompleted()
+    {
+        while (!m_selfAnimator.GetCurrentAnimatorStateInfo(0).IsName("OnEnemyJump_P1"))
+            yield return null;
+        PlayRunAnimation();
+        StopCoroutine(m_checkRunAnimation);
     }
 }
