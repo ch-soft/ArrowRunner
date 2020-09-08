@@ -44,6 +44,8 @@ public class PlayerInstance : MonoBehaviour
     private const int m_dangerousObjectLayer = 8;
     private float m_defaultSpeed;
 
+    private Coroutine m_collectVelocityInfoRoutine;
+    private Coroutine m_forbitJumpRoutine;
 
     private void Awake()
     {
@@ -59,7 +61,7 @@ public class PlayerInstance : MonoBehaviour
 
         StartCoroutine(EnableShootLaserSight(true, 0f));
 
-        StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
+        m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
 
         //EnableSlowmo(false);
         ChangeLifeState(true);
@@ -124,7 +126,7 @@ public class PlayerInstance : MonoBehaviour
             {
                 if (m_selfRigidbody.velocity.y < -3.25f)
                 {
-                    print(m_selfRigidbody.velocity.y); //this is for tests, need delete later
+                    print("Death velocity: " + m_selfRigidbody.velocity.y); //this is for tests, need delete later
 
                     FixateDeath();
                 }
@@ -168,7 +170,7 @@ public class PlayerInstance : MonoBehaviour
 
     private IEnumerator EnableToCollectVelocityInfo(bool state, float delay)
     {
-        yield return new WaitForSecondsRealtime(delay);
+        yield return new WaitForSeconds(delay);
         m_enableCollectVelocityInfo = state;
     }
 
@@ -185,7 +187,7 @@ public class PlayerInstance : MonoBehaviour
 
             case false:
                 {
-                    StartCoroutine(ForbitToFreeJump(delay));
+                    m_forbitJumpRoutine = StartCoroutine(ForbitToFreeJump(delay));
                     break;
                 }
         }
@@ -195,7 +197,11 @@ public class PlayerInstance : MonoBehaviour
 
     private void AllowToFreeJump()
     {
-        StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
+        if (m_collectVelocityInfoRoutine != null)
+        {
+            StopCoroutine(m_collectVelocityInfoRoutine);
+        }
+        m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
         for (int i = 0; i < m_bonesRigidbodies.Length; i++)
         {
             //m_bonesRigidbodies[i].constraints = RigidbodyConstraints.None;
@@ -230,7 +236,9 @@ public class PlayerInstance : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         m_isRigCentralized = true;
-        StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
+
+        m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
+        print("true 1");
     }
 
     private void MoveCharacterForward()
@@ -506,22 +514,32 @@ public class PlayerInstance : MonoBehaviour
 
     public IEnumerator PlayJumpOverAnimation()
     {
-        StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
-        m_selfAnimator.Play("JumpingDown");
-        //m_selfRigidbody.velocity += new Vector3(0f, 7.5f, 5.5f);
+        if (m_collectVelocityInfoRoutine != null)
+        {
+            StopCoroutine(m_collectVelocityInfoRoutine);
+        }
+        if (m_forbitJumpRoutine != null)
+        {
+            StopCoroutine(m_forbitJumpRoutine);
+        }
 
-        m_allowToJump = true;
-        ChangeSpeed(0.5f);
+        m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
+        m_selfAnimator.Play("JumpingDown");
+        transform.position += new Vector3(0f, 0.5f, 0f);
+        m_selfRigidbody.velocity += new Vector3(0f, 6f, 0f);
+
+        //m_allowToJump = true;
+        ChangeSpeed(12f);
         StartCoroutine(TimeControl.NormalizeTime(0.15f));
         m_playerIsKnocks = false;
-        StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0f));
+        StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0.45f));
         m_selfAnimator.speed = 1f;
 
         StartCoroutine(CheckEnemyHitAnimationCompleted());
 
-        StartCoroutine(EnableToCollectVelocityInfo(true, 2f));
-        yield return new WaitForSecondsRealtime(0.4f);
-        m_allowToJump = false;
+        m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(true, 2f));
 
+        yield return new WaitForSecondsRealtime(0.4f);
+        //m_allowToJump = false;
     }
 }

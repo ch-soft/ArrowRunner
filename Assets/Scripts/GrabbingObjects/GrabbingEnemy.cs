@@ -264,10 +264,10 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
 
             case DeathType.Down:
                 {
-                    //PlayGrabbingPoseAnim();
+                    PlayGrabbingPoseAnim();
                     m_enemyRig.SetActive(false);
                     m_distanceController.gameObject.SetActive(false);
-                    //m_canFlyToPlayer = true;
+                    m_canFlyToPlayer = true;
                     break;
                 }
         }
