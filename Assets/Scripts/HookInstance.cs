@@ -136,6 +136,7 @@ public class HookInstance : MonoBehaviour
             case ReturnableObject.Enemy:
             case ReturnableObject.Barrel:
                 {
+
                     if (m_returnableObject == null)
                     {
                         print("Object is null");
@@ -143,7 +144,6 @@ public class HookInstance : MonoBehaviour
                     else
                     {
                         transform.position = m_returnableObject.position;
-                        print(m_returnableObject.position);
                     }
 
 
@@ -221,11 +221,12 @@ public class HookInstance : MonoBehaviour
                             {
                                 other.gameObject.GetComponent<GrabbingBaseObject>().PrepareGrabbingObject(m_parent.position, transform);
                                 other.gameObject.GetComponent<IOnHookGrab>().OnHookGrab();
+                                StartCoroutine(FixateHitAndReturnHome(0.0f));
                             }
                             else
                             {
                                 StartCoroutine(FixateHitAndReturnHome(0.0f));
-
+                                //print("wha 1");
                             }
                         }
                         if (!other.gameObject.GetComponent<GrabbingEnemy>())

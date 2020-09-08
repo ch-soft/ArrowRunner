@@ -238,7 +238,6 @@ public class PlayerInstance : MonoBehaviour
         m_isRigCentralized = true;
 
         m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(true, 0f));
-        print("true 1");
     }
 
     private void MoveCharacterForward()
