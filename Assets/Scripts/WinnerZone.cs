@@ -22,6 +22,7 @@ public class WinnerZone : MonoBehaviour
             m_levelManager.OpenWinnerPanel();
             TimeControl.m_levelFinished = true;
             m_playerInstance.AllowToRun(false);
+
             StartCoroutine(m_playerInstance.PlayDancingAnimation());
 
             for (int i = 0; i < m_confetti.Length; i++)

@@ -17,6 +17,7 @@ public class PlayerInstance : MonoBehaviour
     [BoxGroup("References"), SerializeField] private CoolLettering m_coolLettering;
     [BoxGroup("References"), SerializeField] private HookInstance m_hookInstance;
     [BoxGroup("References"), SerializeField] private ParticleSystem m_punchParticles;
+
     [HideInInspector] public CameraController m_cameraController;
 
     [HideInInspector] public bool m_isAlive;
@@ -42,7 +43,7 @@ public class PlayerInstance : MonoBehaviour
     private bool m_allowToJump;
 
     private const int m_dangerousObjectLayer = 8;
-    private float m_defaultSpeed;
+    private const float m_defaultSpeed = 10f;
 
     private Coroutine m_collectVelocityInfoRoutine;
     private Coroutine m_forbitJumpRoutine;
@@ -65,10 +66,7 @@ public class PlayerInstance : MonoBehaviour
 
         //EnableSlowmo(false);
         ChangeLifeState(true);
-        SaveDefaultSpeed();
 
-        PlayRunAnimation();
-        AllowToRun(true);
         m_isRigCentralized = true;
 
         CheckPlayerTag();
@@ -465,11 +463,6 @@ public class PlayerInstance : MonoBehaviour
     private void ChangeSpeed(float speed)
     {
         m_movementSpeed = speed;
-    }
-
-    private void SaveDefaultSpeed()
-    {
-        m_defaultSpeed = m_movementSpeed;
     }
 
     public void ShowCoolWord()
