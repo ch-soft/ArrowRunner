@@ -525,8 +525,8 @@ public class PlayerInstance : MonoBehaviour
 
         m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
         m_selfAnimator.Play("JumpingDown");
-        transform.position += new Vector3(0f, 0.5f, 0f);
-        m_selfRigidbody.velocity += new Vector3(0f, 6f, 0f);
+        transform.position += new Vector3(0f, 0.7f, 0f);
+        m_selfRigidbody.velocity += new Vector3(0f, 6.5f, 0f);
 
         //m_allowToJump = true;
         ChangeSpeed(12f);

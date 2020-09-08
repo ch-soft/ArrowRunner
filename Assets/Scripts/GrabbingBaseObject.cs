@@ -24,6 +24,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     [BoxGroup("Settings")] public GrabbingObjectType m_grabbingObjectType;
     [Space]
     [BoxGroup("References"), SerializeField] public Rigidbody m_rigidbody;
+    [BoxGroup("References"), SerializeField] public Transform m_grabbingPoint;
 
     [BoxGroup("Spec parameters"), SerializeField] private bool m_useCharacterRig; // for First Person View
     [BoxGroup("Spec parameters"), SerializeField, ShowIf("m_useCharacterRig")] private Transform m_characterRig;

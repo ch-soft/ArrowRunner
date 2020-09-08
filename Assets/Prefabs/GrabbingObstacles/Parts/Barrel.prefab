@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1496572178902977570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8331516707031216886}
+  m_Layer: 0
+  m_Name: GraggingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8331516707031216886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496572178902977570}
+  m_LocalRotation: {x: 0.00000022583697, y: 0.00000008851975, z: 0.00000058377134,
+    w: 1}
+  m_LocalPosition: {x: 0, y: 0.329, z: -0.06}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_Children: []
+  m_Father: {fileID: 8939335428456522933}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5356398357707347622
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +62,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: -1.7107337, z: -17.49}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
-  m_Children: []
+  m_Children:
+  - {fileID: 8331516707031216886}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -91,11 +123,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 2
   m_CollisionDetection: 0
 --- !u!114 &5356398357707347617
 MonoBehaviour:
@@ -109,15 +141,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2f3e47a301c7e439989803d9ec84e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pullingForce: 0
-  m_forceDirection: {x: 0, y: 0, z: 0}
-  m_grabbingObjectType: 0
+  m_pullingForce: 6
+  m_forceDirection: {x: 0, y: 20, z: 20}
+  m_grabbingObjectType: 2
   m_rigidbody: {fileID: 5356398357707347623}
+  m_grabbingPoint: {fileID: 8331516707031216886}
+  m_useCharacterRig: 0
+  m_characterRig: {fileID: 0}
   m_pullingDirection: {x: 0, y: 0, z: 0}
   m_pullingObject: {fileID: 0}
   m_objectWasAttracted: 0
+  m_isGrabbing: 0
   m_playerInstance: {fileID: 0}
   m_selfRenderer: {fileID: 5938394003034858106}
+  m_endPoint: {fileID: 0}
+  m_explosionParticles: {fileID: 0}
   m_isFalling: 0
   m_isAlive: 0
   m_activeMaterial: {fileID: 2100000, guid: da6b57587119c624dbfea07be4e8b0ea, type: 2}

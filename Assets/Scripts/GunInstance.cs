@@ -184,13 +184,21 @@ public class GunInstance : MonoBehaviour
             {
                 case 8:
                     {
+                        Transform grabbingPoint = hit.transform.gameObject.GetComponent<GrabbingBaseObject>().m_grabbingPoint;
+
                         if (hit.transform.gameObject.GetComponent<GrabbingBarrel>())
                         {
-                            m_hook.m_returnableObject = ReturnableObject.Barrel;
+                            m_hook.m_returnableObjectType = ReturnableObject.Barrel;
+                            m_hook.m_returnableObject = grabbingPoint;
+                        }
+                        else if (hit.transform.gameObject.GetComponent<GrabbingEnemy>())
+                        {
+                            m_hook.m_returnableObjectType = ReturnableObject.Enemy;
+                            m_hook.m_returnableObject = grabbingPoint;
                         }
                         else
                         {
-                            m_hook.m_returnableObject = ReturnableObject.Enemy;
+                            m_hook.m_returnableObjectType = ReturnableObject.Other;
                         }
 
                         m_hook.m_targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
@@ -203,7 +211,7 @@ public class GunInstance : MonoBehaviour
                 case 15:
                     {
                         //m_hook.m_targetPosition = new Vector3(0f, hit.point.y, hit.point.z);
-                        m_hook.m_returnableObject = ReturnableObject.Other;
+                        m_hook.m_returnableObjectType = ReturnableObject.Other;
 
                         m_hook.m_targetPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
                         m_hook.m_hookState = HookState.FliesToTarget;

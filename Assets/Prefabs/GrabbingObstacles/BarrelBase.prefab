@@ -224,41 +224,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347623, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347623, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347623, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347617, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_grabbingObjectType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347617, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_pullingForce
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347617, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_forceDirection.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5356398357707347617, guid: bbd705bc8d11b684cbca3b2b523cb57d,
-        type: 3}
-      propertyPath: m_forceDirection.z
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 5356398357707347617, guid: bbd705bc8d11b684cbca3b2b523cb57d,
         type: 3}
       propertyPath: m_endPoint
