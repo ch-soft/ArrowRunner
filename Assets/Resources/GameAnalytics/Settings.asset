@@ -28,19 +28,19 @@ MonoBehaviour:
   gameKey:
   - e45d297839838c5b09953cd8ec498787
   secretKey:
-  - 
+  - bebb87911db55504c115a69fb736fa57f277fdac
   Build:
   - 0.1
   SelectedPlatformOrganization:
-  - 
+  - Malvo
   SelectedPlatformStudio:
-  - 
+  - Malvo
   SelectedPlatformGame:
-  - 
-  SelectedPlatformGameID: ffffffff
-  SelectedOrganization: 00000000
-  SelectedStudio: 00000000
-  SelectedGame: 00000000
+  - Arrow Runner - Android
+  SelectedPlatformGameID: a7bc0100
+  SelectedOrganization: 02000000
+  SelectedStudio: 01000000
+  SelectedGame: 01000000
   NewVersion: 
   Changes: 
   SignUpOpen: 0
