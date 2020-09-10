@@ -41,7 +41,6 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
         m_targetPos = transform.position;
 
         if (m_isConnectWithFace)
@@ -55,6 +54,8 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         StartingSetup();
+
+        m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
     }
 
     void FixedUpdate()

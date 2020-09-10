@@ -11,6 +11,7 @@ TagManager:
   - CoolLettering
   - Barrel
   - Pusher
+  - LevelManager
   layers:
   - Default
   - TransparentFX

@@ -13,17 +13,11 @@ public static class TimeControl
     public static float slowdownFactor = 0.125f;
     public static float slowdownLength = 2f;
 
-    public static void AutoNormalizeTime()
-    {
-        //Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
-        //Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-    }
 
     public static void SlowTime()
     {
         if (!m_levelFinished)
         {
-            //ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
 
             Time.timeScale = slowdownFactor;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -34,7 +28,6 @@ public static class TimeControl
     {
         if (!m_levelFinished)
         {
-            //ChangeTimeScale(_slowmoTime, Time.timeScale * 0.02f);
 
             Time.timeScale = 0.275f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -49,12 +42,5 @@ public static class TimeControl
             Time.timeScale = _normalTime;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
-
-    }
-
-    private static void ChangeTimeScale(float timeScale, float fixedDeltaTimeMultiplier)
-    {
-        Time.timeScale = timeScale;
-        Time.fixedDeltaTime = fixedDeltaTimeMultiplier;
     }
 }

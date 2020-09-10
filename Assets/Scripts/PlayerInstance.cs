@@ -23,6 +23,8 @@ public class PlayerInstance : MonoBehaviour
     [HideInInspector] public bool m_isAlive;
     [HideInInspector] public bool m_playerIsKnocks;
 
+    [BoxGroup("References")] public Transform m_characterFoot;
+
     private Rigidbody m_selfRigidbody;
     private Animator m_selfAnimator;
     private Quaternion m_rigLocalRotation; //old

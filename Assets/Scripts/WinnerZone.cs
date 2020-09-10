@@ -4,7 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 public class WinnerZone : MonoBehaviour
 {
-    [BoxGroup("References"), SerializeField] private LevelController m_levelManager;
+    [BoxGroup("References")] private LevelController m_levelManager;
     [BoxGroup("References"), SerializeField] private ParticleSystem[] m_confetti;
 
     private bool m_isLevelFinished;
@@ -13,6 +13,7 @@ public class WinnerZone : MonoBehaviour
     private void Awake()
     {
         m_playerInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInstance>();
+        m_levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelController>();
     }
 
     private void OnTriggerEnter(Collider other)
