@@ -29142,7 +29142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1985959b34fdaec40a4784356b7e75ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelManager: {fileID: 0}
   m_confetti:
   - {fileID: 5765107306233750943}
   - {fileID: 6109738762808881230}
@@ -43403,7 +43402,7 @@ GameObject:
   - component: {fileID: 6109738763209441284}
   m_Layer: 0
   m_Name: Level-3
-  m_TagString: Untagged
+  m_TagString: SpawnedLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

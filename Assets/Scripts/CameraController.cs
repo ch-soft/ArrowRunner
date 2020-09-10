@@ -56,6 +56,11 @@ public class CameraController : MonoBehaviour
         StartingSetup();
 
         m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
+
+        if (m_secondCamera == null)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, m_winnerZoneTransform.position.z);
+        }
     }
 
     void FixedUpdate()
@@ -114,9 +119,12 @@ public class CameraController : MonoBehaviour
 
     public void ChangeActiveCamera()
     {
-        m_secondCamera.gameObject.SetActive(true);
-        m_secondCamera.transform.position = transform.position;
+        //m_secondCamera.transform.position = new Vector3(_target.transform.position.x, _target.transform.position.y, _target.transform.position.z);
+
+        //m_secondCamera.gameObject.SetActive(true);
+        //m_secondCamera.transform.position = transform.position;
         m_secondCamera.m_rotateAroundCharacter = true;
+
         gameObject.SetActive(false);
     }
 

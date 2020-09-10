@@ -8,10 +8,11 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
     [BoxGroup("References"), SerializeField] private Animator m_swordAnimator;
     [BoxGroup("References"), SerializeField] private Rigidbody[] m_bonesRigidbodies;
     [BoxGroup("References"), SerializeField] private Collider m_collider;
-    [BoxGroup("References"), SerializeField] private Renderer m_selfRenderer;
+    [BoxGroup("References"), SerializeField] private SkinnedMeshRenderer m_selfRenderer;
     [BoxGroup("References"), SerializeField] private Rigidbody m_headRigidbody;
     [BoxGroup("References"), SerializeField] private EnemyDistanceController m_distanceController;
     [BoxGroup("References"), SerializeField] private GameObject m_enemyRig;
+    [BoxGroup("References"), SerializeField] private Mesh[] m_meshesList;
 
     [Space]
     [BoxGroup("Settings"), SerializeField] private Color m_deathColor;
@@ -48,6 +49,8 @@ public class GrabbingEnemy : GrabbingBaseObject, IOnHookGrab
         ChangeAliveState(true);
 
         m_horizontalX = transform.position.x * 10f;
+
+        m_selfRenderer.sharedMesh = m_meshesList[Random.Range(0, m_meshesList.Length)];
     }
 
 

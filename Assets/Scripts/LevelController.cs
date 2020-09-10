@@ -177,23 +177,26 @@ public class LevelController : MonoBehaviour
 
     private void SpawnLevelFromArray()
     {
-        if (PlayerPrefs.HasKey("CurrentSpawnedLevel"))
+        if(GameObject.FindGameObjectsWithTag("SpawnedLevel").Length < 1)
         {
-            m_currentSpawnedLevelID = PlayerPrefs.GetInt("CurrentSpawnedLevel");
-        }
-        else
-        {
-            m_currentSpawnedLevelID = 0;
-            PlayerPrefs.SetInt("CurrentSpawnedLevel", 0);
-        }
+            if (PlayerPrefs.HasKey("CurrentSpawnedLevel"))
+            {
+                m_currentSpawnedLevelID = PlayerPrefs.GetInt("CurrentSpawnedLevel");
+            }
+            else
+            {
+                m_currentSpawnedLevelID = 0;
+                PlayerPrefs.SetInt("CurrentSpawnedLevel", 0);
+            }
 
-        if ((m_currentSpawnedLevelID > m_listOfLevels.Length - 1) || (m_currentSpawnedLevelID < 0))
-        {
-            m_currentSpawnedLevelID = 0;
-            PlayerPrefs.SetInt("CurrentSpawnedLevel", 0);
-        }
+            if ((m_currentSpawnedLevelID > m_listOfLevels.Length - 1) || (m_currentSpawnedLevelID < 0))
+            {
+                m_currentSpawnedLevelID = 0;
+                PlayerPrefs.SetInt("CurrentSpawnedLevel", 0);
+            }
 
-        GameObject currentLevelObject = Instantiate(m_listOfLevels[m_currentSpawnedLevelID], Vector3.zero, Quaternion.identity);
+            GameObject currentLevelObject = Instantiate(m_listOfLevels[m_currentSpawnedLevelID], Vector3.zero, Quaternion.identity);
+        }
     }
 
     private void NullifyLevelsAmount()

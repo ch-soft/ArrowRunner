@@ -12,6 +12,7 @@ TagManager:
   - Barrel
   - Pusher
   - LevelManager
+  - SpawnedLevel
   layers:
   - Default
   - TransparentFX

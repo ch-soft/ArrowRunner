@@ -52,7 +52,7 @@ public class CheatPanel : MonoBehaviour
 
     private void CheatPanelProcessing()
     {
-        if ((Input.touchCount == 3) || (Input.GetMouseButton(2))) _cheatPanelTimer += Time.deltaTime;
+        if ((Input.touchCount == 3) || (Input.GetMouseButton(2))) _cheatPanelTimer += Time.unscaledTime;
         else _cheatPanelTimer = 0f;
 
         if (_cheatPanelTimer > 1f)

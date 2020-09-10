@@ -14690,8 +14690,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5948025532387184081}
   m_Layer: 0
-  m_Name: Level-
-  m_TagString: Untagged
+  m_Name: Level-1
+  m_TagString: SpawnedLevel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33737,7 +33737,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1985959b34fdaec40a4784356b7e75ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelManager: {fileID: 0}
   m_confetti:
   - {fileID: 6215038066034124874}
   - {fileID: 5948025533056204187}
