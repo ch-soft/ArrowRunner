@@ -14,15 +14,27 @@ public class LevelController : MonoBehaviour
 
     [BoxGroup("References"), SerializeField] private Animator m_winnerAnimator;
     [BoxGroup("References"), SerializeField] private Animator m_defeatAnimator;
+    [Space]
+    [BoxGroup("Scroll Bar References"), SerializeField] private Slider m_progressBar;
+    [BoxGroup("Scroll Bar References"), SerializeField] private Text m_currentLevelText;
+
     private PlayerInstance m_playerInstance;
+    private WinnerZone m_winnerZone;
+
+    private Vector3 m_winnerZonePosition;
 
     private const int m_currentLevel = 1;
+
+    private float m_progressBarMaxValue;
 
     private void Awake()
     {
         AnalyticsManager.Initialize();
 
         m_playerInstance = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInstance>();
+        m_winnerZone = GameObject.FindGameObjectWithTag("WinnerZone").GetComponent<WinnerZone>();
+
+        m_winnerZonePosition = m_winnerZone.transform.position;
 
         m_tapToPlayButton.onClick.AddListener(StartRun);
 
@@ -41,6 +53,13 @@ public class LevelController : MonoBehaviour
         StartCoroutine(TimeControl.NormalizeTime(0f));
 
         TimeControl.m_levelFinished = false;
+
+        SetupScrollBar();
+    }
+
+    private void LateUpdate()
+    {
+        CalculateProgressBarValue();
     }
 
     private void StartRun()
@@ -82,5 +101,19 @@ public class LevelController : MonoBehaviour
 
             m_winnerAnimator.Play("ShowEndgamePanel");
         }
+    }
+
+    private void SetupScrollBar()
+    {
+        m_currentLevelText.text = m_currentLevel.ToString();
+
+        m_progressBar.maxValue = Vector3.Distance(m_playerInstance.transform.position, m_winnerZonePosition);
+        m_progressBarMaxValue = m_progressBar.maxValue;
+        print(m_progressBar.maxValue);
+    }
+
+    private void CalculateProgressBarValue()
+    {
+        m_progressBar.value = m_progressBarMaxValue - Vector3.Distance(m_playerInstance.transform.position, m_winnerZonePosition);
     }
 }
