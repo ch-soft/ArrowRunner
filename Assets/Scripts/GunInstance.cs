@@ -225,6 +225,7 @@ public class GunInstance : MonoBehaviour
         {
             //enemy is not is sight, hook will be short
         }
+        m_hook.AllowReturnToBase(true);
 
         m_startingMousePosition = Vector3.zero;
     }

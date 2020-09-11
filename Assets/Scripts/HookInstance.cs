@@ -170,6 +170,7 @@ public class HookInstance : MonoBehaviour
                         ResetDefaultHookParapemers();
 
                         ResetTransform();
+
                     }
 
                     break;

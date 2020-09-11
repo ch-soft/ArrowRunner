@@ -27,25 +27,25 @@ public class GrapplingBase : GrabbingBaseObject, IOnHookGrab
         if ((m_distanceToCharacter >= 0) && (m_distanceToCharacter < 10))
         {
             m_timeInAir = 0.35f;
-            m_animationSpeed = 1.05f;
+            m_animationSpeed = 1.0f;
 
         }
         else if ((m_distanceToCharacter >= 10) && (m_distanceToCharacter < 14))
         {
             m_timeInAir = 0.4f;
-            m_animationSpeed = 0.95f;
+            m_animationSpeed = 0.9f;
 
         }
         else if ((m_distanceToCharacter >= 14) && (m_distanceToCharacter < 17))
         {
             m_timeInAir = 0.45f;
-            m_animationSpeed = 0.85f;
+            m_animationSpeed = 0.8f;
 
         }
         else if ((m_distanceToCharacter >= 17) && (m_distanceToCharacter < 100))
         {
             m_timeInAir = 0.5f;
-            m_animationSpeed = 0.75f;
+            m_animationSpeed = 0.7f;
         }
 
         StartCoroutine(MakeGrapplingMove(m_timeInAir, m_animationSpeed));

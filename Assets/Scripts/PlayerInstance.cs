@@ -301,6 +301,8 @@ public class PlayerInstance : MonoBehaviour
     {
         m_playerIsKnocks = true;
         PlayJumpOverEnemyAnimation();
+
+        yield return new WaitForEndOfFrame();
         StartCoroutine(CheckEnemyHitAnimationCompleted());
 
         ChangeSpeed(m_defaultSpeed * 3f);
@@ -344,9 +346,10 @@ public class PlayerInstance : MonoBehaviour
 
         m_selfAnimator.Play(m_barrelKickAnimName);
 
+
+        yield return new WaitForSecondsRealtime(0.1f);
         StartCoroutine(CheckEnemyHitAnimationCompleted());
 
-        yield return new WaitForSecondsRealtime(0f);
     }
 
     public void PlayRunAnimation()
@@ -551,9 +554,8 @@ public class PlayerInstance : MonoBehaviour
         {
             yield return null;
         }
+        print("it's alive");
         PlayRunAnimation();
-
-        yield return new WaitForSecondsRealtime(0.2f);
     }
 
     public IEnumerator PlayJumpOverAnimation()
@@ -566,6 +568,7 @@ public class PlayerInstance : MonoBehaviour
         {
             StopCoroutine(m_forbitJumpRoutine);
         }
+        m_hookInstance.AllowReturnToBase(false);
 
         m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(false, 0f));
         m_selfAnimator.Play("JumpingDown");
@@ -579,11 +582,12 @@ public class PlayerInstance : MonoBehaviour
         StartCoroutine(m_hookInstance.FixateHitAndReturnHome(0.45f));
         m_selfAnimator.speed = 1f;
 
-        StartCoroutine(CheckEnemyHitAnimationCompleted());
 
         m_collectVelocityInfoRoutine = StartCoroutine(EnableToCollectVelocityInfo(true, 2f));
 
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForEndOfFrame();
+        StartCoroutine(CheckEnemyHitAnimationCompleted());
+
         //m_allowToJump = false;
     }
 }

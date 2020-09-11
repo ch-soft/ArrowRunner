@@ -36,7 +36,7 @@ public class CheatPanel : MonoBehaviour
     private void OpenPanel()
     {
         m_animator.Play("OpenCheatPanel");
-
+        StartCoroutine(TimeControl.NormalizeTime(0f));
     }
 
     private void ClosePanel()
