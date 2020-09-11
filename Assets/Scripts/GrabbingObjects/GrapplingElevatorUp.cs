@@ -26,13 +26,13 @@ public class GrapplingElevatorUp : GrabbingBaseObject, IOnHookGrab
         m_distanceToCharacter = Vector3.Distance(m_playerInstance.transform.position, transform.position);
         if ((m_distanceToCharacter >= 0) && (m_distanceToCharacter < 10))
         {
-            m_timeInAir = 0.4f;
+            m_timeInAir = 0.45f;
             m_animationSpeed = 1.1f;
 
         }
         else if ((m_distanceToCharacter >= 10) && (m_distanceToCharacter < 14))
         {
-            m_timeInAir = 0.45f;
+            m_timeInAir = 0.475f;
             m_animationSpeed = 0.9f;
 
         }

@@ -67,7 +67,7 @@ public class LevelController : MonoBehaviour
         SetupScrollBar();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         CalculateProgressBarValue();
     }

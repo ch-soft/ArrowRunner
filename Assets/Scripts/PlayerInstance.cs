@@ -256,6 +256,8 @@ public class PlayerInstance : MonoBehaviour
 
     public void EnableJumpOnPlank(float animaSpeed)
     {
+        ChangeJumpForceModifier(1.2f);
+
         PlayFlipPlankAnimation(animaSpeed);
         m_allowToJump = true;
         EnableFreeJump(true, 0f);
@@ -265,6 +267,7 @@ public class PlayerInstance : MonoBehaviour
     {
         m_allowToJump = false;
         EnableFreeJump(false, delay);
+        PushDown();
     }
 
     public void EnableElevatorJump(float animaSpeed)
@@ -285,11 +288,11 @@ public class PlayerInstance : MonoBehaviour
     private IEnumerator PushDown()
     {
         m_jumpForceModifier = -5f;
+        m_allowToJump = true;
 
         yield return new WaitForSecondsRealtime(0.1f);
 
         ChangeJumpForceModifier(1f);
-
         m_allowToJump = false;
 
     }
@@ -483,6 +486,7 @@ public class PlayerInstance : MonoBehaviour
     private void PlayFlipPlankAnimation(float animSpeed)
     {
         m_selfAnimator.speed = animSpeed;
+
         //m_selfAnimator.Play("SwingToLand");
         m_selfAnimator.Play("BackFlip");
         //Animation backFlipAnim = m_selfAnimator["BackFlip"];
@@ -543,11 +547,13 @@ public class PlayerInstance : MonoBehaviour
 
     public IEnumerator CheckEnemyHitAnimationCompleted()
     {
-        while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.95f)
+        while (m_selfAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1 < 0.9f)
         {
             yield return null;
         }
         PlayRunAnimation();
+
+        yield return new WaitForSecondsRealtime(0.2f);
     }
 
     public IEnumerator PlayJumpOverAnimation()

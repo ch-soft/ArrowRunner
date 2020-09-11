@@ -126,7 +126,7 @@ public abstract class GrabbingBaseObject : MonoBehaviour
         //m_playerInstance.EnableFreeJump(true);
 
 
-        yield return new WaitForSecondsRealtime(timeInAir * 1.25f); //можно сделать зависимость этого числа от расстояния до персонажа
+        yield return new WaitForSecondsRealtime(timeInAir); //можно сделать зависимость этого числа от расстояния до персонажа
         m_playerInstance.DisableJumpOnPlank(timeInAir * 2.0f);
         //m_playerInstance.EnableFreeJump(false);
 

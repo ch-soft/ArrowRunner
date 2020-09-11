@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using NaughtyAttributes;
+using System.Collections;
+
 public class CameraController : MonoBehaviour
 {
     [BoxGroup("Parameters"), SerializeField] private GameObject _target;
@@ -53,14 +55,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        StartingSetup();
-
-        m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
-
-        if (m_secondCamera == null)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, m_winnerZoneTransform.position.z);
-        }
+        StartCoroutine(StartingSetup());
     }
 
     void FixedUpdate()
@@ -144,10 +139,18 @@ public class CameraController : MonoBehaviour
         transform.position = m_winnerZoneTransform.position;
     }
 
-    private void StartingSetup()
+    private IEnumerator StartingSetup()
     {
+        yield return new WaitForSecondsRealtime(0.1f);
         transform.localPosition = m_defaultPosition;
         transform.localRotation = Quaternion.Euler(m_defaultRotation);
+
+        m_winnerZoneTransform = GameObject.FindGameObjectWithTag("WinnerZone").transform;
+
+        if (m_secondCamera == null)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, m_winnerZoneTransform.position.z);
+        }
     }
 
     public void AllowToReturnCamera(bool state)
