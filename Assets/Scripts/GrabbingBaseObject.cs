@@ -8,7 +8,8 @@ public enum GrabbingObjectType
     EnemyCharacter,
     Barrel,
     Bridge,
-    GrapplingBase
+    GrapplingBase,
+    Elevator
 }
 
 public enum DeathType
@@ -120,13 +121,29 @@ public abstract class GrabbingBaseObject : MonoBehaviour
     {
         m_isGrabbing = true;
         m_objectWasAttracted = true;
-        m_playerInstance.EnableRigidbodyJump(animSpeed);
+        m_playerInstance.EnableJumpOnPlank(animSpeed);
         //m_playerInstance.
         //m_playerInstance.EnableFreeJump(true);
 
 
-        yield return new WaitForSecondsRealtime(timeInAir); //можно сделать зависимость этого числа от расстояния до персонажа
-        m_playerInstance.DisableRigidbodyJump(timeInAir * 2.0f);
+        yield return new WaitForSecondsRealtime(timeInAir * 1.25f); //можно сделать зависимость этого числа от расстояния до персонажа
+        m_playerInstance.DisableJumpOnPlank(timeInAir * 2.0f);
+        //m_playerInstance.EnableFreeJump(false);
+
+        m_isGrabbing = false;
+    }
+
+    public IEnumerator MakeElevatingUpMove(float timeInAir, float animSpeed)
+    {
+        m_isGrabbing = true;
+        m_objectWasAttracted = true;
+        m_playerInstance.EnableElevatorJump(animSpeed);
+        //m_playerInstance.
+        //m_playerInstance.EnableFreeJump(true);
+
+
+        yield return new WaitForSecondsRealtime(timeInAir * 1.425f); //можно сделать зависимость этого числа от расстояния до персонажа
+        m_playerInstance.DisableElevatorJump(timeInAir * 2.0f);
         //m_playerInstance.EnableFreeJump(false);
 
         m_isGrabbing = false;

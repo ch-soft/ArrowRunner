@@ -9,6 +9,7 @@ public class HookSphere : MonoBehaviour
     private GrabbingBridge m_currentBridge;
     private GrapplingBase m_currentGrapplingBase;
     private GrabbingBarrel m_currentBarrel;
+    private GrapplingElevatorUp m_currentElevatorUp;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -36,6 +37,12 @@ public class HookSphere : MonoBehaviour
                 {
                     m_currentBarrel= other.gameObject.GetComponent<GrabbingBarrel>();
                     m_currentBarrel.SwitchOutlineState(true);
+                    break;
+                }
+            case "ElevatorUp":
+                {
+                    m_currentElevatorUp = other.gameObject.GetComponent<GrapplingElevatorUp>();
+                    m_currentElevatorUp.SwitchOutlineState(true);
                     break;
                 }
         }
@@ -69,6 +76,12 @@ public class HookSphere : MonoBehaviour
                     m_currentBarrel.SwitchOutlineState(false);
                     break;
                 }
+            case "ElevatorUp":
+                {
+                    m_currentElevatorUp = other.gameObject.GetComponent<GrapplingElevatorUp>();
+                    m_currentElevatorUp.SwitchOutlineState(false);
+                    break;
+                }
         }
     }
 
@@ -91,6 +104,10 @@ public class HookSphere : MonoBehaviour
         if (m_currentBarrel != null)
         {
             m_currentBarrel.SwitchOutlineState(false);
+        }
+        if (m_currentElevatorUp != null)
+        {
+            m_currentElevatorUp.SwitchOutlineState(false);
         }
     }
 }

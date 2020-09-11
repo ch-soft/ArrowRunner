@@ -35,7 +35,9 @@ public class PlayerInstance : MonoBehaviour
     private string m_animationRLevitationName = "Flying";
     private string m_animationDancingName = "WinnerDancing";
     private string m_barrelKickAnimName = "BarrelKick";
+
     private float m_normalizeTimeDelay = 0f;
+    private float m_jumpForceModifier;
 
     private bool m_canRun;
     private bool m_enableCollectVelocityInfo;
@@ -72,6 +74,8 @@ public class PlayerInstance : MonoBehaviour
         m_isRigCentralized = true;
 
         CheckPlayerTag();
+
+        ChangeJumpForceModifier(1f);
     }
 
     private void FixedUpdate()
@@ -82,7 +86,7 @@ public class PlayerInstance : MonoBehaviour
 
             if (m_allowToJump)
             {
-                m_selfRigidbody.velocity += new Vector3(0, 0.85f, 0f) / 2f;
+                m_selfRigidbody.velocity += new Vector3(0, 0.85f * m_jumpForceModifier, 0f) / 2f;
             }
         }
     }
@@ -168,6 +172,11 @@ public class PlayerInstance : MonoBehaviour
         TimeControl.m_characterIsAlive = state;
     }
 
+    private void ChangeJumpForceModifier(float force)
+    {
+        m_jumpForceModifier = force;
+    }
+
     private IEnumerator EnableToCollectVelocityInfo(bool state, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -245,17 +254,44 @@ public class PlayerInstance : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, transform.position + Vector3.forward, m_movementSpeed * Time.fixedDeltaTime); ; /*m_selfRigidbody.MovePosition(transform.position + Vector3.forward * m_movementSpeed * Time.fixedDeltaTime);*/
     }
 
-    public void EnableRigidbodyJump(float animaSpeed)
+    public void EnableJumpOnPlank(float animaSpeed)
     {
-        PlayFlipAnimation(animaSpeed);
+        PlayFlipPlankAnimation(animaSpeed);
         m_allowToJump = true;
         EnableFreeJump(true, 0f);
     }
 
-    public void DisableRigidbodyJump(float delay)
+    public void DisableJumpOnPlank(float delay)
     {
         m_allowToJump = false;
         EnableFreeJump(false, delay);
+    }
+
+    public void EnableElevatorJump(float animaSpeed)
+    {
+        PlayFlipElevatorAnimation(animaSpeed);
+        m_allowToJump = true;
+        EnableFreeJump(true, 0f);
+
+        ChangeJumpForceModifier(1.5f);
+    }
+    public void DisableElevatorJump(float delay)
+    {
+        StartCoroutine(PushDown());
+
+        EnableFreeJump(false, delay);
+    }
+
+    private IEnumerator PushDown()
+    {
+        m_jumpForceModifier = -5f;
+
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        ChangeJumpForceModifier(1f);
+
+        m_allowToJump = false;
+
     }
 
     public IEnumerator PlayKillEnemyAnimation(float distanceToPlayer)
@@ -444,11 +480,19 @@ public class PlayerInstance : MonoBehaviour
         m_selfAnimator.Play(m_animationDancingName);
     }
 
-    private void PlayFlipAnimation(float animSpeed)
+    private void PlayFlipPlankAnimation(float animSpeed)
     {
         m_selfAnimator.speed = animSpeed;
         //m_selfAnimator.Play("SwingToLand");
         m_selfAnimator.Play("BackFlip");
+        //Animation backFlipAnim = m_selfAnimator["BackFlip"];
+    }
+
+    private void PlayFlipElevatorAnimation(float animSpeed)
+    {
+        m_selfAnimator.speed = animSpeed;
+        //m_selfAnimator.Play("SwingToLand");
+        m_selfAnimator.Play("ElevatorJump");
         //Animation backFlipAnim = m_selfAnimator["BackFlip"];
     }
 
